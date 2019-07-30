@@ -1,3 +1,8 @@
+const ipfs = IpfsApi("localhost", "5001")
+ipfs.id(function(err, res) {
+    if (err) throw err
+    console.log("Connected to IPFS node!", res.id, res.agentVersion, res.protocolVersion);
+});
 App = {
     loading: false,
     contracts: {},
@@ -6,6 +11,7 @@ App = {
         await App.loadWeb3()
         await App.loadAccount()
         await App.loadContract()
+        await App.commit()
     },
 
     // https://medium.com/metamask/https-medium-com-metamask-breaking-change-injecting-web3-7722797916a8
@@ -45,15 +51,18 @@ App = {
         // Set the current blockchain account
         App.account = web3.eth.accounts[0]
     },
-
+    push: async() => {
+        //1- get Commits array from push.py  (1- search how to run python files 2-run command lines on js (python3 push.py)) local commits
+        //2-solidty function(local commits)
+    },
     loadContract: async() => {
         // Create a JavaScript version of the smart contract
-        const Simple = await $.getJSON('Simple.json')
-        App.contracts.Simple = TruffleContract(Simple)
-        App.contracts.Simple.setProvider(App.web3Provider)
+        const createRepo = await $.getJSON('createRepo.json')
+        App.contracts.createRepo = TruffleContract(createRepo)
+        App.contracts.createRepo.setProvider(App.web3Provider)
 
         // Hydrate the smart contract with values from the blockchain
-        App.Simple = await App.contracts.Simple.deployed()
+        App.createRepo = await App.contracts.createRepo.deployed()
     },
     getvalue: async() => {
         var value = await App.Simple.get()

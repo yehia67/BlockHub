@@ -1,5 +1,5 @@
-var Simple = artifacts.require("./Simple.sol");
+var createRepo = artifacts.require("./createRepo.sol");
 
 module.exports = function(deployer) {
-    deployer.deploy(Simple);
+    deployer.deploy(createRepo);
 };

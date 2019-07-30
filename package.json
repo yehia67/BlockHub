@@ -41,5 +41,8 @@
         "truffle": "5.0.2",
         "truffle-contract": "^3.0.7",
         "truffle-hdwallet-provider": "0.0.5"
+    },
+    "dependencies": {
+        "ipfs-api": "^26.1.2"
     }
 }
