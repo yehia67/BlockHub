@@ -12,17 +12,15 @@ contract repo{
     mapping (string => address) branchesMap; //branchName => branchContract
     mapping (address => bool) collaboratorsMap;
 
-    constructor(string memory _repoName, string memory _repoDescription, uint _creationDate) public{
+    constructor(string memory _repoName, string memory _repoDescription) public{
         repoName = _repoName;
         repoDescription = _repoDescription;
         repoOwner = msg.sender;
         collaboratorsMap[msg.sender] = true;
-        creationDate = _creationDate;
-
-        mapping  (string => address) storage _commitMap;
-        commit[] storage _commitArray;
-        branch masterBranch = new branch("master", _commitMap, _commitArray);
-        branchesMap["master"] = masterBranch;
+        creationDate = now;
+        commit[] memory _commitArray;
+        branch masterBranch = new branch("master", _commitArray);
+        branchesMap["master"] = address(masterBranch);
         branches.push(masterBranch);
         emit branchCreated(repoName, "master");
     }
@@ -53,7 +51,8 @@ contract repo{
     }
 
     function makeBranch(string memory _branchName) onlyPermitted public{
-        branchesMap[_branchName] = new branch(_branchName, branches[0].commitMap, branches[0].commitArray);
+        branch Branch = new branch(_branchName, branches[0].getCommitsArray());
+        branchesMap[_branchName] = address(Branch);
         branches.push(branch(branchesMap[_branchName]));
 
         emit branchCreated(repoName, _branchName);
