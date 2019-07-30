@@ -34,10 +34,9 @@ def get_str_between(s, before, after):
 
 
 gitLogCommand = os.popen('git log').read()
-#print(gitLogCommand)
 Commits = [] 
 splitAllCommits = gitLogCommand.split('commit')
-
+splitAllCommits.reverse()
 
 for i in range(1,len(splitAllCommits)):
     splitCommit = splitAllCommits[i].split("\n")
@@ -62,8 +61,9 @@ for i in range(1,len(splitAllCommits)):
     commitMsg =commitMsg[4:]
     Commits.append(commit(commitHash,commitAuthor,commitDate,commitMsg))
   
-  
 for i in range(0,len(Commits)-1):
+    print(Commits[i].hash)
+    print("---------------------------")
     getDeletedFiles = os.popen('git diff --name-only   --diff-filter=D  '+ Commits[i].hash +' ' + Commits[i+1].hash).read()
     if getDeletedFiles != '':
         Commits[i+1].addRemovedFiles(getDeletedFiles)
@@ -110,33 +110,33 @@ for z in range(0,len(Commits)-1):
         Commits[z+1].addAddLines(addedLines)
         Commits[z+1].addRemovedLines(removedLines)                 
             
-for i in range(0,len(Commits)):
-    
-    print("____________________________________________________________________")
-    print(Commits[i].hash)
-    print("____________________________________________________________________")
-    print(Commits[i].author)
-    print("____________________________________________________________________")
-    print(Commits[i].date)
-    print("____________________________________________________________________")
-    print(Commits[i].message)
-    print("____________________________________________________________________") 
-    print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-    print("new files :")
-    print(Commits[i].Changes.addFiles)
-    print("____________________________________________________________________")
-    print("-----------------------------------------------------------")
-    print("remove files :")
-    print(Commits[i].Changes.removeFiles)    
-    print("____________________________________________________________________")
-    print(Commits[i].Changes.addLines)
-    print("____________________________________________________________________")
-    print(Commits[i].Changes.removLines) 
-    print("____________________________________________________________________")
-    print("*******************************************************************************************************************************************")
-            
-       
-   
+def test():
+    for i in range(0,len(Commits)):
+        print("____________________________________________________________________")
+        print(Commits[i].hash)
+        print("____________________________________________________________________")
+        print(Commits[i].author)
+        print("____________________________________________________________________")
+        print(Commits[i].date)
+        print("____________________________________________________________________")
+        print(Commits[i].message)
+        print("____________________________________________________________________") 
+        print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+        print("new files :")
+        print(Commits[i].Changes.addFiles)
+        print("____________________________________________________________________")
+        print("-----------------------------------------------------------")
+        print("remove files :")
+        print(Commits[i].Changes.removeFiles)    
+        print("____________________________________________________________________")
+        print(Commits[i].Changes.addLines)
+        print("____________________________________________________________________")
+        print(Commits[i].Changes.removLines) 
+        print("____________________________________________________________________")
+        print("*******************************************************************************************************************************************")
+                
+        
+
 
 
 
