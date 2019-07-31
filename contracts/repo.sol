@@ -1,6 +1,7 @@
 pragma solidity ^0.5.0;
 
 import "./branch.sol";
+import "./issue.sol";
 
 contract repo{
     string repoName;
@@ -9,6 +10,7 @@ contract repo{
     uint creationDate;
     address[] collaborators;
     branch[] branches;
+    issue[] issues;
     mapping (string => address) branchesMap; //branchName => branchContract
     mapping (address => bool) collaboratorsMap;
 
@@ -27,7 +29,8 @@ contract repo{
 
     event collaboratorAdded(address collaborator, address repoAddress, string repoName);
     event collaboratorRemoved(address collaborator, address repoAddress, string repoName);
-    event branchCreated(string repoName, string _branchName);
+    event branchCreated(string repoName, string branchName);
+    event issueCreated(string issueLabel, string issueMessage);
 
     modifier onlyOwner(){
         require(collaboratorsMap[msg.sender] == true);
@@ -54,7 +57,6 @@ contract repo{
         branch Branch = new branch(_branchName, branches[0].getCommitsArray());
         branchesMap[_branchName] = address(Branch);
         branches.push(branch(branchesMap[_branchName]));
-
         emit branchCreated(repoName, _branchName);
     }
     function doMerge(commit[] memory originalBranhceCommits,commit[] memory mergedBranhceCommits,branch  mergedBranch) private returns(uint8) {
