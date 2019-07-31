@@ -29,3 +29,10 @@ To deploy on ropsten
 ```sh
 deploy --network ropsten-infura
 ```
+
+Initialize the IPFS Daemon 
+```sh
+ipfs config --json API.HTTPHeaders.Access-Control-Allow-Origin "[\"*\"]"
+ipfs config --json API.HTTPHeaders.Access-Control-Allow-Credentials "[\"true\"]"
+ipfs daemon
+```
