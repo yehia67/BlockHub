@@ -11,7 +11,7 @@ App = {
         await App.loadWeb3()
         await App.loadAccount()
         await App.loadContract()
-        await App.commit()
+        await App.push()
     },
 
     // https://medium.com/metamask/https-medium-com-metamask-breaking-change-injecting-web3-7722797916a8
@@ -54,6 +54,9 @@ App = {
     push: async() => {
         //1- get Commits array from push.py  (1- search how to run python files 2-run command lines on js (python3 push.py)) local commits
         //2-solidty function(local commits)
+        ipfs.add(function() {
+            App.createRepo.createNewRepo("BlockHub", "Awsome Project!!");
+        })
     },
     loadContract: async() => {
         // Create a JavaScript version of the smart contract
