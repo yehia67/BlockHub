@@ -81,7 +81,7 @@ contract repo{
         branch secondBranche = branch(branchesMap[_secondBranchName]);
         commit[] memory firstBranchCommits = firstBranche.getCommitsArray();
         commit[] memory secondBranchCommits = secondBranche.getCommitsArray();
-        if(keccak256(abi.encodePacked((firstBranchCommits[firstBranchCommits.length -1].getHash())))  ==keccak256(abi.encodePacked((secondBranchCommits[secondBranchCommits.length -1].getHash())))){
+        if(keccak256(abi.encodePacked((firstBranchCommits[firstBranchCommits.length -1].getHash())))  == keccak256(abi.encodePacked((secondBranchCommits[secondBranchCommits.length -1].getHash())))){
             return 0;
         }
         else if(secondBranchCommits.length  > firstBranchCommits.length){
@@ -90,5 +90,10 @@ contract repo{
         else{
             return doMerge(firstBranchCommits,secondBranchCommits,secondBranche);
         }
+    }
+
+    function makeIssue(string memory _issueLabel, string memory _issueMessage) public{
+        issues.push(new issue(_issueLabel, _issueMessage));
+        emit issueCreated(_issueLabel, _issueMessage);
     }
 }
