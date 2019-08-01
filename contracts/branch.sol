@@ -31,6 +31,14 @@ contract branch{
         commit Commit = new commit(_authorAddress,_authorName, _commitHash, _date, _msg, _change);
         commitMap[_commitHash] = address(Commit);
         commitArray.push(commit(commitMap[_commitHash]));
+        emit commitCreated(_authorAddress, _msg, _commitHash);
+    }
+
+    function pushCommit(string memory _authorName,string memory _commitHash, string memory _date,
+    string memory _msg, string memory _change ) public onlyPermitted{
+        commit Commit = new commit(msg.sender,_authorName, _commitHash, _date, _msg, _change);
+        commitMap[_commitHash] = address(Commit);
+        commitArray.push(commit(commitMap[_commitHash]));
         emit commitCreated(msg.sender, _msg, _commitHash);
     }
 

@@ -23,7 +23,11 @@ class commit:
           self.Changes.removLines.append(removeLines)
       def addAddLines(self,addLines):
           self.Changes.addLines.append(addLines)         
+<<<<<<< HEAD
 # c3e9bc2672301d709109f536aa5a6038eff1e2db    7acd6ec2a8abbde0a950de2520b12318483fd7f5      
+=======
+
+>>>>>>> a31d17b26328aa599376bacde33856722abd5c3b
 def get_str_between(s, before, after):
      beforeIndex = s.find(before)
      afterIndex = s.find(after)
@@ -133,8 +137,15 @@ def test():
         print(Commits[i].Changes.removLines) 
         print("____________________________________________________________________")
         print("*******************************************************************************************************************************************")
+<<<<<<< HEAD
                 
         
+=======
+def showChanges():
+    print(Commits[5].Changes.removeFiles) 
+                 
+               
+>>>>>>> a31d17b26328aa599376bacde33856722abd5c3b
 
 
 
