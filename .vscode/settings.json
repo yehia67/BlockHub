@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "C:\\Users\\Mostafa\\Anaconda2\\python.exe"
+    "python.pythonPath": "C:\\Users\\Mostafa\\Anaconda2\\python.exe",
+    "git.ignoreLimitWarning": true
 }

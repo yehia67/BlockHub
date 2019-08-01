@@ -109,15 +109,22 @@ App = {
     },
 
     push: async() => {
-        return $.ajax({
+        //1- get Commits array from push.py  (1- search how to run python files 2-run command lines on js (python3 push.py)) local commits
+        //2-solidty function(local commits)
+        /*  ipfs.add(function() {
+             App.createRepo.createNewRepo("BlockHub", "Awsome Project!!");
+         }) */
+         var commitsArray = []
+         $.ajax({
             type: 'GET',
-            url: 'http://127.0.0.1:5000/',
-
+            url: 'http://127.0.0.1:5000/commit',
+        
             success: function(response) {
-                console.log(response);
+              commitsArray = response.split(',')
+              console.log(commitsArray)
             },
             error: function(response) {
-                return console.error(response);
+              return console.error(response);
             }
         });
     },

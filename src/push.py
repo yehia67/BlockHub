@@ -23,7 +23,6 @@ class commit:
           self.Changes.removLines.append(removeLines)
       def addAddLines(self,addLines):
           self.Changes.addLines.append(addLines)         
-
 def get_str_between(s, before, after):
      beforeIndex = s.find(before)
      afterIndex = s.find(after)
