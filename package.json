@@ -43,6 +43,7 @@
         "truffle-hdwallet-provider": "0.0.5"
     },
     "dependencies": {
+        "childprocess": "^2.0.2",
         "ipfs-api": "^26.1.2"
     }
 }

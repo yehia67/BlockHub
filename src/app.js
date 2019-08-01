@@ -1,8 +1,8 @@
-const ipfs = IpfsApi("localhost", "5001")
+/* const ipfs = IpfsApi("localhost", "5001")
 ipfs.id(function(err, res) {
     if (err) throw err
     console.log("Connected to IPFS node!", res.id, res.agentVersion, res.protocolVersion);
-});
+}); */
 App = {
     loading: false,
     contracts: {},
@@ -54,9 +54,9 @@ App = {
     push: async() => {
         //1- get Commits array from push.py  (1- search how to run python files 2-run command lines on js (python3 push.py)) local commits
         //2-solidty function(local commits)
-        ipfs.add(function() {
-            App.createRepo.createNewRepo("BlockHub", "Awsome Project!!");
-        })
+        /*  ipfs.add(function() {
+             App.createRepo.createNewRepo("BlockHub", "Awsome Project!!");
+         }) */
     },
     loadContract: async() => {
         // Create a JavaScript version of the smart contract
