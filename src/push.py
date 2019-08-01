@@ -23,11 +23,7 @@ class commit:
           self.Changes.removLines.append(removeLines)
       def addAddLines(self,addLines):
           self.Changes.addLines.append(addLines)         
-<<<<<<< HEAD
 # c3e9bc2672301d709109f536aa5a6038eff1e2db    7acd6ec2a8abbde0a950de2520b12318483fd7f5      
-=======
-
->>>>>>> a31d17b26328aa599376bacde33856722abd5c3b
 def get_str_between(s, before, after):
      beforeIndex = s.find(before)
      afterIndex = s.find(after)
@@ -69,13 +65,13 @@ for i in range(0,len(Commits)-1):
     print("---------------------------")
     getDeletedFiles = os.popen('git diff --name-only   --diff-filter=D  '+ Commits[i].hash +' ' + Commits[i+1].hash).read()
     if getDeletedFiles != '':
-        Commits[i+1].addRemovedFiles(getDeletedFiles)
+        Commits[i+1].addRemovedFiles("0" + getDeletedFiles)
     getCreatedFiles = os.popen('git diff --name-only   --diff-filter=A  '+ Commits[i].hash +' ' + Commits[i+1].hash).read()
     if  getCreatedFiles != '':
-        Commits[i+1].addAddFiles(getCreatedFiles)   
-  
-  
-  
+        Commits[i+1].addAddFiles("1" + getCreatedFiles)
+
+
+
 for z in range(0,len(Commits)-1):     
     getModifiedFiles = os.popen('git diff    --diff-filter=M  '+  Commits[z].hash +' ' + Commits[z+1].hash).read()
     getModifiedFilesNames = getModifiedFiles.split("diff --git a")
@@ -86,8 +82,8 @@ for z in range(0,len(Commits)-1):
         #get file name & location
         spaceIndeces = changes.find(" ")
         filename = changes[0:spaceIndeces]
-        addedLines = "File location " + filename + " new Lines At :"
-        removedLines = "File location " + filename + " removed Lines At :"
+        addedLines = "2File location " + filename + " new Lines At :"
+        removedLines = "3File location " + filename + " removed Lines At :"
         
         lineChanges = changes.split("\n")
         for j in range(0,len(lineChanges)):
@@ -137,19 +133,13 @@ def test():
         print(Commits[i].Changes.removLines) 
         print("____________________________________________________________________")
         print("*******************************************************************************************************************************************")
-<<<<<<< HEAD
                 
-        
-=======
-def showChanges():
-    print(Commits[5].Changes.removeFiles) 
-                 
-               
->>>>>>> a31d17b26328aa599376bacde33856722abd5c3b
+def showChange():
+    print(Commits[5].Changes.removeFiles[2])
 
 
 
-
+showChange()
    
    
        
