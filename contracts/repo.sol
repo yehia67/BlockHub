@@ -24,14 +24,16 @@ contract repo{
         branch masterBranch = new branch("master", _commitArray);
         branchesMap["master"] = address(masterBranch);
         branches.push(masterBranch);
-        emit branchCreated(repoName, "master");
+        emit branchCreated(repoName,address(masterBranch), "master");
     }
 
     event collaboratorAdded(address collaborator, address repoAddress, string repoName);
     event collaboratorRemoved(address collaborator, address repoAddress, string repoName);
-    event branchCreated(string repoName, string branchName);
+    event branchCreated(string repoName,address branchAddress ,string branchName);
     event issueCreated(string issueLabel, string issueMessage);
-
+    function getMasterBranch() view public returns (address) {
+        return branchesMap['master'];
+    }
     modifier onlyOwner(){
         require(collaboratorsMap[msg.sender] == true);
         _;
@@ -57,7 +59,7 @@ contract repo{
         branch Branch = new branch(_branchName, branches[0].getCommitsArray());
         branchesMap[_branchName] = address(Branch);
         branches.push(branch(branchesMap[_branchName]));
-        emit branchCreated(repoName, _branchName);
+        emit branchCreated(repoName,address(Branch) ,_branchName);
     }
     function doMerge(commit[] memory originalBranhceCommits,commit[] memory mergedBranhceCommits,branch  mergedBranch) private returns(uint8) {
             uint  diff = originalBranhceCommits.length -  mergedBranhceCommits.length;

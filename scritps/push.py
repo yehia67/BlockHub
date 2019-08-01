@@ -112,7 +112,7 @@ for z in range(0,len(Commits)-1):
 
 def showChanges():
     for i in range(0,len(Commits[2].Changes.removeFiles)):
-        print(Commits[2].Changes.addLines[i]) 
+        print(Commits[2].Changes.removeFiles[i]) 
 
    
    
