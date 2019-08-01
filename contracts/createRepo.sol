@@ -5,10 +5,12 @@ import "./repo.sol";
 contract createRepo{
     repo[] repos;
     //map
-    event repoCreated(string _repoName, string _repoDescription, address _repoOwner, uint _creationDate);
+    event repoCreated(string _repoName,address repoAddress, string _repoDescription, address _repoOwner, uint _creationDate);
 
-    function createNewRepo(string memory _repoName, string memory _repoDescription, address _repoOwner) public{
-        repos.push(new repo(_repoName, _repoDescription));
-        emit repoCreated(_repoName, _repoDescription, _repoOwner, now);
+    function createNewRepo(string memory _repoName, string memory _repoDescription) public returns(address){
+        repo Repo = new repo(_repoName, _repoDescription);
+        repos.push(Repo);
+        emit repoCreated(_repoName,address(Repo) ,_repoDescription, msg.sender, now);
+        return(address(Repo));
     }
 }

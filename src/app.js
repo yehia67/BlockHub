@@ -6,11 +6,14 @@ ipfs.id(function(err, res) {
 App = {
     loading: false,
     contracts: {},
+    repoAddress: '',
+    repoBranchMasterAdress: '',
 
     load: async() => {
         await App.loadWeb3()
         await App.loadAccount()
         await App.loadContract()
+        await App.makeRepo()
         await App.push()
     },
 
@@ -51,6 +54,60 @@ App = {
         // Set the current blockchain account
         App.account = web3.eth.accounts[0]
     },
+
+    loadContract: async() => {
+        // Create a JavaScript version of the smart contract
+        const createRepo = await $.getJSON('createRepo.json')
+        App.contracts.createRepo = TruffleContract(createRepo)
+        App.contracts.createRepo.setProvider(App.web3Provider)
+
+        // Hydrate the smart contract with values from the blockchain
+        App.createRepo = await App.contracts.createRepo.deployed()
+    },
+    makeRepo: async() => {
+        const repo = await App.createRepo.createNewRepo("Create Project", "Awsome project el7")
+        console.log(repo)
+        App.repoAddress = repo.logs[0].args.repoAddress
+        App.loadRepo()
+    },
+    loadRepo: async() => {
+        const repo = await $.getJSON('repo.json')
+        App.contracts.repo = web3.eth.contract(repo.abi).at(App.repoAddress)
+        App.masterBranchPromise()
+        App.loadMasterBranch()
+            // App.makeCommitPromise()
+    },
+    masterBranchPromise: async() => {
+        return new Promise(function(resolve, reject) {
+            App.contracts.repo.getMasterBranch(function(error, response) {
+                if (error) {
+                    reject(error)
+                } else {
+                    resolve(response)
+                    App.repoBranchMasterAdress = response
+                }
+            })
+        });
+    },
+    loadMasterBranch: async() => {
+        const masterBranch = await $.getJSON('branch.json')
+        App.contracts.masterBranch = web3.eth.contract(masterBranch.abi).at(App.repoBranchMasterAdress)
+    },
+
+    makeCommitPromise: async() => {
+        return new Promise(function(resolve, reject) {
+            App.contracts.masterBranch.pushCommit(_authorName, _commitHash, _date,
+                _msg, change,
+                function(error, response) {
+                    if (error) {
+                        reject(error)
+                    } else {
+                        resolve(response)
+                    }
+                })
+        });
+    },
+
     push: async() => {
         return $.ajax({
             type: 'GET',
@@ -63,15 +120,6 @@ App = {
                 return console.error(response);
             }
         });
-    },
-    loadContract: async() => {
-        // Create a JavaScript version of the smart contract
-        const createRepo = await $.getJSON('createRepo.json')
-        App.contracts.createRepo = TruffleContract(createRepo)
-        App.contracts.createRepo.setProvider(App.web3Provider)
-
-        // Hydrate the smart contract with values from the blockchain
-        App.createRepo = await App.contracts.createRepo.deployed()
     },
     getvalue: async() => {
         var value = await App.Simple.get()
