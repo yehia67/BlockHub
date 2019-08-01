@@ -54,7 +54,7 @@ App = {
     push: async() => {
         return $.ajax({
             type: 'GET',
-            url: 'serv.py',
+            url: 'http://127.0.0.1:5000/',
 
             success: function(response) {
                 console.log(response);
