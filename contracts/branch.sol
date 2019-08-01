@@ -14,10 +14,10 @@ contract branch{
     }
     function initMap(commit[] memory _commitArray)  private  {
         for (uint index = 0; index < _commitArray.length; index++) {
-                commitMap[_commitArray[index].getHash()]  = address(_commitArray[index]);
+            commitMap[_commitArray[index].getHash()] = address(_commitArray[index]);
         }
     }
-    function getCommitsArray() view public returns (commit[] memory) {
+    function getCommitsArray() public view returns (commit[] memory) {
         return commitArray;
     }
     event commitCreated(address commitCreator, string msg, string _commitHash);
@@ -26,12 +26,11 @@ contract branch{
         //require(msg.sender == owner);
         _;
     }
-    function parseCommit(address _authorAddress,string memory _authorName,string memory _commitHash, string memory _date, 
+    function parseCommit(address _authorAddress,string memory _authorName,string memory _commitHash, string memory _date,
     string memory _msg, string memory _change ) public onlyPermitted{
-        commit Commit =  new commit(_authorAddress,_authorName, _commitHash, _date, _msg, _change);
+        commit Commit = new commit(_authorAddress,_authorName, _commitHash, _date, _msg, _change);
         commitMap[_commitHash] = address(Commit);
         commitArray.push(commit(commitMap[_commitHash]));
-        
         emit commitCreated(msg.sender, _msg, _commitHash);
     }
 
