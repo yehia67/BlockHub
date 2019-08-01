@@ -52,11 +52,17 @@ App = {
         App.account = web3.eth.accounts[0]
     },
     push: async() => {
-        //1- get Commits array from push.py  (1- search how to run python files 2-run command lines on js (python3 push.py)) local commits
-        //2-solidty function(local commits)
-        /*  ipfs.add(function() {
-             App.createRepo.createNewRepo("BlockHub", "Awsome Project!!");
-         }) */
+        return $.ajax({
+            type: 'GET',
+            url: 'serv.py',
+
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(response) {
+                return console.error(response);
+            }
+        });
     },
     loadContract: async() => {
         // Create a JavaScript version of the smart contract
