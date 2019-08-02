@@ -65,10 +65,10 @@ for i in range(0,len(Commits)-1):
     print("---------------------------")
     getDeletedFiles = os.popen('git diff --name-only   --diff-filter=D  '+ Commits[i].hash +' ' + Commits[i+1].hash).read()
     if getDeletedFiles != '':
-        Commits[i+1].addRemovedFiles("0" + getDeletedFiles)
+        Commits[i+1].addRemovedFiles(getDeletedFiles.split("\n"))
     getCreatedFiles = os.popen('git diff --name-only   --diff-filter=A  '+ Commits[i].hash +' ' + Commits[i+1].hash).read()
     if  getCreatedFiles != '':
-        Commits[i+1].addAddFiles("1" + getCreatedFiles)
+        Commits[i+1].addAddFiles(getCreatedFiles.split("\n"))
 
 
 
@@ -82,8 +82,8 @@ for z in range(0,len(Commits)-1):
         #get file name & location
         spaceIndeces = changes.find(" ")
         filename = changes[0:spaceIndeces]
-        addedLines = "2File location " + filename + " new Lines At :"
-        removedLines = "3File location " + filename + " removed Lines At :"
+        addedLines = ""
+        removedLines = ""
         
         lineChanges = changes.split("\n")
         for j in range(0,len(lineChanges)):
@@ -98,10 +98,10 @@ for z in range(0,len(Commits)-1):
                         j = j - 1
                         break
                     if line[0:2] == "+ ":
-                        addedLines += "\n\n" + "Line " + str(counter) + " with content: " +"\n\n"+ line[2:len(line)]+ "\n\n"
+                        addedLines += filename + "" + "@@@" + str(counter) + "@@@"+ line[2:len(line)]+ "\n\n"
                         counter = int(counter) + 1
                     elif line[0:2] == "- ":
-                        removedLines += "\n\n" + "Line " + str(counter) + " with content " + "\n\n"+line[2:len(line)]+"\n\n"
+                        removedLines += filename + "" + "@@@" + str(counter) + "@@@"+line[2:len(line)]+"\n\n"
                         counter = int(counter) + 1
                     else:
                         counter = int(counter) + 1
@@ -135,7 +135,7 @@ def test():
         print("*******************************************************************************************************************************************")
                 
 def showChange():
-    print(Commits[5].Changes.removeFiles[2])
+    print(Commits[5].Changes.addLines[2])
 
 
 

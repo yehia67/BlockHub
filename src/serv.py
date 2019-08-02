@@ -8,7 +8,7 @@ CORS(app)
 def hello_world():
    return Commits[1].author
 
-@app.route('/commit')
+@app.route('/hash')
 def commitHash():
    commitsHash = ""
    for eachHash in range(len(Commits)):
@@ -17,6 +17,48 @@ def commitHash():
       if eachHash != (len(Commits) - 1):
          commitsHash = commitsHash + ","
    return commitsHash
+
+@app.route('/addedFiles')
+def getAddedFiles():
+   commitsAddedFiles = ""
+   for i in range(len(Commits)):
+      for j in range(len(Commits[i].Changes.addFiles)):
+         for z in range(len(Commits[i].Changes.addFiles[j])):
+            commitsAddedFiles += Commits[i].Changes.addFiles[j][z]
+            commitsAddedFiles += ","
+         commitsAddedFiles += "@@@"
+
+   return commitsAddedFiles
+
+@app.route('/removedFiles')
+def getRemovedFiles():
+   commitsRemovedFiles = ""
+   for i in range(len(Commits)):
+      for j in range(len(Commits[i].Changes.removeFiles)):
+         for z in range(len(Commits[i].Changes.removeFiles[j])):
+            commitsRemovedFiles += Commits[i].Changes.removeFiles[j][z]
+            commitsRemovedFiles += ","
+         commitsRemovedFiles += "@@@"
+
+   return commitsRemovedFiles
+
+@app.route('/addedLines')
+def getAddedLines():
+   commitsAddedLines = ""
+   for i in range(len(Commits)):
+      for j in range(len(Commits[i].Changes.addLines)):
+         commitsAddedLines += str(Commits[i].Changes.addLines[j])
+      commitsAddedLines += "$$$"
+   return commitsAddedLines
+
+@app.route('/removedLines')
+def getRemovedLines():
+   commitsRemovedLines = ""
+   for i in range(len(Commits)):
+      for j in range(len(Commits[i].Changes.removLines)):
+         commitsRemovedLines += str(Commits[i].Changes.removLines[j])
+      commitsRemovedLines += "$$$"
+   return commitsRemovedLines
 
 if __name__ == '__main__':
    app.run(debug = True)
