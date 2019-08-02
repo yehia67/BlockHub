@@ -27,16 +27,20 @@ contract branch{
         _;
     }
     function parseCommit(address _authorAddress,string memory _authorName,string memory _commitHash, string memory _date,
-    string memory _msg, string memory _change ) public onlyPermitted{
-        commit Commit = new commit(_authorAddress,_authorName, _commitHash, _date, _msg, _change);
+    string memory _msg, bytes32[] memory _addedFiles, bytes32[] memory _addedLines,
+    bytes32[] memory _removedFiles, bytes32[] memory _removedLines) public onlyPermitted{
+        commit Commit = new commit(_authorAddress,_authorName, _commitHash, _date, _msg, _addedFiles,  _addedLines,
+        _removedFiles, _removedLines);
         commitMap[_commitHash] = address(Commit);
         commitArray.push(commit(commitMap[_commitHash]));
         emit commitCreated(_authorAddress, _msg, _commitHash);
     }
 
     function pushCommit(string memory _authorName,string memory _commitHash, string memory _date,
-    string memory _msg, string memory _change ) public onlyPermitted{
-        commit Commit = new commit(msg.sender,_authorName, _commitHash, _date, _msg, _change);
+    string memory _msg, bytes32[] memory _addedFiles, bytes32[] memory _addedLines,
+    bytes32[] memory _removedFiles, bytes32[] memory _removedLines) public onlyPermitted{
+        commit Commit = new commit(msg.sender,_authorName, _commitHash, _date, _msg, _addedFiles,  _addedLines,
+        _removedFiles, _removedLines);
         commitMap[_commitHash] = address(Commit);
         commitArray.push(commit(commitMap[_commitHash]));
         emit commitCreated(msg.sender, _msg, _commitHash);
