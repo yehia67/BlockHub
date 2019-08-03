@@ -73,6 +73,9 @@ for i in range(0,len(Commits)-1):
 for z in range(0,len(Commits)-1):     
     getModifiedFiles = os.popen('git diff    --diff-filter=M  '+  Commits[z].hash +' ' + Commits[z+1].hash).read()
     getModifiedFilesNames = getModifiedFiles.split("diff --git a")
+    for i in range(0,len(getModifiedFilesNames)):
+        print(getModifiedFilesNames[i])
+        print("___________________________")
     for i in range(1,len(getModifiedFilesNames)): 
         
         changes = getModifiedFilesNames[i]
@@ -102,7 +105,7 @@ for z in range(0,len(Commits)-1):
                         removedLines += "\n\n" + "Line " + str(counter) + " with content " + "\n\n"+line[2:len(line)]+"\n\n"
                         counter = int(counter) + 1
                     else:
-                        counter = int(counter) + 1
+                        counter = int(float(counter)) + 1
                     j = j +1
         Commits[z+1].addAddLines(addedLines)
         Commits[z+1].addRemovedLines(removedLines)                 
@@ -117,7 +120,6 @@ def showChanges():
    
    
        
-showChanges()
 
 
 
