@@ -6,7 +6,7 @@ CORS(app)
 
 @app.route('/')
 def hello_world():
-   return Commits[1].author
+   return commitsJsonObject
 
 @app.route('/hash')
 def commitHash():
