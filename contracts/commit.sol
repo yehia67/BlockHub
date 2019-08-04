@@ -6,27 +6,19 @@ contract commit{
   string commitHash;
   string date;
   string message;
-  //string change;
-  bytes32[] addedFiles;
-  bytes32[] addedLines;
-  bytes32[] removedFiles;
-  bytes32[] removedLines;
+  string change;
+
   
-  constructor (address  _authorAddress,string memory _authorName,string memory _commitHash,
-  string memory  _date, string memory _message) public {
-    authorAddress = _authorAddress;
+  constructor (string memory _authorName,string memory _commitHash,
+  string memory  _date, string memory _message,string memory _change) public {
+    authorAddress = msg.sender;
     commitHash = _commitHash;
     date = _date;
     message = _message;
     authorName = _authorName;
+    change = _change;
   }
-  function initChanges( bytes32[] memory _addedFiles, bytes32[] memory _addedLines,
-  bytes32[] memory _removedFiles, bytes32[] memory _removedLines) public{
-    addedFiles = _addedFiles;
-    addedLines = _addedLines;
-    removedFiles = _removedFiles;
-    removedLines = _removedLines;
-  }
+
   function getAuthorAddress() public view returns (address) {
     return authorAddress;
   }
@@ -47,19 +39,5 @@ contract commit{
     return message;
   }
 
-  function getAddedFiles() public view returns (bytes32[] memory){
-    return addedFiles;
-  }
 
-  function getAddedLines() public view returns (bytes32[] memory){
-    return addedLines;
-  }
-
-  function getRemovedFiles() public view returns (bytes32[] memory){
-    return removedFiles;
-  }
-  
-  function getRemovedLines() public view returns (bytes32[] memory){
-    return removedLines;
-  }
 }

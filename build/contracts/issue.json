@@ -4,8 +4,8 @@
     {
       "inputs": [
         {
-          "name": "_label",
-          "type": "string"
+          "name": "_repoOwner",
+          "type": "address"
         },
         {
           "name": "_issueMessage",
@@ -15,27 +15,50 @@
       "payable": false,
       "stateMutability": "nonpayable",
       "type": "constructor"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "close",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "commitRequest",
+          "type": "address"
+        }
+      ],
+      "name": "makeCommit",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.0+commit.1d4f565a\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"name\":\"_label\",\"type\":\"string\"},{\"name\":\"_issueMessage\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/home/yehia/Documents/Projects/hackathon/BlockHub/contracts/issue.sol\":\"issue\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":1000},\"remappings\":[]},\"sources\":{\"/home/yehia/Documents/Projects/hackathon/BlockHub/contracts/issue.sol\":{\"keccak256\":\"0x5024e237da78ab065fc3d532f3e34db171c37e7063b771f1aa76fcabf9f72c6b\",\"urls\":[\"bzzr://40cf209fcaaf94b0fabddb86f1641f5c5441eac79e07e522eefac5e7763d967a\"]}},\"version\":1}",
-  "bytecode": "0x608060405234801561001057600080fd5b506040516101d53803806101d58339810180604052604081101561003357600080fd5b81019080805164010000000081111561004b57600080fd5b8201602081018481111561005e57600080fd5b815164010000000081118282018710171561007857600080fd5b5050929190602001805164010000000081111561009457600080fd5b820160208101848111156100a757600080fd5b81516401000000008111828201871017156100c157600080fd5b505084519093506100db92506000915060208501906100f7565b5080516100ef9060019060208401906100f7565b505050610192565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061013857805160ff1916838001178555610165565b82800160010185558215610165579182015b8281111561016557825182559160200191906001019061014a565b50610171929150610175565b5090565b61018f91905b80821115610171576000815560010161017b565b90565b6035806101a06000396000f3fe6080604052600080fdfea165627a7a7230582033a0547df0da00cb0aae65774084e93ed08e33b23313e9eb6db32f5fdefcff060029",
-  "deployedBytecode": "0x6080604052600080fdfea165627a7a7230582033a0547df0da00cb0aae65774084e93ed08e33b23313e9eb6db32f5fdefcff060029",
-  "sourceMap": "25:204:4:-;;;89:138;8:9:-1;5:2;;;30:1;27;20:12;5:2;89:138:4;;;;;;;;;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;89:138:4;;;;;;19:11:-1;14:3;11:20;8:2;;;44:1;41;34:12;8:2;62:21;;123:4;114:14;;138:31;;;135:2;;;182:1;179;172:12;135:2;213:10;;261:11;244:29;;285:43;;;282:58;-1:-1;233:115;230:2;;;361:1;358;351:12;230:2;0:372;;89:138:4;;;;;;;19:11:-1;14:3;11:20;8:2;;;44:1;41;34:12;8:2;62:21;;123:4;114:14;;138:31;;;135:2;;;182:1;179;172:12;135:2;213:10;;261:11;244:29;;285:43;;;282:58;-1:-1;233:115;230:2;;;361:1;358;351:12;230:2;-1:-1;;168:14:4;;89:138;;-1:-1:-1;168:14:4;;-1:-1:-1;168:5:4;;-1:-1:-1;168:14:4;;;;;:::i;:::-;-1:-1:-1;192:28:4;;;;:12;;:28;;;;;:::i;:::-;;89:138;;25:204;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;25:204:4;;;-1:-1:-1;25:204:4;:::i;:::-;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;:::o;:::-;;;;;;;",
-  "deployedSourceMap": "25:204:4:-;;;;;",
-  "source": "pragma solidity ^0.5.0;\n\ncontract issue{\n    string label;\n    string issueMessage;\n\n    constructor(string memory _label, string memory _issueMessage) public{\n        label = _label;\n        issueMessage = _issueMessage;\n    }\n}",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.0+commit.1d4f565a\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[],\"name\":\"close\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"commitRequest\",\"type\":\"address\"}],\"name\":\"makeCommit\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"name\":\"_repoOwner\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/home/yehia/Documents/Projects/hackathon/BlockHub/contracts/issue.sol\":\"issue\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":100000},\"remappings\":[]},\"sources\":{\"/home/yehia/Documents/Projects/hackathon/BlockHub/contracts/commit.sol\":{\"keccak256\":\"0x885b8d16db36b4146f5f5fcc917633e924527b6fbd10b82019b0029f7588c211\",\"urls\":[\"bzzr://79bff8652c70bf504a5e1da6ec075809fd36ca81f09c018ef204a46f1f199955\"]},\"/home/yehia/Documents/Projects/hackathon/BlockHub/contracts/issue.sol\":{\"keccak256\":\"0xcf03689f064564805ed4dd70fe587c1e720bd5d6b939d98318db1aabb175c7a9\",\"urls\":[\"bzzr://629c110821c60a528f9c9267f4f5430f99f7a722613d1c04fbf50a3ec8dbd7f4\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b5060405160208061021c8339810180604052602081101561003057600080fd5b505160008054600160a060020a03909216600160a060020a031992831617905560018054909116331790556101b28061006a6000396000f3fe60806040526004361061004b5763ffffffff7c010000000000000000000000000000000000000000000000000000000060003504166343d726d68114610050578063f01b393e14610067575b600080fd5b34801561005c57600080fd5b506100656100a7565b005b34801561007357600080fd5b506100656004803603602081101561008a57600080fd5b503573ffffffffffffffffffffffffffffffffffffffff1661010f565b600054339073ffffffffffffffffffffffffffffffffffffffff168114806100e9575060015473ffffffffffffffffffffffffffffffffffffffff8281169116145b15156100f457600080fd5b60015473ffffffffffffffffffffffffffffffffffffffff16ff5b600280546001810182556000919091527f405787fa12a823e0f2b7631cc41b3ba8828b3321ca811111fa75cd3aa3bb5ace0180547fffffffffffffffffffffffff00000000000000000000000000000000000000001673ffffffffffffffffffffffffffffffffffffffff9290921691909117905556fea165627a7a72305820405e9be06a295a9de197428def092cbe8339be0e068c3f34e524e0ded84695130029",
+  "deployedBytecode": "0x60806040526004361061004b5763ffffffff7c010000000000000000000000000000000000000000000000000000000060003504166343d726d68114610050578063f01b393e14610067575b600080fd5b34801561005c57600080fd5b506100656100a7565b005b34801561007357600080fd5b506100656004803603602081101561008a57600080fd5b503573ffffffffffffffffffffffffffffffffffffffff1661010f565b600054339073ffffffffffffffffffffffffffffffffffffffff168114806100e9575060015473ffffffffffffffffffffffffffffffffffffffff8281169116145b15156100f457600080fd5b60015473ffffffffffffffffffffffffffffffffffffffff16ff5b600280546001810182556000919091527f405787fa12a823e0f2b7631cc41b3ba8828b3321ca811111fa75cd3aa3bb5ace0180547fffffffffffffffffffffffff00000000000000000000000000000000000000001673ffffffffffffffffffffffffffffffffffffffff9290921691909117905556fea165627a7a72305820405e9be06a295a9de197428def092cbe8339be0e068c3f34e524e0ded84695130029",
+  "sourceMap": "48:555:4:-;;;162:119;8:9:-1;5:2;;;30:1;27;20:12;5:2;162:119:4;;;;;;;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;162:119:4;218:9;:21;;-1:-1:-1;;;;;218:21:4;;;-1:-1:-1;;;;;;218:21:4;;;;;;;249:25;;;;;264:10;249:25;;;48:555;;;;;;",
+  "deployedSourceMap": "48:555:4:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;410:90;;8:9:-1;5:2;;;30:1;27;20:12;5:2;410:90:4;;;;;;504:97;;8:9:-1;5:2;;;30:1;27;20:12;5:2;504:97:4;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;504:97:4;;;;;410:90;351:9;;447:10;;351:9;;341:19;;;:45;;-1:-1:-1;374:12:4;;;364:22;;;374:12;;364:22;341:45;333:54;;;;;;;;481:12;;;;468:26;504:97;561:14;27:10:-1;;39:1;23:18;;45:23;;-1:-1;561:34:4;;;;;;;;;;;;;;;;;;;;;504:97::o",
+  "source": "pragma solidity ^0.5.0;\nimport \"./commit.sol\"; \ncontract issue{\n    address payable repoOwner;\n    address payable issueCreator;\n    commit[] CommitsRequest;\n    constructor(address payable _repoOwner) public{\n        repoOwner= _repoOwner;\n        issueCreator = msg.sender;\n    }\n    modifier onlyPermited(address closer){\n        require(closer == repoOwner || closer == issueCreator);\n         _;\n    }\n   function close() public onlyPermited(msg.sender) {\n       selfdestruct(issueCreator);\n   }\n   function makeCommit(commit commitRequest) public{\n       CommitsRequest.push(commitRequest);\n   }\n}",
   "sourcePath": "/home/yehia/Documents/Projects/hackathon/BlockHub/contracts/issue.sol",
   "ast": {
     "absolutePath": "/home/yehia/Documents/Projects/hackathon/BlockHub/contracts/issue.sol",
     "exportedSymbols": {
       "issue": [
-        532
+        431
       ]
     },
-    "id": 533,
+    "id": 432,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 511,
+        "id": 367,
         "literals": [
           "solidity",
           "^",
@@ -51,19 +74,19 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 532,
+        "id": 368,
         "linearizedBaseContracts": [
-          532
+          388
         ],
         "name": "issue",
-        "nodeType": "ContractDefinition",
+        "nodeType": "ImportDirective",
         "nodes": [
           {
             "constant": false,
-            "id": 513,
+            "id": 369,
             "name": "label",
             "nodeType": "VariableDeclaration",
-            "scope": 532,
+            "scope": 388,
             "src": "45:12:4",
             "stateVariable": true,
             "storageLocation": "default",
@@ -72,7 +95,7 @@
               "typeString": "string"
             },
             "typeName": {
-              "id": 512,
+              "id": 368,
               "name": "string",
               "nodeType": "ElementaryTypeName",
               "src": "45:6:4",
@@ -86,10 +109,10 @@
           },
           {
             "constant": false,
-            "id": 515,
+            "id": 371,
             "name": "issueMessage",
             "nodeType": "VariableDeclaration",
-            "scope": 532,
+            "scope": 388,
             "src": "63:19:4",
             "stateVariable": true,
             "storageLocation": "default",
@@ -98,7 +121,7 @@
               "typeString": "string"
             },
             "typeName": {
-              "id": 514,
+              "id": 370,
               "name": "string",
               "nodeType": "ElementaryTypeName",
               "src": "63:6:4",
@@ -112,25 +135,25 @@
           },
           {
             "body": {
-              "id": 530,
+              "id": 386,
               "nodeType": "Block",
               "src": "158:69:4",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 524,
+                    "id": 380,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 522,
+                      "id": 378,
                       "name": "label",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 513,
+                      "referencedDeclaration": 369,
                       "src": "168:5:4",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_storage",
@@ -141,11 +164,11 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 523,
+                      "id": 379,
                       "name": "_label",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 517,
+                      "referencedDeclaration": 373,
                       "src": "176:6:4",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory_ptr",
@@ -158,25 +181,25 @@
                       "typeString": "string storage ref"
                     }
                   },
-                  "id": 525,
+                  "id": 381,
                   "nodeType": "ExpressionStatement",
                   "src": "168:14:4"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 528,
+                    "id": 384,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 526,
+                      "id": 382,
                       "name": "issueMessage",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 515,
+                      "referencedDeclaration": 371,
                       "src": "192:12:4",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_storage",
@@ -187,11 +210,11 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 527,
+                      "id": 383,
                       "name": "_issueMessage",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 519,
+                      "referencedDeclaration": 375,
                       "src": "207:13:4",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory_ptr",
@@ -204,29 +227,29 @@
                       "typeString": "string storage ref"
                     }
                   },
-                  "id": 529,
+                  "id": 385,
                   "nodeType": "ExpressionStatement",
                   "src": "192:28:4"
                 }
               ]
             },
             "documentation": null,
-            "id": 531,
+            "id": 387,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [],
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 520,
+              "id": 376,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 517,
+                  "id": 373,
                   "name": "_label",
                   "nodeType": "VariableDeclaration",
-                  "scope": 531,
+                  "scope": 387,
                   "src": "101:20:4",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -235,7 +258,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 516,
+                    "id": 372,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "101:6:4",
@@ -249,10 +272,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 519,
+                  "id": 375,
                   "name": "_issueMessage",
                   "nodeType": "VariableDeclaration",
-                  "scope": 531,
+                  "scope": 387,
                   "src": "123:27:4",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -261,7 +284,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 518,
+                    "id": 374,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "123:6:4",
@@ -277,36 +300,1173 @@
               "src": "100:51:4"
             },
             "returnParameters": {
-              "id": 521,
+              "id": 377,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "158:0:4"
             },
-            "scope": 532,
+            "scope": 388,
             "src": "89:138:4",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 533,
-        "src": "25:204:4"
+        "scope": 432,
+        "src": "24:22:4",
+        "absolutePath": "/home/yehia/Documents/Projects/hackathon/BlockHub/contracts/commit.sol",
+        "file": "./commit.sol",
+        "sourceUnit": 307,
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 431,
+        "linearizedBaseContracts": [
+          431
+        ],
+        "name": "issue",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 370,
+            "name": "repoOwner",
+            "nodeType": "VariableDeclaration",
+            "scope": 431,
+            "src": "68:25:4",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address_payable",
+              "typeString": "address payable"
+            },
+            "typeName": {
+              "id": 369,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "68:15:4",
+              "stateMutability": "payable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address_payable",
+                "typeString": "address payable"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 372,
+            "name": "issueCreator",
+            "nodeType": "VariableDeclaration",
+            "scope": 431,
+            "src": "99:28:4",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address_payable",
+              "typeString": "address payable"
+            },
+            "typeName": {
+              "id": 371,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "99:15:4",
+              "stateMutability": "payable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address_payable",
+                "typeString": "address payable"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 386,
+              "nodeType": "Block",
+              "src": "179:73:4",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 379,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 377,
+                      "name": "repoOwner",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 370,
+                      "src": "189:9:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address_payable",
+                        "typeString": "address payable"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 378,
+                        "name": "msg",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 686,
+                        "src": "180:3:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_magic_message",
+                          "typeString": "msg"
+                        }
+                      },
+                      "id": 378,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "sender",
+                      "nodeType": "Identifier",
+                      "referencedDeclaration": 374,
+                      "src": "200:10:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address_payable",
+                        "typeString": "address payable"
+                      },
+                      "name": "_repoOwner",
+                      "overloadedDeclarations": []
+                    },
+                    "src": "189:21:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  },
+                  "id": 380,
+                  "nodeType": "ExpressionStatement",
+                  "src": "189:21:4"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 384,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 381,
+                      "name": "issueCreator",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 372,
+                      "src": "220:12:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address_payable",
+                        "typeString": "address payable"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 382,
+                        "name": "msg",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 697,
+                        "src": "235:3:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_magic_message",
+                          "typeString": "msg"
+                        }
+                      },
+                      "id": 383,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "sender",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "235:10:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address_payable",
+                        "typeString": "address payable"
+                      }
+                    },
+                    "src": "220:25:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  },
+                  "id": 385,
+                  "nodeType": "ExpressionStatement",
+                  "src": "220:25:4"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 375,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "CommitsRequest",
+            "nodeType": "VariableDeclaration",
+            "parameters": {
+              "id": 375,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 374,
+                  "name": "_repoOwner",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 387,
+                  "src": "145:26:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address_payable",
+                    "typeString": "address payable"
+                  },
+                  "typeName": {
+                    "id": 373,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "145:15:4",
+                    "stateMutability": "payable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "144:28:4"
+            },
+            "returnParameters": {
+              "id": 376,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "179:0:4"
+            },
+            "scope": 431,
+            "src": "133:23:4",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "internal",
+            "constant": false,
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_array$_t_contract$_commit_$306_$dyn_storage",
+              "typeString": "contract commit[]"
+            },
+            "typeName": {
+              "baseType": {
+                "contractScope": null,
+                "id": 373,
+                "name": "commit",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 306,
+                "src": "133:6:4",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_contract$_commit_$306",
+                  "typeString": "contract commit"
+                }
+              },
+              "id": 374,
+              "length": null,
+              "nodeType": "ArrayTypeName",
+              "src": "133:8:4",
+              "typeDescriptions": {
+                "typeIdentifier": "t_array$_t_contract$_commit_$306_$dyn_storage_ptr",
+                "typeString": "contract commit[]"
+              }
+            },
+            "value": null
+          },
+          {
+            "body": {
+              "id": 389,
+              "nodeType": "Block",
+              "src": "208:73:4",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "commonType": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        "id": 398,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "argumentTypes": null,
+                          "commonType": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          },
+                          "id": 394,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftExpression": {
+                            "argumentTypes": null,
+                            "id": 392,
+                            "name": "closer",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 389,
+                            "src": "312:6:4",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          },
+                          "nodeType": "BinaryOperation",
+                          "operator": "==",
+                          "rightExpression": {
+                            "argumentTypes": null,
+                            "id": 393,
+                            "name": "repoOwner",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 370,
+                            "src": "322:9:4",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address_payable",
+                              "typeString": "address payable"
+                            }
+                          },
+                          "src": "312:19:4",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "||",
+                        "rightExpression": {
+                          "argumentTypes": null,
+                          "commonType": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          },
+                          "id": 397,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftExpression": {
+                            "argumentTypes": null,
+                            "id": 395,
+                            "name": "closer",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 389,
+                            "src": "335:6:4",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          },
+                          "nodeType": "BinaryOperation",
+                          "operator": "==",
+                          "rightExpression": {
+                            "argumentTypes": null,
+                            "id": 396,
+                            "name": "issueCreator",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 372,
+                            "src": "345:12:4",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address_payable",
+                              "typeString": "address payable"
+                            }
+                          },
+                          "src": "335:22:4",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        },
+                        "src": "312:45:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      ],
+                      "id": 391,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        700,
+                        701
+                      ],
+                      "referencedDeclaration": 700,
+                      "src": "304:7:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
+                        "typeString": "function (bool) pure"
+                      }
+                    },
+                    "id": 382,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "Assignment",
+                    "src": "218:21:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    },
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 380,
+                      "name": "repoOwner",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 370,
+                      "src": "218:9:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address_payable",
+                        "typeString": "address payable"
+                      }
+                    },
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 381,
+                      "name": "_repoOwner",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 377,
+                      "src": "229:10:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address_payable",
+                        "typeString": "address payable"
+                      }
+                    }
+                  },
+                  "id": 383,
+                  "nodeType": "ExpressionStatement",
+                  "src": "218:21:4"
+                },
+                {
+                  "id": 388,
+                  "nodeType": "ExpressionStatement",
+                  "src": "249:25:4",
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 387,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 384,
+                      "name": "issueCreator",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 372,
+                      "src": "249:12:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address_payable",
+                        "typeString": "address payable"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 385,
+                        "name": "msg",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 712,
+                        "src": "264:3:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_magic_message",
+                          "typeString": "msg"
+                        }
+                      },
+                      "id": 386,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "sender",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "264:10:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address_payable",
+                        "typeString": "address payable"
+                      }
+                    },
+                    "src": "249:25:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  }
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 390,
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 378,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 377,
+                  "name": "_repoOwner",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 390,
+                  "src": "174:26:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address_payable",
+                    "typeString": "address payable"
+                  },
+                  "typeName": {
+                    "id": 376,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "174:15:4",
+                    "stateMutability": "payable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "173:28:4"
+            },
+            "src": "162:119:4",
+            "visibility": "public",
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "returnParameters": {
+              "id": 379,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "208:0:4"
+            },
+            "scope": 431,
+            "stateMutability": "nonpayable",
+            "superFunction": null
+          },
+          {
+            "body": {
+              "id": 405,
+              "nodeType": "Block",
+              "src": "323:83:4",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 401,
+                        "name": "issueCreator",
+                        "nodeType": "BinaryOperation",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 372,
+                        "src": "341:45:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        "commonType": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "argumentTypes": null,
+                          "commonType": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          },
+                          "id": 397,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftExpression": {
+                            "argumentTypes": null,
+                            "id": 395,
+                            "name": "closer",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 392,
+                            "src": "341:6:4",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          },
+                          "nodeType": "BinaryOperation",
+                          "operator": "==",
+                          "rightExpression": {
+                            "argumentTypes": null,
+                            "id": 396,
+                            "name": "repoOwner",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 370,
+                            "src": "351:9:4",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address_payable",
+                              "typeString": "address payable"
+                            }
+                          },
+                          "src": "341:19:4",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        },
+                        "operator": "||",
+                        "rightExpression": {
+                          "argumentTypes": null,
+                          "commonType": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          },
+                          "id": 400,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftExpression": {
+                            "argumentTypes": null,
+                            "id": 398,
+                            "name": "closer",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 392,
+                            "src": "364:6:4",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          },
+                          "nodeType": "BinaryOperation",
+                          "operator": "==",
+                          "rightExpression": {
+                            "argumentTypes": null,
+                            "id": 399,
+                            "name": "issueCreator",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 372,
+                            "src": "374:12:4",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address_payable",
+                              "typeString": "address payable"
+                            }
+                          },
+                          "src": "364:22:4",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      ],
+                      "id": 394,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        715,
+                        716
+                      ],
+                      "referencedDeclaration": 715,
+                      "src": "333:7:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
+                        "typeString": "function (bool) pure"
+                      }
+                    },
+                    "id": 402,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "333:54:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 403,
+                  "nodeType": "ExpressionStatement",
+                  "src": "333:54:4"
+                },
+                {
+                  "id": 404,
+                  "nodeType": "PlaceholderStatement",
+                  "src": "398:1:4"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 406,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "id": 406,
+                      "name": "msg",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 697,
+                      "src": "418:3:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_magic_message",
+                        "typeString": "msg"
+                      }
+                    },
+                    "id": 407,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "sender",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": null,
+                    "src": "418:10:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  }
+                ],
+                "id": 408,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 405,
+                  "name": "onlyPermited",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 403,
+                  "src": "405:12:4",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$_t_address_$",
+                    "typeString": "modifier (address)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "405:24:4"
+              }
+            ],
+            "name": "onlyPermited",
+            "nodeType": "ModifierDefinition",
+            "parameters": {
+              "id": 393,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 392,
+                  "name": "closer",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 406,
+                  "src": "308:14:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 391,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "308:7:4",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "307:16:4"
+            },
+            "returnParameters": {
+              "id": 409,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "430:0:4"
+            },
+            "scope": 416,
+            "src": "286:120:4",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 417,
+              "nodeType": "Block",
+              "src": "459:41:4",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 414,
+                        "name": "issueCreator",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 372,
+                        "src": "481:12:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      ],
+                      "id": 413,
+                      "name": "selfdestruct",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 720,
+                      "src": "468:12:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_selfdestruct_nonpayable$_t_address_payable_$returns$__$",
+                        "typeString": "function (address payable)"
+                      }
+                    },
+                    "id": 415,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "468:26:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 416,
+                  "nodeType": "ExpressionStatement",
+                  "src": "468:26:4"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 418,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "id": 409,
+                      "name": "msg",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 712,
+                      "src": "447:3:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_magic_message",
+                        "typeString": "msg"
+                      }
+                    },
+                    "id": 410,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "sender",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": null,
+                    "src": "447:10:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  }
+                ],
+                "id": 411,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 408,
+                  "name": "onlyPermited",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 406,
+                  "src": "434:12:4",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$_t_address_$",
+                    "typeString": "modifier (address)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "434:24:4"
+              }
+            ],
+            "name": "close",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 407,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "424:2:4"
+            },
+            "returnParameters": {
+              "id": 412,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "459:0:4"
+            },
+            "scope": 431,
+            "src": "410:90:4",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 429,
+              "nodeType": "Block",
+              "src": "552:49:4",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 426,
+                        "name": "commitRequest",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 420,
+                        "src": "581:13:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_commit_$306",
+                          "typeString": "contract commit"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_contract$_commit_$306",
+                          "typeString": "contract commit"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 423,
+                        "name": "CommitsRequest",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 375,
+                        "src": "561:14:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_contract$_commit_$306_$dyn_storage",
+                          "typeString": "contract commit[] storage ref"
+                        }
+                      },
+                      "id": 425,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "push",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "561:19:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_arraypush_nonpayable$_t_contract$_commit_$306_$returns$_t_uint256_$",
+                        "typeString": "function (contract commit) returns (uint256)"
+                      }
+                    },
+                    "id": 427,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "561:34:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 428,
+                  "nodeType": "ExpressionStatement",
+                  "src": "561:34:4"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 430,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "makeCommit",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 421,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 420,
+                  "name": "commitRequest",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 430,
+                  "src": "524:20:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_commit_$306",
+                    "typeString": "contract commit"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 419,
+                    "name": "commit",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 306,
+                    "src": "524:6:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_commit_$306",
+                      "typeString": "contract commit"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "523:22:4"
+            },
+            "returnParameters": {
+              "id": 422,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "552:0:4"
+            },
+            "scope": 431,
+            "src": "504:97:4",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 432,
+        "src": "48:555:4"
       }
     ],
-    "src": "0:229:4"
+    "src": "0:603:4"
   },
   "legacyAST": {
     "absolutePath": "/home/yehia/Documents/Projects/hackathon/BlockHub/contracts/issue.sol",
     "exportedSymbols": {
       "issue": [
-        532
+        431
       ]
     },
-    "id": 533,
+    "id": 432,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 511,
+        "id": 367,
         "literals": [
           "solidity",
           "^",
@@ -322,19 +1482,19 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 532,
+        "id": 368,
         "linearizedBaseContracts": [
-          532
+          388
         ],
         "name": "issue",
-        "nodeType": "ContractDefinition",
+        "nodeType": "ImportDirective",
         "nodes": [
           {
             "constant": false,
-            "id": 513,
+            "id": 369,
             "name": "label",
             "nodeType": "VariableDeclaration",
-            "scope": 532,
+            "scope": 388,
             "src": "45:12:4",
             "stateVariable": true,
             "storageLocation": "default",
@@ -343,7 +1503,7 @@
               "typeString": "string"
             },
             "typeName": {
-              "id": 512,
+              "id": 368,
               "name": "string",
               "nodeType": "ElementaryTypeName",
               "src": "45:6:4",
@@ -357,10 +1517,10 @@
           },
           {
             "constant": false,
-            "id": 515,
+            "id": 371,
             "name": "issueMessage",
             "nodeType": "VariableDeclaration",
-            "scope": 532,
+            "scope": 388,
             "src": "63:19:4",
             "stateVariable": true,
             "storageLocation": "default",
@@ -369,7 +1529,7 @@
               "typeString": "string"
             },
             "typeName": {
-              "id": 514,
+              "id": 370,
               "name": "string",
               "nodeType": "ElementaryTypeName",
               "src": "63:6:4",
@@ -383,25 +1543,25 @@
           },
           {
             "body": {
-              "id": 530,
+              "id": 386,
               "nodeType": "Block",
               "src": "158:69:4",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 524,
+                    "id": 380,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 522,
+                      "id": 378,
                       "name": "label",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 513,
+                      "referencedDeclaration": 369,
                       "src": "168:5:4",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_storage",
@@ -412,11 +1572,11 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 523,
+                      "id": 379,
                       "name": "_label",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 517,
+                      "referencedDeclaration": 373,
                       "src": "176:6:4",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory_ptr",
@@ -429,25 +1589,25 @@
                       "typeString": "string storage ref"
                     }
                   },
-                  "id": 525,
+                  "id": 381,
                   "nodeType": "ExpressionStatement",
                   "src": "168:14:4"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 528,
+                    "id": 384,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 526,
+                      "id": 382,
                       "name": "issueMessage",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 515,
+                      "referencedDeclaration": 371,
                       "src": "192:12:4",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_storage",
@@ -458,11 +1618,11 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 527,
+                      "id": 383,
                       "name": "_issueMessage",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 519,
+                      "referencedDeclaration": 375,
                       "src": "207:13:4",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory_ptr",
@@ -475,29 +1635,29 @@
                       "typeString": "string storage ref"
                     }
                   },
-                  "id": 529,
+                  "id": 385,
                   "nodeType": "ExpressionStatement",
                   "src": "192:28:4"
                 }
               ]
             },
             "documentation": null,
-            "id": 531,
+            "id": 387,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [],
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 520,
+              "id": 376,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 517,
+                  "id": 373,
                   "name": "_label",
                   "nodeType": "VariableDeclaration",
-                  "scope": 531,
+                  "scope": 387,
                   "src": "101:20:4",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -506,7 +1666,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 516,
+                    "id": 372,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "101:6:4",
@@ -520,10 +1680,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 519,
+                  "id": 375,
                   "name": "_issueMessage",
                   "nodeType": "VariableDeclaration",
-                  "scope": 531,
+                  "scope": 387,
                   "src": "123:27:4",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -532,7 +1692,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 518,
+                    "id": 374,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "123:6:4",
@@ -548,23 +1708,1160 @@
               "src": "100:51:4"
             },
             "returnParameters": {
-              "id": 521,
+              "id": 377,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "158:0:4"
             },
-            "scope": 532,
+            "scope": 388,
             "src": "89:138:4",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 533,
-        "src": "25:204:4"
+        "scope": 432,
+        "src": "24:22:4",
+        "absolutePath": "/home/yehia/Documents/Projects/hackathon/BlockHub/contracts/commit.sol",
+        "file": "./commit.sol",
+        "sourceUnit": 307,
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 431,
+        "linearizedBaseContracts": [
+          431
+        ],
+        "name": "issue",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 370,
+            "name": "repoOwner",
+            "nodeType": "VariableDeclaration",
+            "scope": 431,
+            "src": "68:25:4",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address_payable",
+              "typeString": "address payable"
+            },
+            "typeName": {
+              "id": 369,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "68:15:4",
+              "stateMutability": "payable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address_payable",
+                "typeString": "address payable"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 372,
+            "name": "issueCreator",
+            "nodeType": "VariableDeclaration",
+            "scope": 431,
+            "src": "99:28:4",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address_payable",
+              "typeString": "address payable"
+            },
+            "typeName": {
+              "id": 371,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "99:15:4",
+              "stateMutability": "payable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address_payable",
+                "typeString": "address payable"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 386,
+              "nodeType": "Block",
+              "src": "179:73:4",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 379,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 377,
+                      "name": "repoOwner",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 370,
+                      "src": "189:9:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address_payable",
+                        "typeString": "address payable"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 378,
+                        "name": "msg",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 686,
+                        "src": "180:3:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_magic_message",
+                          "typeString": "msg"
+                        }
+                      },
+                      "id": 378,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "sender",
+                      "nodeType": "Identifier",
+                      "referencedDeclaration": 374,
+                      "src": "200:10:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address_payable",
+                        "typeString": "address payable"
+                      },
+                      "name": "_repoOwner",
+                      "overloadedDeclarations": []
+                    },
+                    "src": "189:21:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  },
+                  "id": 380,
+                  "nodeType": "ExpressionStatement",
+                  "src": "189:21:4"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 384,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 381,
+                      "name": "issueCreator",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 372,
+                      "src": "220:12:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address_payable",
+                        "typeString": "address payable"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 382,
+                        "name": "msg",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 697,
+                        "src": "235:3:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_magic_message",
+                          "typeString": "msg"
+                        }
+                      },
+                      "id": 383,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "sender",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "235:10:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address_payable",
+                        "typeString": "address payable"
+                      }
+                    },
+                    "src": "220:25:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  },
+                  "id": 385,
+                  "nodeType": "ExpressionStatement",
+                  "src": "220:25:4"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 375,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "CommitsRequest",
+            "nodeType": "VariableDeclaration",
+            "parameters": {
+              "id": 375,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 374,
+                  "name": "_repoOwner",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 387,
+                  "src": "145:26:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address_payable",
+                    "typeString": "address payable"
+                  },
+                  "typeName": {
+                    "id": 373,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "145:15:4",
+                    "stateMutability": "payable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "144:28:4"
+            },
+            "returnParameters": {
+              "id": 376,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "179:0:4"
+            },
+            "scope": 431,
+            "src": "133:23:4",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "internal",
+            "constant": false,
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_array$_t_contract$_commit_$306_$dyn_storage",
+              "typeString": "contract commit[]"
+            },
+            "typeName": {
+              "baseType": {
+                "contractScope": null,
+                "id": 373,
+                "name": "commit",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 306,
+                "src": "133:6:4",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_contract$_commit_$306",
+                  "typeString": "contract commit"
+                }
+              },
+              "id": 374,
+              "length": null,
+              "nodeType": "ArrayTypeName",
+              "src": "133:8:4",
+              "typeDescriptions": {
+                "typeIdentifier": "t_array$_t_contract$_commit_$306_$dyn_storage_ptr",
+                "typeString": "contract commit[]"
+              }
+            },
+            "value": null
+          },
+          {
+            "body": {
+              "id": 389,
+              "nodeType": "Block",
+              "src": "208:73:4",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "commonType": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        "id": 398,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "argumentTypes": null,
+                          "commonType": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          },
+                          "id": 394,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftExpression": {
+                            "argumentTypes": null,
+                            "id": 392,
+                            "name": "closer",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 389,
+                            "src": "312:6:4",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          },
+                          "nodeType": "BinaryOperation",
+                          "operator": "==",
+                          "rightExpression": {
+                            "argumentTypes": null,
+                            "id": 393,
+                            "name": "repoOwner",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 370,
+                            "src": "322:9:4",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address_payable",
+                              "typeString": "address payable"
+                            }
+                          },
+                          "src": "312:19:4",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "||",
+                        "rightExpression": {
+                          "argumentTypes": null,
+                          "commonType": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          },
+                          "id": 397,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftExpression": {
+                            "argumentTypes": null,
+                            "id": 395,
+                            "name": "closer",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 389,
+                            "src": "335:6:4",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          },
+                          "nodeType": "BinaryOperation",
+                          "operator": "==",
+                          "rightExpression": {
+                            "argumentTypes": null,
+                            "id": 396,
+                            "name": "issueCreator",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 372,
+                            "src": "345:12:4",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address_payable",
+                              "typeString": "address payable"
+                            }
+                          },
+                          "src": "335:22:4",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        },
+                        "src": "312:45:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      ],
+                      "id": 391,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        700,
+                        701
+                      ],
+                      "referencedDeclaration": 700,
+                      "src": "304:7:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
+                        "typeString": "function (bool) pure"
+                      }
+                    },
+                    "id": 382,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "Assignment",
+                    "src": "218:21:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    },
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 380,
+                      "name": "repoOwner",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 370,
+                      "src": "218:9:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address_payable",
+                        "typeString": "address payable"
+                      }
+                    },
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 381,
+                      "name": "_repoOwner",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 377,
+                      "src": "229:10:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address_payable",
+                        "typeString": "address payable"
+                      }
+                    }
+                  },
+                  "id": 383,
+                  "nodeType": "ExpressionStatement",
+                  "src": "218:21:4"
+                },
+                {
+                  "id": 388,
+                  "nodeType": "ExpressionStatement",
+                  "src": "249:25:4",
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 387,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 384,
+                      "name": "issueCreator",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 372,
+                      "src": "249:12:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address_payable",
+                        "typeString": "address payable"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 385,
+                        "name": "msg",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 712,
+                        "src": "264:3:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_magic_message",
+                          "typeString": "msg"
+                        }
+                      },
+                      "id": 386,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "sender",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "264:10:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address_payable",
+                        "typeString": "address payable"
+                      }
+                    },
+                    "src": "249:25:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  }
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 390,
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 378,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 377,
+                  "name": "_repoOwner",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 390,
+                  "src": "174:26:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address_payable",
+                    "typeString": "address payable"
+                  },
+                  "typeName": {
+                    "id": 376,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "174:15:4",
+                    "stateMutability": "payable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "173:28:4"
+            },
+            "src": "162:119:4",
+            "visibility": "public",
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "returnParameters": {
+              "id": 379,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "208:0:4"
+            },
+            "scope": 431,
+            "stateMutability": "nonpayable",
+            "superFunction": null
+          },
+          {
+            "body": {
+              "id": 405,
+              "nodeType": "Block",
+              "src": "323:83:4",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 401,
+                        "name": "issueCreator",
+                        "nodeType": "BinaryOperation",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 372,
+                        "src": "341:45:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        "commonType": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "argumentTypes": null,
+                          "commonType": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          },
+                          "id": 397,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftExpression": {
+                            "argumentTypes": null,
+                            "id": 395,
+                            "name": "closer",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 392,
+                            "src": "341:6:4",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          },
+                          "nodeType": "BinaryOperation",
+                          "operator": "==",
+                          "rightExpression": {
+                            "argumentTypes": null,
+                            "id": 396,
+                            "name": "repoOwner",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 370,
+                            "src": "351:9:4",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address_payable",
+                              "typeString": "address payable"
+                            }
+                          },
+                          "src": "341:19:4",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        },
+                        "operator": "||",
+                        "rightExpression": {
+                          "argumentTypes": null,
+                          "commonType": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          },
+                          "id": 400,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftExpression": {
+                            "argumentTypes": null,
+                            "id": 398,
+                            "name": "closer",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 392,
+                            "src": "364:6:4",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          },
+                          "nodeType": "BinaryOperation",
+                          "operator": "==",
+                          "rightExpression": {
+                            "argumentTypes": null,
+                            "id": 399,
+                            "name": "issueCreator",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 372,
+                            "src": "374:12:4",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address_payable",
+                              "typeString": "address payable"
+                            }
+                          },
+                          "src": "364:22:4",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      ],
+                      "id": 394,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        715,
+                        716
+                      ],
+                      "referencedDeclaration": 715,
+                      "src": "333:7:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
+                        "typeString": "function (bool) pure"
+                      }
+                    },
+                    "id": 402,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "333:54:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 403,
+                  "nodeType": "ExpressionStatement",
+                  "src": "333:54:4"
+                },
+                {
+                  "id": 404,
+                  "nodeType": "PlaceholderStatement",
+                  "src": "398:1:4"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 406,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "id": 406,
+                      "name": "msg",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 697,
+                      "src": "418:3:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_magic_message",
+                        "typeString": "msg"
+                      }
+                    },
+                    "id": 407,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "sender",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": null,
+                    "src": "418:10:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  }
+                ],
+                "id": 408,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 405,
+                  "name": "onlyPermited",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 403,
+                  "src": "405:12:4",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$_t_address_$",
+                    "typeString": "modifier (address)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "405:24:4"
+              }
+            ],
+            "name": "onlyPermited",
+            "nodeType": "ModifierDefinition",
+            "parameters": {
+              "id": 393,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 392,
+                  "name": "closer",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 406,
+                  "src": "308:14:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 391,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "308:7:4",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "307:16:4"
+            },
+            "returnParameters": {
+              "id": 409,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "430:0:4"
+            },
+            "scope": 416,
+            "src": "286:120:4",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 417,
+              "nodeType": "Block",
+              "src": "459:41:4",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 414,
+                        "name": "issueCreator",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 372,
+                        "src": "481:12:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      ],
+                      "id": 413,
+                      "name": "selfdestruct",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 720,
+                      "src": "468:12:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_selfdestruct_nonpayable$_t_address_payable_$returns$__$",
+                        "typeString": "function (address payable)"
+                      }
+                    },
+                    "id": 415,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "468:26:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 416,
+                  "nodeType": "ExpressionStatement",
+                  "src": "468:26:4"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 418,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "id": 409,
+                      "name": "msg",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 712,
+                      "src": "447:3:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_magic_message",
+                        "typeString": "msg"
+                      }
+                    },
+                    "id": 410,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "sender",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": null,
+                    "src": "447:10:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  }
+                ],
+                "id": 411,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 408,
+                  "name": "onlyPermited",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 406,
+                  "src": "434:12:4",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$_t_address_$",
+                    "typeString": "modifier (address)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "434:24:4"
+              }
+            ],
+            "name": "close",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 407,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "424:2:4"
+            },
+            "returnParameters": {
+              "id": 412,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "459:0:4"
+            },
+            "scope": 431,
+            "src": "410:90:4",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 429,
+              "nodeType": "Block",
+              "src": "552:49:4",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 426,
+                        "name": "commitRequest",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 420,
+                        "src": "581:13:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_commit_$306",
+                          "typeString": "contract commit"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_contract$_commit_$306",
+                          "typeString": "contract commit"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 423,
+                        "name": "CommitsRequest",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 375,
+                        "src": "561:14:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_contract$_commit_$306_$dyn_storage",
+                          "typeString": "contract commit[] storage ref"
+                        }
+                      },
+                      "id": 425,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "push",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "561:19:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_arraypush_nonpayable$_t_contract$_commit_$306_$returns$_t_uint256_$",
+                        "typeString": "function (contract commit) returns (uint256)"
+                      }
+                    },
+                    "id": 427,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "561:34:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 428,
+                  "nodeType": "ExpressionStatement",
+                  "src": "561:34:4"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 430,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "makeCommit",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 421,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 420,
+                  "name": "commitRequest",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 430,
+                  "src": "524:20:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_commit_$306",
+                    "typeString": "contract commit"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 419,
+                    "name": "commit",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 306,
+                    "src": "524:6:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_commit_$306",
+                      "typeString": "contract commit"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "523:22:4"
+            },
+            "returnParameters": {
+              "id": 422,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "552:0:4"
+            },
+            "scope": 431,
+            "src": "504:97:4",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 432,
+        "src": "48:555:4"
       }
     ],
-    "src": "0:229:4"
+    "src": "0:603:4"
   },
   "compiler": {
     "name": "solc",
@@ -572,7 +2869,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.8",
-  "updatedAt": "2019-08-02T14:08:36.725Z",
+  "updatedAt": "2019-08-04T11:42:10.586Z",
   "devdoc": {
     "methods": {}
   },

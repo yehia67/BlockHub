@@ -20,30 +20,23 @@ contract branch{
     function getCommitsArray() public view returns (commit[] memory) {
         return commitArray;
     }
-    event commitCreated(address commitCreator, string msg, string _commitHash);
+     function getCommitsArrayLength() public view returns (uint) {
+        return commitArray.length;
+    }
+   function pushCommit(string memory _authorName,string memory _commitHash,
+  string memory  _date, string memory _message,string memory _change) public{
+      
+      commit Commit = new commit(_authorName,_commitHash,_date,_message,_change);
+      commitMap[_commitHash] = address(Commit);
+      emit commitCreated(msg.sender,_authorName,_message,_commitHash);
+  }
+    event commitCreated(address commitCreator, string name,string msg, string _commitHash);
 
     modifier onlyPermitted(){
         //require(msg.sender == owner);
         _;
     }
-    function parseCommit(address _authorAddress,string memory _authorName,string memory _commitHash, string memory _date,
-    string memory _msg) public onlyPermitted{
-        commit Commit = new commit(_authorAddress,_authorName, _commitHash, _date, _msg);
-        commitMap[_commitHash] = address(Commit);
-        commitArray.push(commit(commitMap[_commitHash]));
-        emit commitCreated(_authorAddress, _msg, _commitHash);
-    }
-
-    function pushCommit(string memory _authorName,string memory _commitHash, string memory _date,
-    string memory _msg, bytes32[] memory _addedFiles, bytes32[] memory _addedLines,
-    bytes32[] memory _removedFiles, bytes32[] memory _removedLines) public onlyPermitted{
-        commit Commit = new commit(msg.sender,_authorName, _commitHash, _date, _msg);
-        Commit.initChanges( _addedFiles,  _addedLines,_removedFiles, _removedLines);
-        commitMap[_commitHash] = address(Commit);
-        commitArray.push(commit(commitMap[_commitHash]));
-        emit commitCreated(msg.sender, _msg, _commitHash);
-    }
-
+  
 
     function getLastCommitHash() public view returns(string memory) {
         return commitArray[commitArray.length-1].getHash();
