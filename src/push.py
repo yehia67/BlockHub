@@ -165,6 +165,10 @@ def showChange():
         print(Commits[len(Commits)-1].Changes.addLines[i])
 
 showChange()
+
+def returnDifference(recLength):
+    return compDict = {"local commits" : len(Commits), "received commits" : recLength}
+
    
        
 

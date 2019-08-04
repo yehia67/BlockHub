@@ -31,7 +31,7 @@ def get_str_between(s, before, after):
 
 #Use os Module
 
-
+os.popen('git config diff.renames 0') # fixing "too many files skipping inexact rename detection" warning
 gitLogCommand = os.popen('git log').read()
 Commits = [] 
 splitAllCommits = gitLogCommand.split('commit')
