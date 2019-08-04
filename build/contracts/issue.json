@@ -17,9 +17,9 @@
       "type": "constructor"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.0+commit.1d4f565a\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"name\":\"_label\",\"type\":\"string\"},{\"name\":\"_issueMessage\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/home/yehia/Documents/Projects/hackathon/BlockHub/contracts/issue.sol\":\"issue\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/yehia/Documents/Projects/hackathon/BlockHub/contracts/issue.sol\":{\"keccak256\":\"0x5024e237da78ab065fc3d532f3e34db171c37e7063b771f1aa76fcabf9f72c6b\",\"urls\":[\"bzzr://40cf209fcaaf94b0fabddb86f1641f5c5441eac79e07e522eefac5e7763d967a\"]}},\"version\":1}",
-  "bytecode": "0x608060405234801561001057600080fd5b506040516101d53803806101d58339810180604052604081101561003357600080fd5b81019080805164010000000081111561004b57600080fd5b8201602081018481111561005e57600080fd5b815164010000000081118282018710171561007857600080fd5b5050929190602001805164010000000081111561009457600080fd5b820160208101848111156100a757600080fd5b81516401000000008111828201871017156100c157600080fd5b505084519093506100db92506000915060208501906100f7565b5080516100ef9060019060208401906100f7565b505050610192565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061013857805160ff1916838001178555610165565b82800160010185558215610165579182015b8281111561016557825182559160200191906001019061014a565b50610171929150610175565b5090565b61018f91905b80821115610171576000815560010161017b565b90565b6035806101a06000396000f3fe6080604052600080fdfea165627a7a72305820cd14aaceb35f172bf8efc1728e6889cf10ba94a13bb71a7ce4865faeefdc03ce0029",
-  "deployedBytecode": "0x6080604052600080fdfea165627a7a72305820cd14aaceb35f172bf8efc1728e6889cf10ba94a13bb71a7ce4865faeefdc03ce0029",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.0+commit.1d4f565a\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"name\":\"_label\",\"type\":\"string\"},{\"name\":\"_issueMessage\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/home/yehia/Documents/Projects/hackathon/BlockHub/contracts/issue.sol\":\"issue\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":1000},\"remappings\":[]},\"sources\":{\"/home/yehia/Documents/Projects/hackathon/BlockHub/contracts/issue.sol\":{\"keccak256\":\"0x5024e237da78ab065fc3d532f3e34db171c37e7063b771f1aa76fcabf9f72c6b\",\"urls\":[\"bzzr://40cf209fcaaf94b0fabddb86f1641f5c5441eac79e07e522eefac5e7763d967a\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b506040516101d53803806101d58339810180604052604081101561003357600080fd5b81019080805164010000000081111561004b57600080fd5b8201602081018481111561005e57600080fd5b815164010000000081118282018710171561007857600080fd5b5050929190602001805164010000000081111561009457600080fd5b820160208101848111156100a757600080fd5b81516401000000008111828201871017156100c157600080fd5b505084519093506100db92506000915060208501906100f7565b5080516100ef9060019060208401906100f7565b505050610192565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061013857805160ff1916838001178555610165565b82800160010185558215610165579182015b8281111561016557825182559160200191906001019061014a565b50610171929150610175565b5090565b61018f91905b80821115610171576000815560010161017b565b90565b6035806101a06000396000f3fe6080604052600080fdfea165627a7a7230582033a0547df0da00cb0aae65774084e93ed08e33b23313e9eb6db32f5fdefcff060029",
+  "deployedBytecode": "0x6080604052600080fdfea165627a7a7230582033a0547df0da00cb0aae65774084e93ed08e33b23313e9eb6db32f5fdefcff060029",
   "sourceMap": "25:204:4:-;;;89:138;8:9:-1;5:2;;;30:1;27;20:12;5:2;89:138:4;;;;;;;;;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;89:138:4;;;;;;19:11:-1;14:3;11:20;8:2;;;44:1;41;34:12;8:2;62:21;;123:4;114:14;;138:31;;;135:2;;;182:1;179;172:12;135:2;213:10;;261:11;244:29;;285:43;;;282:58;-1:-1;233:115;230:2;;;361:1;358;351:12;230:2;0:372;;89:138:4;;;;;;;19:11:-1;14:3;11:20;8:2;;;44:1;41;34:12;8:2;62:21;;123:4;114:14;;138:31;;;135:2;;;182:1;179;172:12;135:2;213:10;;261:11;244:29;;285:43;;;282:58;-1:-1;233:115;230:2;;;361:1;358;351:12;230:2;-1:-1;;168:14:4;;89:138;;-1:-1:-1;168:14:4;;-1:-1:-1;168:5:4;;-1:-1:-1;168:14:4;;;;;:::i;:::-;-1:-1:-1;192:28:4;;;;:12;;:28;;;;;:::i;:::-;;89:138;;25:204;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;25:204:4;;;-1:-1:-1;25:204:4;:::i;:::-;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;:::o;:::-;;;;;;;",
   "deployedSourceMap": "25:204:4:-;;;;;",
   "source": "pragma solidity ^0.5.0;\n\ncontract issue{\n    string label;\n    string issueMessage;\n\n    constructor(string memory _label, string memory _issueMessage) public{\n        label = _label;\n        issueMessage = _issueMessage;\n    }\n}",
@@ -28,14 +28,14 @@
     "absolutePath": "/home/yehia/Documents/Projects/hackathon/BlockHub/contracts/issue.sol",
     "exportedSymbols": {
       "issue": [
-        453
+        532
       ]
     },
-    "id": 454,
+    "id": 533,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 432,
+        "id": 511,
         "literals": [
           "solidity",
           "^",
@@ -51,19 +51,19 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 453,
+        "id": 532,
         "linearizedBaseContracts": [
-          453
+          532
         ],
         "name": "issue",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 434,
+            "id": 513,
             "name": "label",
             "nodeType": "VariableDeclaration",
-            "scope": 453,
+            "scope": 532,
             "src": "45:12:4",
             "stateVariable": true,
             "storageLocation": "default",
@@ -72,7 +72,7 @@
               "typeString": "string"
             },
             "typeName": {
-              "id": 433,
+              "id": 512,
               "name": "string",
               "nodeType": "ElementaryTypeName",
               "src": "45:6:4",
@@ -86,10 +86,10 @@
           },
           {
             "constant": false,
-            "id": 436,
+            "id": 515,
             "name": "issueMessage",
             "nodeType": "VariableDeclaration",
-            "scope": 453,
+            "scope": 532,
             "src": "63:19:4",
             "stateVariable": true,
             "storageLocation": "default",
@@ -98,7 +98,7 @@
               "typeString": "string"
             },
             "typeName": {
-              "id": 435,
+              "id": 514,
               "name": "string",
               "nodeType": "ElementaryTypeName",
               "src": "63:6:4",
@@ -112,25 +112,25 @@
           },
           {
             "body": {
-              "id": 451,
+              "id": 530,
               "nodeType": "Block",
               "src": "158:69:4",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 445,
+                    "id": 524,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 443,
+                      "id": 522,
                       "name": "label",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 434,
+                      "referencedDeclaration": 513,
                       "src": "168:5:4",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_storage",
@@ -141,11 +141,11 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 444,
+                      "id": 523,
                       "name": "_label",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 438,
+                      "referencedDeclaration": 517,
                       "src": "176:6:4",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory_ptr",
@@ -158,25 +158,25 @@
                       "typeString": "string storage ref"
                     }
                   },
-                  "id": 446,
+                  "id": 525,
                   "nodeType": "ExpressionStatement",
                   "src": "168:14:4"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 449,
+                    "id": 528,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 447,
+                      "id": 526,
                       "name": "issueMessage",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 436,
+                      "referencedDeclaration": 515,
                       "src": "192:12:4",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_storage",
@@ -187,11 +187,11 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 448,
+                      "id": 527,
                       "name": "_issueMessage",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 440,
+                      "referencedDeclaration": 519,
                       "src": "207:13:4",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory_ptr",
@@ -204,29 +204,29 @@
                       "typeString": "string storage ref"
                     }
                   },
-                  "id": 450,
+                  "id": 529,
                   "nodeType": "ExpressionStatement",
                   "src": "192:28:4"
                 }
               ]
             },
             "documentation": null,
-            "id": 452,
+            "id": 531,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [],
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 441,
+              "id": 520,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 438,
+                  "id": 517,
                   "name": "_label",
                   "nodeType": "VariableDeclaration",
-                  "scope": 452,
+                  "scope": 531,
                   "src": "101:20:4",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -235,7 +235,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 437,
+                    "id": 516,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "101:6:4",
@@ -249,10 +249,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 440,
+                  "id": 519,
                   "name": "_issueMessage",
                   "nodeType": "VariableDeclaration",
-                  "scope": 452,
+                  "scope": 531,
                   "src": "123:27:4",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -261,7 +261,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 439,
+                    "id": 518,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "123:6:4",
@@ -277,19 +277,19 @@
               "src": "100:51:4"
             },
             "returnParameters": {
-              "id": 442,
+              "id": 521,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "158:0:4"
             },
-            "scope": 453,
+            "scope": 532,
             "src": "89:138:4",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 454,
+        "scope": 533,
         "src": "25:204:4"
       }
     ],
@@ -299,14 +299,14 @@
     "absolutePath": "/home/yehia/Documents/Projects/hackathon/BlockHub/contracts/issue.sol",
     "exportedSymbols": {
       "issue": [
-        453
+        532
       ]
     },
-    "id": 454,
+    "id": 533,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 432,
+        "id": 511,
         "literals": [
           "solidity",
           "^",
@@ -322,19 +322,19 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 453,
+        "id": 532,
         "linearizedBaseContracts": [
-          453
+          532
         ],
         "name": "issue",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 434,
+            "id": 513,
             "name": "label",
             "nodeType": "VariableDeclaration",
-            "scope": 453,
+            "scope": 532,
             "src": "45:12:4",
             "stateVariable": true,
             "storageLocation": "default",
@@ -343,7 +343,7 @@
               "typeString": "string"
             },
             "typeName": {
-              "id": 433,
+              "id": 512,
               "name": "string",
               "nodeType": "ElementaryTypeName",
               "src": "45:6:4",
@@ -357,10 +357,10 @@
           },
           {
             "constant": false,
-            "id": 436,
+            "id": 515,
             "name": "issueMessage",
             "nodeType": "VariableDeclaration",
-            "scope": 453,
+            "scope": 532,
             "src": "63:19:4",
             "stateVariable": true,
             "storageLocation": "default",
@@ -369,7 +369,7 @@
               "typeString": "string"
             },
             "typeName": {
-              "id": 435,
+              "id": 514,
               "name": "string",
               "nodeType": "ElementaryTypeName",
               "src": "63:6:4",
@@ -383,25 +383,25 @@
           },
           {
             "body": {
-              "id": 451,
+              "id": 530,
               "nodeType": "Block",
               "src": "158:69:4",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 445,
+                    "id": 524,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 443,
+                      "id": 522,
                       "name": "label",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 434,
+                      "referencedDeclaration": 513,
                       "src": "168:5:4",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_storage",
@@ -412,11 +412,11 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 444,
+                      "id": 523,
                       "name": "_label",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 438,
+                      "referencedDeclaration": 517,
                       "src": "176:6:4",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory_ptr",
@@ -429,25 +429,25 @@
                       "typeString": "string storage ref"
                     }
                   },
-                  "id": 446,
+                  "id": 525,
                   "nodeType": "ExpressionStatement",
                   "src": "168:14:4"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 449,
+                    "id": 528,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 447,
+                      "id": 526,
                       "name": "issueMessage",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 436,
+                      "referencedDeclaration": 515,
                       "src": "192:12:4",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_storage",
@@ -458,11 +458,11 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 448,
+                      "id": 527,
                       "name": "_issueMessage",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 440,
+                      "referencedDeclaration": 519,
                       "src": "207:13:4",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory_ptr",
@@ -475,29 +475,29 @@
                       "typeString": "string storage ref"
                     }
                   },
-                  "id": 450,
+                  "id": 529,
                   "nodeType": "ExpressionStatement",
                   "src": "192:28:4"
                 }
               ]
             },
             "documentation": null,
-            "id": 452,
+            "id": 531,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [],
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 441,
+              "id": 520,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 438,
+                  "id": 517,
                   "name": "_label",
                   "nodeType": "VariableDeclaration",
-                  "scope": 452,
+                  "scope": 531,
                   "src": "101:20:4",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -506,7 +506,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 437,
+                    "id": 516,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "101:6:4",
@@ -520,10 +520,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 440,
+                  "id": 519,
                   "name": "_issueMessage",
                   "nodeType": "VariableDeclaration",
-                  "scope": 452,
+                  "scope": 531,
                   "src": "123:27:4",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -532,7 +532,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 439,
+                    "id": 518,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "123:6:4",
@@ -548,19 +548,19 @@
               "src": "100:51:4"
             },
             "returnParameters": {
-              "id": 442,
+              "id": 521,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "158:0:4"
             },
-            "scope": 453,
+            "scope": 532,
             "src": "89:138:4",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 454,
+        "scope": 533,
         "src": "25:204:4"
       }
     ],
@@ -572,7 +572,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.8",
-  "updatedAt": "2019-08-01T16:05:00.038Z",
+  "updatedAt": "2019-08-02T14:08:36.725Z",
   "devdoc": {
     "methods": {}
   },

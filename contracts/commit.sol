@@ -13,20 +13,20 @@ contract commit{
   bytes32[] removedLines;
   
   constructor (address  _authorAddress,string memory _authorName,string memory _commitHash,
-  string memory  _date, string memory _message, bytes32[] memory _addedFiles, bytes32[] memory _addedLines,
-  bytes32[] memory _removedFiles, bytes32[] memory _removedLines) public {
+  string memory  _date, string memory _message) public {
     authorAddress = _authorAddress;
     commitHash = _commitHash;
     date = _date;
     message = _message;
-    //change = _change;
     authorName = _authorName;
+  }
+  function initChanges( bytes32[] memory _addedFiles, bytes32[] memory _addedLines,
+  bytes32[] memory _removedFiles, bytes32[] memory _removedLines) public{
     addedFiles = _addedFiles;
     addedLines = _addedLines;
     removedFiles = _removedFiles;
     removedLines = _removedLines;
   }
-
   function getAuthorAddress() public view returns (address) {
     return authorAddress;
   }
