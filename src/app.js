@@ -14,7 +14,8 @@ App = {
         await App.loadWeb3()
         await App.loadAccount()
         await App.loadContract()
-        await App.makeRepo()
+        await App.push()
+
     },
 
     // https://medium.com/metamask/https-medium-com-metamask-breaking-change-injecting-web3-7722797916a8
@@ -164,11 +165,10 @@ App = {
         var commitsArray = []
         $.ajax({
             type: 'GET',
-            url: 'http://127.0.0.1:5000/commit',
+            url: 'http://127.0.0.1:5000/getDifference?len=29',
 
             success: function(response) {
-                commitsArray = response.split(',')
-                console.log(commitsArray)
+                console.log(response)
             },
             error: function(response) {
                 return console.error(response);

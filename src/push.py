@@ -252,8 +252,9 @@ def showChange():
 
 def returnDifference(recLength):
     #print(commitsJson)
+    # print(len(Commits))
     if(int(recLength) > len(Commits)):
-        return -1
+        return "error"
     elif(int(recLength) < len(Commits)):
         var = len(Commits) - recLength
         print(var)
@@ -265,7 +266,7 @@ def returnDifference(recLength):
             var -= 1
         return json.dumps(tempDict)
     else:
-        return 0
+        return "equal"
 
    
 print(returnDifference(6))
