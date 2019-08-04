@@ -197,7 +197,7 @@ def showChange():
 showChange()
 
 def returnDifference(recLength):
-    compDict = {"local commits" : len(Commits), "received commits" : recLength}
+    return compDict = {"local commits" : len(Commits), "received commits" : recLength}
 
    
        
