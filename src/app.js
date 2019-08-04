@@ -8,13 +8,13 @@ App = {
     contracts: {},
     repoAddress: '',
     repoBranchMasterAdress: '',
+    commitsLength: -1,
 
     load: async() => {
         await App.loadWeb3()
         await App.loadAccount()
         await App.loadContract()
         await App.makeRepo()
-        await App.push()
     },
 
     // https://medium.com/metamask/https-medium-com-metamask-breaking-change-injecting-web3-7722797916a8
@@ -65,17 +65,19 @@ App = {
         App.createRepo = await App.contracts.createRepo.deployed()
     },
     makeRepo: async() => {
-        const repo = await App.createRepo.createNewRepo("Create Project", "Awsome project el7")
+        let repoName = prompt("enter your repo name")
+        let repoDescription = prompt("enter repo desription")
+        const repo = await App.createRepo.createNewRepo(repoName, repoDescription)
         console.log(repo)
         App.repoAddress = repo.logs[0].args.repoAddress
+        alert("Your repo address is " + App.repoAddress)
         App.loadRepo()
     },
     loadRepo: async() => {
         const repo = await $.getJSON('repo.json')
         App.contracts.repo = web3.eth.contract(repo.abi).at(App.repoAddress)
         App.masterBranchPromise()
-        App.loadMasterBranch()
-            // App.makeCommitPromise()
+
     },
     masterBranchPromise: async() => {
         return new Promise(function(resolve, reject) {
@@ -84,7 +86,11 @@ App = {
                     reject(error)
                 } else {
                     resolve(response)
+                    console.log("hnaaaa " + response)
+                    alert("branch address = " + response)
                     App.repoBranchMasterAdress = response
+                    App.loadMasterBranch()
+
                 }
             })
         });
@@ -92,17 +98,58 @@ App = {
     loadMasterBranch: async() => {
         const masterBranch = await $.getJSON('branch.json')
         App.contracts.masterBranch = web3.eth.contract(masterBranch.abi).at(App.repoBranchMasterAdress)
+        console.log(App.repoBranchMasterAdress)
+        App.pushCommits()
     },
-
-    makeCommitPromise: async() => {
+    pushCommits: async() => {
+        App.checkLengthPromise()
+        let authorName = prompt("your name")
+        let commitHash = prompt("your commitHash")
+        let date = prompt("date")
+        let msg = prompt("commit message")
+        let change = prompt("changes you made")
+        App.makeCommitPromise(authorName, commitHash, date, msg, change)
+    },
+    checkLengthPromise: async() => {
         return new Promise(function(resolve, reject) {
-            App.contracts.masterBranch.pushCommit(_authorName, _commitHash, _date,
-                _msg, change,
+            App.contracts.masterBranch.getCommitsArrayLength(
                 function(error, response) {
                     if (error) {
                         reject(error)
                     } else {
                         resolve(response)
+                        console.log("length " + response)
+                        App.commitsLength = response
+
+                    }
+                })
+        });
+    },
+    checkLastHashPromise: async() => {
+        return new Promise(function(resolve, reject) {
+            App.contracts.masterBranch.getLastCommitHash(
+                function(error, response) {
+                    if (error) {
+                        reject(error)
+                    } else {
+                        resolve(response)
+                        console.log("hash " + response)
+                    }
+                })
+        });
+    },
+
+    makeCommitPromise: (_authorName, _commitHash, _date, _msg, _change) => {
+        return new Promise(function(resolve, reject) {
+            App.contracts.masterBranch.pushCommit(_authorName, _commitHash, _date,
+                _msg, _change,
+                function(error, response) {
+                    if (error) {
+                        reject(error)
+                    } else {
+                        resolve(response)
+                        alert("done")
+                        console.log(response)
                     }
                 })
         });
@@ -114,17 +161,17 @@ App = {
         /*  ipfs.add(function() {
              App.createRepo.createNewRepo("BlockHub", "Awsome Project!!");
          }) */
-         var commitsArray = []
-         $.ajax({
+        var commitsArray = []
+        $.ajax({
             type: 'GET',
             url: 'http://127.0.0.1:5000/commit',
-        
+
             success: function(response) {
-              commitsArray = response.split(',')
-              console.log(commitsArray)
+                commitsArray = response.split(',')
+                console.log(commitsArray)
             },
             error: function(response) {
-              return console.error(response);
+                return console.error(response);
             }
         });
     },

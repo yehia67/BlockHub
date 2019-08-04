@@ -1,11 +1,21 @@
 pragma solidity ^0.5.0;
-
+import "./commit.sol"; 
 contract issue{
-    string label;
-    string issueMessage;
-
-    constructor(string memory _label, string memory _issueMessage) public{
-        label = _label;
-        issueMessage = _issueMessage;
+    address payable repoOwner;
+    address payable issueCreator;
+    commit[] CommitsRequest;
+    constructor(address payable _repoOwner) public{
+        repoOwner= _repoOwner;
+        issueCreator = msg.sender;
     }
+    modifier onlyPermited(address closer){
+        require(closer == repoOwner || closer == issueCreator);
+         _;
+    }
+   function close() public onlyPermited(msg.sender) {
+       selfdestruct(issueCreator);
+   }
+   function makeCommit(commit commitRequest) public{
+       CommitsRequest.push(commitRequest);
+   }
 }

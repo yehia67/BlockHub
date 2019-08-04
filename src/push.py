@@ -24,14 +24,8 @@ class commit:
           self.Changes.removLines.append(removeLines)
       def addAddLines(self,addLines):
           self.Changes.addLines.append(addLines)         
-# c3e9bc2672301d709109f536aa5a6038eff1e2db    7acd6ec2a8abbde0a950de2520b12318483fd7f5      
+
 def get_str_between(s, before, after):
-    #  beforeIndex = s.find(before)
-    #  afterIndex = s.find(after)
-    #  print("before : ", before)
-    #  print("after : ", after)
-    #  print("s : ", s)
-    #  return s[beforeIndex+len(before):afterIndex]
     splitted = s.split(" ")
     counterString = splitted[1]
     if counterString.find(",") != -1:
@@ -99,8 +93,8 @@ for i in range(0,len(splitAllCommits)):
 #     commitsJson.update({"commit#"+Commits[0].hash:commitDict})
   
 for i in range(0,len(Commits) - 1):
-    print(Commits[i].hash)
-    print("---------------------------")
+    # print(Commits[i].hash)
+    # print("---------------------------")
     commitDict = commitsJson["commit#"+Commits[i + 1].hash]
     change = {}
     getDeletedFiles = os.popen('git diff --name-only   --diff-filter=D  '+ Commits[i].hash +' ' + Commits[i+1].hash).read()
@@ -231,32 +225,8 @@ for z in range(0,len(Commits)-1):
         commitsJson.update({"commit#"+Commits[z + 1].hash:commitDict})
         #print(commitDict)  
 commitsJsonObject = json.dumps(commitsJson)
-#print(commitsJsonObject)
             
-def test():
-    for i in range(0,len(Commits)):
-        print("____________________________________________________________________")
-        print(Commits[i].hash)
-        print("____________________________________________________________________")
-        print(Commits[i].author)
-        print("____________________________________________________________________")
-        print(Commits[i].date)
-        print("____________________________________________________________________")
-        print(Commits[i].message)
-        print("____________________________________________________________________") 
-        print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-        print("new files :")
-        print(Commits[i].Changes.addFiles)
-        print("____________________________________________________________________")
-        print("-----------------------------------------------------------")
-        print("remove files :")
-        print(Commits[i].Changes.removeFiles)    
-        print("____________________________________________________________________")
-        print(Commits[i].Changes.addLines)
-        print("____________________________________________________________________")
-        print(Commits[i].Changes.removLines) 
-        print("____________________________________________________________________")
-        print("*******************************************************************************************************************************************")
+
                 
 def showChange():
     print(commitsJson["commit#52ae8e3ce6478f1b1b21a5f02c2ad305c652b6b8"])
