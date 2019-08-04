@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
+from flask import request
 from push import *
 app = Flask(__name__)
 CORS(app)
@@ -7,6 +8,11 @@ CORS(app)
 @app.route('/')
 def hello_world():
    return commitsJsonObject
+
+@app.route('/getDifference')
+def getDifference():
+   return returnDifference(int(request.args.get('len')))
+
 
 @app.route('/hash')
 def commitHash():
