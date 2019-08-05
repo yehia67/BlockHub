@@ -265,9 +265,9 @@ def returnDifference(recLength):
         var = len(Commits) - recLength
         print(var)
         counter = -1
-        tempDict = {}
+        tempDict = []
         while var > 0:
-            tempDict.update({list(commitsJson.keys())[counter] : commitsJson[list(commitsJson.keys())[counter]]})
+            tempDict.append({list(commitsJson.keys())[counter] : commitsJson[list(commitsJson.keys())[counter]]})
             counter -= 1
             var -= 1
         return json.dumps(tempDict)
