@@ -9,13 +9,17 @@ App = {
     repoAddress: '',
     repoBranchMasterAdress: '',
     commitsLength: -1,
-    element : {},
+    author : '',
+    message : '',
+    change : [],
+    date : '',
 
     load: async() => {
         await App.loadWeb3()
         await App.loadAccount()
         await App.loadContract()
         await App.push()
+        await App.makeRepo()
 
     },
 
@@ -105,11 +109,12 @@ App = {
     },
     pushCommits: async() => {
         App.checkLengthPromise()
-        let authorName = prompt("your name")
-        let commitHash = prompt("your commitHash")
-        let date = prompt("date")
-        let msg = prompt("commit message")
-        let change = prompt("changes you made")
+        let authorName = App.author
+        let commitHash = App.hash
+        let date = App.date
+        let msg = App.message
+        let change = App.change
+        console.log(App.change)
         App.makeCommitPromise(authorName, commitHash, date, msg, change)
     },
     checkLengthPromise: async() => {
@@ -170,9 +175,14 @@ App = {
 
             success: function(response) {
                 var commitsArray = JSON.parse(response)
-                element = commitsArray[0]
+                var element = commitsArray[0]
+                console.log(element)
                 for(key in element) {
                     console.log("key : " + key + "-> " + element[key]["author"])
+                    App.author = element[key]["author"]
+                    App.message = element[key]["message"]
+                    App.date = element[key]["date"]
+                    App.change = "change"
                 }
 
             },
