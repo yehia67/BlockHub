@@ -164,15 +164,19 @@ def showChange():
     for i in range(0,len(Commits[len(Commits)-1].Changes.addLines)):
         print(Commits[len(Commits)-1].Changes.addLines[i])
 
-showChange()
 
-def returnDifference(recLength):
-    return compDict = {"local commits" : len(Commits), "received commits" : recLength}
-
-   
+print("_______________________________________")
+print(Commits[0].message)
+print("_______________________________________")   
        
 
+print("_______________________________________")
+print(Commits[len(Commits)-1].message)
+print("_______________________________________")  
 
+print("_______________________________________")
+print(len(Commits))
+print("_______________________________________")  
 
 
 

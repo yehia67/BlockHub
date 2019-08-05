@@ -118,6 +118,10 @@ def showChanges():
         print(Commits[2].Changes.removeFiles[i]) 
 
    
+print("_______________________________________")
+print(len(Commits))
+print("_______________________________________")   
+       
    
        
 

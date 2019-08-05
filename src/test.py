@@ -1,5 +1,9 @@
 import os
+import 'push.py'
 # test get strings between
+print("--------------------------------------------------")
+print(len(Commits))
+print("--------------------------------------------------")
 def get_str_between(s, before, after):
     splitted = s.split(" ")
     counterString = splitted[1]
