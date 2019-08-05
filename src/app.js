@@ -9,6 +9,7 @@ App = {
     repoAddress: '',
     repoBranchMasterAdress: '',
     commitsLength: -1,
+    element : {},
 
     load: async() => {
         await App.loadWeb3()
@@ -168,7 +169,12 @@ App = {
             url: 'http://127.0.0.1:5000/getDifference?len=29',
 
             success: function(response) {
-                console.log(response)
+                var commitsArray = JSON.parse(response)
+                element = commitsArray[0]
+                for(key in element) {
+                    console.log("key : " + key + "-> " + element[key]["author"])
+                }
+
             },
             error: function(response) {
                 return console.error(response);
