@@ -1,24 +1,27 @@
-/* const ipfs = IpfsApi("localhost", "5001")
+const ipfs = IpfsApi("localhost", "5001")
+    //const ipfs = IpfsApi("ipfs.infura.io", "5001", {protocol: 'https'});
 ipfs.id(function(err, res) {
     if (err) throw err
     console.log("Connected to IPFS node!", res.id, res.agentVersion, res.protocolVersion);
-}); */
+})
 App = {
     loading: false,
     contracts: {},
     repoAddress: '',
     repoBranchMasterAdress: '',
     commitsLength: -1,
-    author : '',
-    message : '',
-    change : [],
-    date : '',
+    author: '',
+    message: '',
+    hash: '',
+    change: [],
+    date: '',
+    ipfsHash: '',
 
     load: async() => {
         await App.loadWeb3()
         await App.loadAccount()
         await App.loadContract()
-        await App.push()
+        await App.ConnectedToServer()
         await App.makeRepo()
 
     },
@@ -109,13 +112,7 @@ App = {
     },
     pushCommits: async() => {
         App.checkLengthPromise()
-        let authorName = App.author
-        let commitHash = App.hash
-        let date = App.date
-        let msg = App.message
-        let change = App.change
-        console.log(App.change)
-        App.makeCommitPromise(authorName, commitHash, date, msg, change)
+        App.makeCommitPromise(App.author, App.hash, App.date, App.message, "change")
     },
     checkLengthPromise: async() => {
         return new Promise(function(resolve, reject) {
@@ -162,12 +159,7 @@ App = {
         });
     },
 
-    push: async() => {
-        //1- get Commits array from push.py  (1- search how to run python files 2-run command lines on js (python3 push.py)) local commits
-        //2-solidty function(local commits)
-        /*  ipfs.add(function() {
-             App.createRepo.createNewRepo("BlockHub", "Awsome Project!!");
-         }) */
+    ConnectedToServer: async() => {
         var commitsArray = []
         $.ajax({
             type: 'GET',
@@ -177,9 +169,10 @@ App = {
                 var commitsArray = JSON.parse(response)
                 var element = commitsArray[0]
                 console.log(element)
-                for(key in element) {
+                for (key in element) {
                     console.log("key : " + key + "-> " + element[key]["author"])
                     App.author = element[key]["author"]
+                    App.hash = element[key]["hash"]
                     App.message = element[key]["message"]
                     App.date = element[key]["date"]
                     App.change = "change"
@@ -192,14 +185,34 @@ App = {
         });
     },
     getvalue: async() => {
-        var value = await App.Simple.get()
-        $('#getValue').html(value)
-
+        ipfs.cat(App.ipfsHash, function(err, res) {
+            if (err || !res) {
+                return console.error('ipfs cat error', err, res)
+            }
+            $('#getValue').html(res.toString())
+        })
     },
     setValue: async() => {
-        var value = $('#setValue').val()
-        await App.Simple.set(value)
-    }
+        let filePath
+
+
+
+        var input = document.getElementById("setValue");
+        var fReader = new FileReader();
+        fReader.readAsText(input.files[0]);
+        fReader.onloadend = function(event) {
+            filePath = event.target.result
+            ipfs.add([Buffer.from(JSON.stringify(event.target.result))], function(err, res) {
+                if (err || !res) {
+                    return console.error('ipfs add error', err, res)
+                } else {
+                    App.ipfsHash = res[0].hash
+                    console.log(res[0].hash)
+                }
+            })
+        }
+
+    },
 
 }
 

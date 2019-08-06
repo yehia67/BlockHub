@@ -89,11 +89,6 @@
           "indexed": false,
           "name": "issueCreator",
           "type": "address"
-        },
-        {
-          "indexed": false,
-          "name": "issueMessage",
-          "type": "string"
         }
       ],
       "name": "issueCreated",
@@ -157,16 +152,7 @@
     },
     {
       "constant": false,
-      "inputs": [
-        {
-          "name": "_issueLabel",
-          "type": "string"
-        },
-        {
-          "name": "_issueMessage",
-          "type": "string"
-        }
-      ],
+      "inputs": [],
       "name": "makeIssue",
       "outputs": [],
       "payable": false,
@@ -227,8 +213,8 @@
       {
         "baseContracts": [],
         "contractDependencies": [
-          431,
-          212
+          212,
+          431
         ],
         "contractKind": "contract",
         "documentation": null,
@@ -1739,37 +1725,10 @@
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1205:7:5",
+                    "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
-                    },
-                    "stateMutability": "nonpayable"
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                },
-                {
-                  "constant": false,
-                  "id": 512,
-                  "indexed": false,
-                  "name": "issueMessage",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 514,
-                  "src": "1216:19:5",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_string_memory_ptr",
-                    "typeString": "string"
-                  },
-                  "typeName": {
-                    "id": 511,
-                    "name": "string",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "1216:6:5",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_string_storage_ptr",
-                      "typeString": "string"
                     }
                   },
                   "value": null,
@@ -3377,37 +3336,6 @@
                             "typeDescriptions": {
                               "typeIdentifier": "t_address_payable",
                               "typeString": "address payable"
-                            },
-                            "expression": {
-                              "argumentTypes": null,
-                              "id": 655,
-                              "name": "msg",
-                              "nodeType": "Identifier",
-                              "overloadedDeclarations": [],
-                              "referencedDeclaration": 682,
-                              "src": "2362:3:5",
-                              "typeDescriptions": {
-                                "typeIdentifier": "t_magic_message",
-                                "typeString": "msg"
-                              }
-                            },
-                            "isConstant": false,
-                            "isLValue": false,
-                            "isPure": false,
-                            "lValueRequested": false,
-                            "memberName": "sender"
-                          },
-                          {
-                            "argumentTypes": null,
-                            "id": 650,
-                            "name": "_issueMessage",
-                            "nodeType": "Identifier",
-                            "overloadedDeclarations": [],
-                            "referencedDeclaration": 641,
-                            "src": "2447:13:5",
-                            "typeDescriptions": {
-                              "typeIdentifier": "t_string_memory_ptr",
-                              "typeString": "string memory"
                             }
                           }
                         ],
@@ -3416,10 +3344,6 @@
                             {
                               "typeIdentifier": "t_address_payable",
                               "typeString": "address payable"
-                            },
-                            {
-                              "typeIdentifier": "t_string_memory_ptr",
-                              "typeString": "string memory"
                             }
                           ],
                           "id": 685,
@@ -3519,16 +3443,6 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 692,
-                        "name": "_issueLabel",
-                        "nodeType": "MemberAccess",
-                        "overloadedDeclarations": [],
-                        "referencedDeclaration": null,
-                        "src": "2409:10:5",
-                        "typeDescriptions": {
-                          "typeIdentifier": "t_address_payable",
-                          "typeString": "address payable"
-                        },
                         "expression": {
                           "argumentTypes": null,
                           "id": 691,
@@ -3542,23 +3456,18 @@
                             "typeString": "msg"
                           }
                         },
+                        "id": 692,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
-                        "memberName": "sender"
-                      },
-                      {
-                        "argumentTypes": null,
-                        "id": 656,
-                        "name": "_issueMessage",
-                        "nodeType": "Identifier",
-                        "overloadedDeclarations": [],
-                        "referencedDeclaration": 641,
-                        "src": "2503:13:5",
+                        "memberName": "sender",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": null,
+                        "src": "2409:10:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_string_memory_ptr",
-                          "typeString": "string memory"
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
                         }
                       }
                     ],
@@ -3567,10 +3476,6 @@
                         {
                           "typeIdentifier": "t_address_payable",
                           "typeString": "address payable"
-                        },
-                        {
-                          "typeIdentifier": "t_string_memory_ptr",
-                          "typeString": "string memory"
                         }
                       ],
                       "id": 690,
@@ -3614,60 +3519,7 @@
             "parameters": {
               "id": 679,
               "nodeType": "ParameterList",
-              "parameters": [
-                {
-                  "constant": false,
-                  "id": 649,
-                  "name": "_issueLabel",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 670,
-                  "src": "2322:25:5",
-                  "stateVariable": false,
-                  "storageLocation": "memory",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_string_memory_ptr",
-                    "typeString": "string"
-                  },
-                  "typeName": {
-                    "id": 648,
-                    "name": "string",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "2322:6:5",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_string_storage_ptr",
-                      "typeString": "string"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                },
-                {
-                  "constant": false,
-                  "id": 651,
-                  "name": "_issueMessage",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 670,
-                  "src": "2349:27:5",
-                  "stateVariable": false,
-                  "storageLocation": "memory",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_string_memory_ptr",
-                    "typeString": "string"
-                  },
-                  "typeName": {
-                    "id": 650,
-                    "name": "string",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "2349:6:5",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_string_storage_ptr",
-                      "typeString": "string"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                }
-              ],
+              "parameters": [],
               "src": "2329:2:5"
             },
             "returnParameters": {
@@ -3735,8 +3587,8 @@
       {
         "baseContracts": [],
         "contractDependencies": [
-          431,
-          212
+          212,
+          431
         ],
         "contractKind": "contract",
         "documentation": null,
@@ -5247,37 +5099,10 @@
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1205:7:5",
+                    "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
-                    },
-                    "stateMutability": "nonpayable"
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                },
-                {
-                  "constant": false,
-                  "id": 512,
-                  "indexed": false,
-                  "name": "issueMessage",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 514,
-                  "src": "1216:19:5",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_string_memory_ptr",
-                    "typeString": "string"
-                  },
-                  "typeName": {
-                    "id": 511,
-                    "name": "string",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "1216:6:5",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_string_storage_ptr",
-                      "typeString": "string"
                     }
                   },
                   "value": null,
@@ -6885,37 +6710,6 @@
                             "typeDescriptions": {
                               "typeIdentifier": "t_address_payable",
                               "typeString": "address payable"
-                            },
-                            "expression": {
-                              "argumentTypes": null,
-                              "id": 655,
-                              "name": "msg",
-                              "nodeType": "Identifier",
-                              "overloadedDeclarations": [],
-                              "referencedDeclaration": 682,
-                              "src": "2362:3:5",
-                              "typeDescriptions": {
-                                "typeIdentifier": "t_magic_message",
-                                "typeString": "msg"
-                              }
-                            },
-                            "isConstant": false,
-                            "isLValue": false,
-                            "isPure": false,
-                            "lValueRequested": false,
-                            "memberName": "sender"
-                          },
-                          {
-                            "argumentTypes": null,
-                            "id": 650,
-                            "name": "_issueMessage",
-                            "nodeType": "Identifier",
-                            "overloadedDeclarations": [],
-                            "referencedDeclaration": 641,
-                            "src": "2447:13:5",
-                            "typeDescriptions": {
-                              "typeIdentifier": "t_string_memory_ptr",
-                              "typeString": "string memory"
                             }
                           }
                         ],
@@ -6924,10 +6718,6 @@
                             {
                               "typeIdentifier": "t_address_payable",
                               "typeString": "address payable"
-                            },
-                            {
-                              "typeIdentifier": "t_string_memory_ptr",
-                              "typeString": "string memory"
                             }
                           ],
                           "id": 685,
@@ -7027,16 +6817,6 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 692,
-                        "name": "_issueLabel",
-                        "nodeType": "MemberAccess",
-                        "overloadedDeclarations": [],
-                        "referencedDeclaration": null,
-                        "src": "2409:10:5",
-                        "typeDescriptions": {
-                          "typeIdentifier": "t_address_payable",
-                          "typeString": "address payable"
-                        },
                         "expression": {
                           "argumentTypes": null,
                           "id": 691,
@@ -7050,23 +6830,18 @@
                             "typeString": "msg"
                           }
                         },
+                        "id": 692,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
-                        "memberName": "sender"
-                      },
-                      {
-                        "argumentTypes": null,
-                        "id": 656,
-                        "name": "_issueMessage",
-                        "nodeType": "Identifier",
-                        "overloadedDeclarations": [],
-                        "referencedDeclaration": 641,
-                        "src": "2503:13:5",
+                        "memberName": "sender",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": null,
+                        "src": "2409:10:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_string_memory_ptr",
-                          "typeString": "string memory"
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
                         }
                       }
                     ],
@@ -7075,10 +6850,6 @@
                         {
                           "typeIdentifier": "t_address_payable",
                           "typeString": "address payable"
-                        },
-                        {
-                          "typeIdentifier": "t_string_memory_ptr",
-                          "typeString": "string memory"
                         }
                       ],
                       "id": 690,
@@ -7122,60 +6893,7 @@
             "parameters": {
               "id": 679,
               "nodeType": "ParameterList",
-              "parameters": [
-                {
-                  "constant": false,
-                  "id": 649,
-                  "name": "_issueLabel",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 670,
-                  "src": "2322:25:5",
-                  "stateVariable": false,
-                  "storageLocation": "memory",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_string_memory_ptr",
-                    "typeString": "string"
-                  },
-                  "typeName": {
-                    "id": 648,
-                    "name": "string",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "2322:6:5",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_string_storage_ptr",
-                      "typeString": "string"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                },
-                {
-                  "constant": false,
-                  "id": 651,
-                  "name": "_issueMessage",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 670,
-                  "src": "2349:27:5",
-                  "stateVariable": false,
-                  "storageLocation": "memory",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_string_memory_ptr",
-                    "typeString": "string"
-                  },
-                  "typeName": {
-                    "id": 650,
-                    "name": "string",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "2349:6:5",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_string_storage_ptr",
-                      "typeString": "string"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                }
-              ],
+              "parameters": [],
               "src": "2329:2:5"
             },
             "returnParameters": {
@@ -7203,7 +6921,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.8",
-  "updatedAt": "2019-08-04T11:42:10.593Z",
+  "updatedAt": "2019-08-05T13:55:42.093Z",
   "devdoc": {
     "methods": {}
   },

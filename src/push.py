@@ -248,12 +248,6 @@ def showChange():
 
 #showChange()
 
-<<<<<<< HEAD
-
-print("_______________________________________")
-print(Commits[0].message)
-print("_______________________________________")   
-=======
 #test()
 
 def returnDifference(recLength):
@@ -277,7 +271,6 @@ def returnDifference(recLength):
    
 print(returnDifference(6))
    
->>>>>>> d5e8cfba7e8af11e30d5be269f2bfafa2d8b2867
        
 
 print("_______________________________________")
