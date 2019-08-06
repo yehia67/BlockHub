@@ -73,6 +73,31 @@ App = {
         // Hydrate the smart contract with values from the blockchain
         App.createRepo = await App.contracts.createRepo.deployed()
     },
+    ConnectedToServer: async() => {
+        var commitsArray = []
+        $.ajax({
+            type: 'GET',
+            url: 'http://127.0.0.1:5000/getDifference?len=29',
+
+            success: function(response) {
+                var commitsArray = JSON.parse(response)
+                var element = commitsArray[0]
+                console.log(element)
+                for (key in element) {
+                    console.log("key : " + key + "-> " + element[key]["author"])
+                    App.author = element[key]["author"]
+                    App.hash = element[key]["hash"]
+                    App.message = element[key]["message"]
+                    App.date = element[key]["date"]
+                    App.change = "change"
+                }
+
+            },
+            error: function(response) {
+                return console.error(response);
+            }
+        });
+    },
     makeRepo: async() => {
         let repoName = prompt("enter your repo name")
         let repoDescription = prompt("enter repo desription")
@@ -112,7 +137,13 @@ App = {
     },
     pushCommits: async() => {
         App.checkLengthPromise()
-        App.makeCommitPromise(App.author, App.hash, App.date, App.message, "change")
+        ipfs.add([Buffer.from(JSON.stringify(App.change))], function(err, res) {
+            if (err || !res) {
+                return console.error('ipfs add error', err, res)
+            } else {
+                App.makeCommitPromise(App.author, App.hash, App.date, App.message, res[0].hash)
+            }
+        })
     },
     checkLengthPromise: async() => {
         return new Promise(function(resolve, reject) {
@@ -159,31 +190,7 @@ App = {
         });
     },
 
-    ConnectedToServer: async() => {
-        var commitsArray = []
-        $.ajax({
-            type: 'GET',
-            url: 'http://127.0.0.1:5000/getDifference?len=29',
 
-            success: function(response) {
-                var commitsArray = JSON.parse(response)
-                var element = commitsArray[0]
-                console.log(element)
-                for (key in element) {
-                    console.log("key : " + key + "-> " + element[key]["author"])
-                    App.author = element[key]["author"]
-                    App.hash = element[key]["hash"]
-                    App.message = element[key]["message"]
-                    App.date = element[key]["date"]
-                    App.change = "change"
-                }
-
-            },
-            error: function(response) {
-                return console.error(response);
-            }
-        });
-    },
     getvalue: async() => {
         ipfs.cat(App.ipfsHash, function(err, res) {
             if (err || !res) {
@@ -193,10 +200,6 @@ App = {
         })
     },
     setValue: async() => {
-        let filePath
-
-
-
         var input = document.getElementById("setValue");
         var fReader = new FileReader();
         fReader.readAsText(input.files[0]);
@@ -211,8 +214,20 @@ App = {
                 }
             })
         }
-
     },
+    uploadIPFS: (file) => {
+        let hash
+        ipfs.add([Buffer.from(JSON.stringify(file))], function(err, res) {
+            if (err || !res) {
+                return console.error('ipfs add error', err, res)
+            } else {
+                hash = res[0].hash
+                console.log(res[0].hash)
+            }
+        })
+        return hash
+    }
+
 
 }
 

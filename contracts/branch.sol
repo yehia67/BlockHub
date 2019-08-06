@@ -5,6 +5,8 @@ import "./commit.sol";
 contract branch{
     string branchName;
     mapping(string => address) commitMap; //CommitHash => contract
+    mapping ( string => string) changes;// CommitHash => IPFS hash
+
     commit[] commitArray;
 
     constructor(string memory _branchName, commit[] memory _commitArray) public{
@@ -24,9 +26,10 @@ contract branch{
         return commitArray.length;
     }
    function pushCommit(string memory _authorName,string memory _commitHash,
-  string memory  _date, string memory _message,string memory _change) public{
+  string memory  _date, string memory _message,string memory _ipfsChange) public{
       
-      commit Commit = new commit(_authorName,_commitHash,_date,_message,_change);
+      commit Commit = new commit(_authorName,_commitHash,_date,_message);
+      changes[_commitHash] =_ipfsChange;
       commitMap[_commitHash] = address(Commit);
       emit commitCreated(msg.sender,_authorName,_message,_commitHash);
   }

@@ -6,17 +6,15 @@ contract commit{
   string commitHash;
   string date;
   string message;
-  string change;
 
   
   constructor (string memory _authorName,string memory _commitHash,
-  string memory  _date, string memory _message,string memory _change) public {
+  string memory  _date, string memory _message) public {
     authorAddress = msg.sender;
     commitHash = _commitHash;
     date = _date;
     message = _message;
     authorName = _authorName;
-    change = _change;
   }
 
   function getAuthorAddress() public view returns (address) {
@@ -38,6 +36,7 @@ contract commit{
   function getMessage() public view returns (string memory) {
     return message;
   }
+
 
 
 }
