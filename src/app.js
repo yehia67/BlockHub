@@ -13,9 +13,8 @@ App = {
     author: '',
     message: '',
     hash: '',
-    change: {},
+    change: [],
     date: '',
-    changeJson: '',
     ipfsHash: '',
 
     load: async() => {
@@ -23,7 +22,7 @@ App = {
         await App.loadAccount()
         await App.loadContract()
         await App.ConnectedToServer()
-        await App.makeRepo()
+            // await App.makeRepo()
 
     },
 
@@ -90,23 +89,7 @@ App = {
                     App.hash = element[key]["hash"]
                     App.message = element[key]["message"]
                     App.date = element[key]["date"]
-                    /*for(changeKey in element[key]["change"]) {
-                        if(changeKey === "Added Lines") {
-                            App.change.addedLines = element[key]["change"][changeKey]
-                        } else if(changeKey === "Removed Lines") {
-                            App.change.removedLines = element[key]["change"][changeKey]
-                        } else if(changeKey === "files added") {
-                            App.change.addedFiles = element[key]["change"][changeKey]
-                        } else if(changeKey === "files deleted") {
-                            App.change.removedFiles = element[key]["change"][changeKey]
-                        }
-                    }*/
-                    App.change.addedLines = element[key]["change"]["Added Lines"]
-                    App.change.removedLines = element[key]["change"]["Removed Lines"]
-                    App.change.addedFiles = element[key]["change"]["files added"]
-                    App.change.removedFiles = element[key]["change"]["files deleted"]
-
-                    App.changeJson = JSON.stringify(App.change)
+                    App.change = "change"
                 }
 
             },
@@ -116,8 +99,10 @@ App = {
         });
     },
     makeRepo: async() => {
-        let repoName = prompt("enter your repo name")
-        let repoDescription = prompt("enter repo desription")
+        // let repoName = prompt("enter your repo name")
+        // let repoDescription = prompt("enter repo desription")
+        let repoName = $('#repoNameText').val()
+        let repoDescription = $('#repoDescriptionText').val()
         const repo = await App.createRepo.createNewRepo(repoName, repoDescription)
         console.log(repo)
         App.repoAddress = repo.logs[0].args.repoAddress
@@ -137,11 +122,9 @@ App = {
                     reject(error)
                 } else {
                     resolve(response)
-                    console.log("hnaaaa " + response)
                     alert("branch address = " + response)
                     App.repoBranchMasterAdress = response
                     App.loadMasterBranch()
-
                 }
             })
         });
@@ -154,7 +137,7 @@ App = {
     },
     pushCommits: async() => {
         App.checkLengthPromise()
-        ipfs.add([Buffer.from(JSON.stringify(App.changeJson))], function(err, res) {
+        ipfs.add([Buffer.from(JSON.stringify(App.change))], function(err, res) {
             if (err || !res) {
                 return console.error('ipfs add error', err, res)
             } else {
@@ -201,6 +184,7 @@ App = {
                     } else {
                         resolve(response)
                         alert("done")
+                        window.location.href = "repoCreationDetails.html";
                         console.log(response)
                     }
                 })
@@ -214,19 +198,21 @@ App = {
                 return console.error('ipfs cat error', err, res)
             }
             $('#getValue').html(res.toString())
+
         })
     },
     setValue: async() => {
-        var value = $('#setValue').val()
+        var value = $('#uploadInput').val()
         ipfs.add(Buffer.from(value), function(err, res) {
             if (err || !res) {
                 return console.error('ipfs add error', err, res)
             }
-
             res.forEach(function(file) {
                 if (file && file.hash) {
                     console.log('successfully stored', file.hash)
                     console.log(file.hash)
+                    alert("upload Done")
+                    window.location.href = "repoPage.html";
                 }
             })
         })
@@ -247,8 +233,6 @@ App = {
 
 }
 
-$(() => {
-    $(window).load(() => {
-        App.load()
-    })
-})
+$(window).on('load', function() {
+    App.load()
+});
