@@ -24,7 +24,6 @@ App = {
         await App.loadAccount()
         await App.loadContract()
         await App.ConnectedToServer()
-        // await App.makeRepo()
 
     },
 
@@ -79,11 +78,11 @@ App = {
         var commitsArray = []
         $.ajax({
             type: 'GET',
-            url: 'http://127.0.0.1:5000/getDifference?len=29',
+            url: 'http://127.0.0.1:5000/getDifference?len=1',
 
             success: function(response) {
                 var commitsArray = JSON.parse(response)
-                for(var i = 0; i < commitsArray.length; i++) {
+                for (var i = 0; i < commitsArray.length; i++) {
                     var element = commitsArray[i]
                     console.log(element)
                     for (key in element) {
@@ -92,17 +91,17 @@ App = {
                         App.hash.push(element[key]["hash"])
                         App.message.push(element[key]["message"])
                         App.date.push(element[key]["date"])
-                        /*for(changeKey in element[key]["change"]) {
-                            if(changeKey === "Added Lines") {
-                                App.change.addedLines = element[key]["change"][changeKey]
-                            } else if(changeKey === "Removed Lines") {
-                                App.change.removedLines = element[key]["change"][changeKey]
-                            } else if(changeKey === "files added") {
-                                App.change.addedFiles = element[key]["change"][changeKey]
-                            } else if(changeKey === "files deleted") {
-                                App.change.removedFiles = element[key]["change"][changeKey]
-                            }
-                        }*/
+                            /*for(changeKey in element[key]["change"]) {
+                                if(changeKey === "Added Lines") {
+                                    App.change.addedLines = element[key]["change"][changeKey]
+                                } else if(changeKey === "Removed Lines") {
+                                    App.change.removedLines = element[key]["change"][changeKey]
+                                } else if(changeKey === "files added") {
+                                    App.change.addedFiles = element[key]["change"][changeKey]
+                                } else if(changeKey === "files deleted") {
+                                    App.change.removedFiles = element[key]["change"][changeKey]
+                                }
+                            }*/
                         currentChange = {}
                         currentChange.addedLines = element[key]["change"]["Added Lines"]
                         currentChange.removedLines = element[key]["change"]["Removed Lines"]
@@ -117,7 +116,7 @@ App = {
                 console.log("Dates : ", App.date)
                 console.log("Messages : ", App.message)
                 console.log("Hashes: ", App.hash)
-                App.makeRepo()
+                    //App.makeRepo()
 
             },
             error: function(response) {
@@ -165,7 +164,7 @@ App = {
     },
     pushCommits: async() => {
         App.checkLengthPromise()
-        for(let j = 0; j < App.hash.length; j++) {
+        for (let j = 0; j < App.hash.length; j++) {
             ipfs.add([Buffer.from(App.changeJson[j])], function(err, res) {
                 if (err || !res) {
                     return console.error('ipfs add error', err, res)
@@ -228,8 +227,8 @@ App = {
                 return console.error('ipfs add error', err, res)
             } else {
                 console.log("weeeeeeeeeeeeeeeeeeeeeeeeee")
-                //App.makeCommitPromise(App.author, App.hash, App.date, App.message, res[0].hash)
-                // App.ipfsHash = res[0].hash
+                    //App.makeCommitPromise(App.author, App.hash, App.date, App.message, res[0].hash)
+                    // App.ipfsHash = res[0].hash
             }
         })
     },
