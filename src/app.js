@@ -13,8 +13,9 @@ App = {
     author: '',
     message: '',
     hash: '',
-    change: [],
+    change: {},
     date: '',
+    changeJson: '',
     ipfsHash: '',
 
     load: async() => {
@@ -89,7 +90,23 @@ App = {
                     App.hash = element[key]["hash"]
                     App.message = element[key]["message"]
                     App.date = element[key]["date"]
-                    App.change = "change"
+                    /*for(changeKey in element[key]["change"]) {
+                        if(changeKey === "Added Lines") {
+                            App.change.addedLines = element[key]["change"][changeKey]
+                        } else if(changeKey === "Removed Lines") {
+                            App.change.removedLines = element[key]["change"][changeKey]
+                        } else if(changeKey === "files added") {
+                            App.change.addedFiles = element[key]["change"][changeKey]
+                        } else if(changeKey === "files deleted") {
+                            App.change.removedFiles = element[key]["change"][changeKey]
+                        }
+                    }*/
+                    App.change.addedLines = element[key]["change"]["Added Lines"]
+                    App.change.removedLines = element[key]["change"]["Removed Lines"]
+                    App.change.addedFiles = element[key]["change"]["files added"]
+                    App.change.removedFiles = element[key]["change"]["files deleted"]
+
+                    App.changeJson = JSON.stringify(App.change)
                 }
 
             },
@@ -137,7 +154,7 @@ App = {
     },
     pushCommits: async() => {
         App.checkLengthPromise()
-        ipfs.add([Buffer.from(JSON.stringify(App.change))], function(err, res) {
+        ipfs.add([Buffer.from(JSON.stringify(App.changeJson))], function(err, res) {
             if (err || !res) {
                 return console.error('ipfs add error', err, res)
             } else {
