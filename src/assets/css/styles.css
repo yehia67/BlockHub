@@ -8,7 +8,8 @@ body {
 }
 
 #timelineDiv {
-    width: 50%;
+    width: 48%;
+    padding-right: 1%;
 }
 
 .float-right {
@@ -187,7 +188,13 @@ body {
 }
 
 #searchBox {
-    margin-bottom: 100px;
+    width: 50%;
+    height: 50px;
+    margin: 0px;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-top: 1%;
+    border: none;
 }
 
 .repoInput {
@@ -224,7 +231,7 @@ form {}
 
 .createRepoInputForm {
     margin-left: 15px;
-    margin-top: 15px;
+    margin-top: 70px;
 }
 
 .uploadCommitLbl {
@@ -341,6 +348,11 @@ p {}
     border-radius: 25px;
 }
 
+.card {
+    background-color: inherit;
+    border: none;
+}
+
 .card-body.issueCommentCardBody {
     border-radius: 25px;
 }
@@ -353,6 +365,10 @@ p {}
     width: 95%;
     /*margin-left:20px;*/
     /*margin-top:20px;*/
+}
+
+.myCodeTable {
+    width: 150%;
 }
 
 .newCommentDiv {
@@ -377,10 +393,6 @@ p {}
 
 .float-left.btnDiv.branchBtnDiv {
     margin-left: -35px;
-}
-
-#reposDiv {
-    /*margin-left:-100px;*/
 }
 
 .btn.btn-primary.float-right.postCommentBtn {
