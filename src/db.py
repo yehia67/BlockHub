@@ -23,13 +23,6 @@ def show(issueName):
 conn = sqlite3.connect('issue.db')
 print("Opened database successfully")
 
-createIssue("el77")
-insert("el77","isa")
-insert("el77","yarab yarab") 
-insert("el77","yarab el7") 
-insert("el77","el7 el7 el7") 
-
-show("el77")
 
 
 conn.close()       
