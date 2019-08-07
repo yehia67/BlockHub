@@ -217,20 +217,19 @@ App = {
         })
     },
     setValue: async() => {
-        var input = document.getElementById("setValue");
-        var fReader = new FileReader();
-        fReader.readAsText(input.files[0]);
-        fReader.onloadend = function(event) {
-            filePath = event.target.result
-            ipfs.add([Buffer.from(JSON.stringify(event.target.result))], function(err, res) {
-                if (err || !res) {
-                    return console.error('ipfs add error', err, res)
-                } else {
-                    App.ipfsHash = res[0].hash
-                    console.log(res[0].hash)
+        var value = $('#setValue').val()
+        ipfs.add(Buffer.from(value), function(err, res) {
+            if (err || !res) {
+                return console.error('ipfs add error', err, res)
+            }
+
+            res.forEach(function(file) {
+                if (file && file.hash) {
+                    console.log('successfully stored', file.hash)
+                    console.log(file.hash)
                 }
             })
-        }
+        })
     },
     uploadIPFS: (file) => {
         let hash

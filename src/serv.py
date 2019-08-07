@@ -2,6 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 from flask import request
 from push import *
+from db import *
 app = Flask(__name__)
 CORS(app)
 
