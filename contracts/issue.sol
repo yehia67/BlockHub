@@ -15,7 +15,7 @@ contract issue{
    function close() public onlyPermited(msg.sender) {
        selfdestruct(issueCreator);
    }
-   function makeCommit(commit commitRequest) public{
+   function pullRequest(commit commitRequest) public{
        CommitsRequest.push(commitRequest);
    }
 }

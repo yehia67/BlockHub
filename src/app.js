@@ -211,7 +211,7 @@ App = {
                 if (file && file.hash) {
                     console.log('successfully stored', file.hash)
                     console.log(file.hash)
-                    window.location.href = "repoPage.html";
+                        //window.location.href = "repoPage.html";
                 }
             })
         })
