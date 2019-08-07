@@ -126,8 +126,10 @@ App = {
         });
     },
     makeRepo: async() => {
-        let repoName = prompt("enter your repo name")
-        let repoDescription = prompt("enter repo desription")
+        // let repoName = prompt("enter your repo name")
+        // let repoDescription = prompt("enter repo desription")
+        let repoName = $('#repoNameText').val()
+        let repoDescription = $('#repoDescriptionText').val()
         const repo = await App.createRepo.createNewRepo(repoName, repoDescription)
         console.log(repo)
         App.repoAddress = repo.logs[0].args.repoAddress
@@ -147,11 +149,9 @@ App = {
                     reject(error)
                 } else {
                     resolve(response)
-                    console.log("hnaaaa " + response)
                     alert("branch address = " + response)
                     App.repoBranchMasterAdress = response
                     App.loadMasterBranch()
-
                 }
             })
         });
@@ -215,6 +215,7 @@ App = {
                     } else {
                         resolve(response)
                         alert("done")
+                        window.location.href = "repoCreationDetails.html";
                         console.log(response)
                     }
                 })
@@ -240,20 +241,20 @@ App = {
                 return console.error('ipfs cat error', err, res)
             }
             $('#getValue').html(res.toString())
+
         })
     },
     setValue: async() => {
-        var value = $('#setValue').val()
-        console.log(value)
+        var value = $('#uploadInput').val()
         ipfs.add(Buffer.from(value), function(err, res) {
             if (err || !res) {
                 return console.error('ipfs add error', err, res)
             }
-
             res.forEach(function(file) {
                 if (file && file.hash) {
                     console.log('successfully stored', file.hash)
                     console.log(file.hash)
+                    window.location.href = "repoPage.html";
                 }
             })
         })
@@ -274,8 +275,6 @@ App = {
 
 }
 
-$(() => {
-    $(window).load(() => {
-        App.load()
-    })
-})
+$(window).on('load', function() {
+    App.load()
+});

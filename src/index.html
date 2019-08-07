@@ -6,10 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Hello Box</title>
+    <title>BlockHub</title>
 
     <!-- Bootstrap -->
-    <link href="vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ABeeZee">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <!-- <link href="vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"> -->
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -23,23 +26,53 @@
 
 <body>
 
-    <!--Start YOUR Front End code from here  -->
-    <div class="app">
+    <!--Start YOUR Front End code from here-->
+    <nav class="navbar navbar-light navbar-expand-md" style="background-color:steelBlue;">
+        <div class="container-fluid"><a class="navbar-brand" href="#">Dashboard</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1"></div>
+        </div>
+    </nav>
+    <div id="blockHub" style="/*background-color:lightCyan;*/">
+        <div class="jumbotron introJumbotron">
+            <h1>BlockHub</h1>
+            <p>BlockHub is a decentralized version control system</p>
+        </div>
+    </div>
+    <div class="searchInputDiv"><input type="search" placeholder="Search for a Repo.." id="searchBox"><a class="btn btn-primary float-right searchBtn" role="button" href="#" style="margin:-50px 200px 0px 150px;width:100px;height:40px;">Search</a></div>
+    <div class="float-left" id="timelineDiv"><textarea id="TimelineArea" style="height:48px;width:362px;">Timeline</textarea>
+        <div id="issuesArea">
+            <div class="issueDiv"><label class="issueLabel">Mahmoud Khalil pushed to BlockHub</label><textarea class="issueText">2 commits to dev</textarea></div>
+            <div class="issueDiv"><label class="issueLabel">Yehia Tarek pushed to BlockHub</label><textarea class="issueText">1 commit to master</textarea></div>
+            <div class="issueDiv"><label class="issueLabel">Mostafa Hazem created a repository BlockHub</label><textarea class="issueText">2 commits to dev</textarea></div>
+            <div class="issueDiv"><label class="issueLabel">Mostafa Hazem created an issue in BlockHub</label><textarea class="issueText">strings don't get saved</textarea>
+                <div class="issueDiv"><label class="issueLabel">Yehia Tarek commented on an issue in BlockHub</label><textarea class="issueText">fixed strings bug</textarea></div>
+            </div>
+        </div>
+    </div>
+    <div class="float-right" id="reposDiv"><textarea id="reposArea" style="height:48px;width:50%;">Repositories</textarea><a class="btn btn-primary float-right" role="button" href="createRepo.html" style="height:40px;width:148px;padding:8px;margin:1px;">New Repository +</a>
+        <div><a href="blockHub.html" class="reposLink" style="color:rgb(66,0,255);font-size:18px;">yehia67/BlockHub</a></div>
+        <div><a href="blockHub.html" class="reposLink" style="color:rgb(66,0,255);font-size:18px;">MahmoudKhalil/EDF Scheduling RTOS - TIVA c</a></div>
+        <div><a href="blockHub.html" class="reposLink" style="color:rgb(66,0,255);font-size:18px;">Mostafa172/FlowersCLIPS</a></div>
+        <div><a href="blockHub.html" class="reposLink" style="color:rgb(66,0,255);font-size:18px;">yehia67/Feedblock</a></div>
+        <div><a href="blockHub.html" class="reposLink" style="color:rgb(66,0,255);font-size:18px;">MahmoudKhalil/Ay haga helwa Khalil 3amlha</a></div>
+    </div>
+    <!-- <div class="app">
         <form class="p-5">
             <div class="m-5 form-group">
                 <h1 class="text-center">Hello Box</h1>
-                <input webkitdirectory mozdirectory type="file" class="form-control" placeholder="Set Any String To Be Saved On Etherum Blockchian" id="setValue">
+                <input type="file" class="form-control" placeholder="Set Any String To Be Saved On Etherum Blockchian" id="setValue">
                 <button type="button" onclick="App.getvalue()" class="btn btn-primary pull-left mt-3">Get Value</button>
                 <button type="button" onclick="App.setValue()" class="btn btn-primary float-right mt-3">Set Value</button>
             </div>
             <h1 class="text-center" id="getValue"></h1>
         </form>
-    </div>
+    </div> -->
 
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="vendor/truffle-contract/dist/truffle-contract.js"></script>
