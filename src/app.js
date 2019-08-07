@@ -10,12 +10,13 @@ App = {
     repoAddress: '',
     repoBranchMasterAdress: '',
     commitsLength: -1,
-    author: '',
-    message: '',
-    hash: '',
-    change: {},
-    date: '',
-    changeJson: '',
+    author: [],
+    message: [],
+    hash: [],
+    change: [],
+    date: [],
+    changeJson: [],
+    ipfsHashArr: [],
     ipfsHash: '',
 
     load: async() => {
@@ -23,7 +24,7 @@ App = {
         await App.loadAccount()
         await App.loadContract()
         await App.ConnectedToServer()
-        await App.makeRepo()
+        // await App.makeRepo()
 
     },
 
@@ -82,32 +83,41 @@ App = {
 
             success: function(response) {
                 var commitsArray = JSON.parse(response)
-                var element = commitsArray[0]
-                console.log(element)
-                for (key in element) {
-                    console.log("key : " + key + "-> " + element[key]["author"])
-                    App.author = element[key]["author"]
-                    App.hash = element[key]["hash"]
-                    App.message = element[key]["message"]
-                    App.date = element[key]["date"]
-                    /*for(changeKey in element[key]["change"]) {
-                        if(changeKey === "Added Lines") {
-                            App.change.addedLines = element[key]["change"][changeKey]
-                        } else if(changeKey === "Removed Lines") {
-                            App.change.removedLines = element[key]["change"][changeKey]
-                        } else if(changeKey === "files added") {
-                            App.change.addedFiles = element[key]["change"][changeKey]
-                        } else if(changeKey === "files deleted") {
-                            App.change.removedFiles = element[key]["change"][changeKey]
-                        }
-                    }*/
-                    App.change.addedLines = element[key]["change"]["Added Lines"]
-                    App.change.removedLines = element[key]["change"]["Removed Lines"]
-                    App.change.addedFiles = element[key]["change"]["files added"]
-                    App.change.removedFiles = element[key]["change"]["files deleted"]
+                for(var i = 0; i < commitsArray.length; i++) {
+                    var element = commitsArray[i]
+                    console.log(element)
+                    for (key in element) {
+                        console.log("key : " + key + "-> " + element[key]["author"])
+                        App.author.push(element[key]["author"])
+                        App.hash.push(element[key]["hash"])
+                        App.message.push(element[key]["message"])
+                        App.date.push(element[key]["date"])
+                        /*for(changeKey in element[key]["change"]) {
+                            if(changeKey === "Added Lines") {
+                                App.change.addedLines = element[key]["change"][changeKey]
+                            } else if(changeKey === "Removed Lines") {
+                                App.change.removedLines = element[key]["change"][changeKey]
+                            } else if(changeKey === "files added") {
+                                App.change.addedFiles = element[key]["change"][changeKey]
+                            } else if(changeKey === "files deleted") {
+                                App.change.removedFiles = element[key]["change"][changeKey]
+                            }
+                        }*/
+                        currentChange = {}
+                        currentChange.addedLines = element[key]["change"]["Added Lines"]
+                        currentChange.removedLines = element[key]["change"]["Removed Lines"]
+                        currentChange.addedFiles = element[key]["change"]["files added"]
+                        currentChange.removedFiles = element[key]["change"]["files deleted"]
+                        App.change.push(currentChange)
 
-                    App.changeJson = JSON.stringify(App.change)
+                        App.changeJson.push(JSON.stringify(currentChange))
+                    }
                 }
+                console.log("Authors : ", App.author)
+                console.log("Dates : ", App.date)
+                console.log("Messages : ", App.message)
+                console.log("Hashes: ", App.hash)
+                App.makeRepo()
 
             },
             error: function(response) {
@@ -151,16 +161,20 @@ App = {
         App.contracts.masterBranch = web3.eth.contract(masterBranch.abi).at(App.repoBranchMasterAdress)
         console.log(App.repoBranchMasterAdress)
         App.pushCommits()
+        App.pushGitFile()
     },
     pushCommits: async() => {
         App.checkLengthPromise()
-        ipfs.add([Buffer.from(JSON.stringify(App.changeJson))], function(err, res) {
-            if (err || !res) {
-                return console.error('ipfs add error', err, res)
-            } else {
-                App.makeCommitPromise(App.author, App.hash, App.date, App.message, res[0].hash)
-            }
-        })
+        for(let j = 0; j < App.hash.length; j++) {
+            ipfs.add([Buffer.from(App.changeJson[j])], function(err, res) {
+                if (err || !res) {
+                    return console.error('ipfs add error', err, res)
+                } else {
+                    console.log(App.author[j])
+                    App.makeCommitPromise(App.author[j], App.hash[j], App.date[j], App.message[j], res[0].hash)
+                }
+            })
+        }
     },
     checkLengthPromise: async() => {
         return new Promise(function(resolve, reject) {
@@ -207,6 +221,18 @@ App = {
         });
     },
 
+    pushGitFile: async() => {
+        ipfs.add([Buffer.from("/.git")], function(err, res) {
+            if (err || !res) {
+                return console.error('ipfs add error', err, res)
+            } else {
+                console.log("weeeeeeeeeeeeeeeeeeeeeeeeee")
+                //App.makeCommitPromise(App.author, App.hash, App.date, App.message, res[0].hash)
+                // App.ipfsHash = res[0].hash
+            }
+        })
+    },
+
 
     getvalue: async() => {
         ipfs.cat(App.ipfsHash, function(err, res) {
@@ -218,6 +244,7 @@ App = {
     },
     setValue: async() => {
         var value = $('#setValue').val()
+        console.log(value)
         ipfs.add(Buffer.from(value), function(err, res) {
             if (err || !res) {
                 return console.error('ipfs add error', err, res)
