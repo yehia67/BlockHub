@@ -213,8 +213,8 @@
       {
         "baseContracts": [],
         "contractDependencies": [
-          432,
-          221
+          221,
+          432
         ],
         "contractKind": "contract",
         "documentation": null,
@@ -3587,8 +3587,8 @@
       {
         "baseContracts": [],
         "contractDependencies": [
-          432,
-          221
+          221,
+          432
         ],
         "contractKind": "contract",
         "documentation": null,
@@ -6921,7 +6921,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.8",
-  "updatedAt": "2019-08-06T12:54:59.353Z",
+  "updatedAt": "2019-08-07T11:13:55.183Z",
   "devdoc": {
     "methods": {}
   },
