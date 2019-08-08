@@ -257,12 +257,13 @@ def returnDifference(recLength):
         return "error"
     elif(int(recLength) < len(Commits)):
         var = len(Commits) - recLength
-        print(var)
         counter = -1
         tempDict = []
         while var > 0:
             tempCommit = {list(commitsJson.keys())[counter] : commitsJson[list(commitsJson.keys())[counter]]}
-            if(tempCommit.get('change') != None):
+            commitObj = tempCommit.get(list(tempCommit.keys())[0])
+            # print(commitObj)
+            if(commitObj.get('change') != None):
                 tempDict.append(tempCommit)
             counter -= 1
             var -= 1
@@ -271,23 +272,5 @@ def returnDifference(recLength):
     else:
         return "equal"
 
-   
-print(returnDifference(6))
-   
-       
-
-print("_______________________________________")
-print(Commits[len(Commits)-1].message)
-print("_______________________________________")  
-
-print("_______________________________________")
-print(len(Commits))
-print("_______________________________________")  
-
-
-
- 
-
- 
-
- 
+# print(commitsJsonObject)
+print(returnDifference(1))
