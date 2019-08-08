@@ -31,27 +31,6 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="vendor/truffle-contract/dist/truffle-contract.js"></script>
-    <!--Install Buffer-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/BrowserFS/2.0.0/browserfs.min.js" integrity="sha256-9vfol9kbQ9KEqShl+2ejcpsESl8uQAI2K81vm1EVkRo=" crossorigin="anonymous"></script>
-    <script type="text/javascript">
-        // Installs globals onto window:
-        // * Buffer
-        // * require (monkey-patches if already defined)
-        // * process
-        // You can pass in an arbitrary object if you do not wish to pollute
-        // the global namespace.
-        BrowserFS.install(window);
-        // Configures BrowserFS to use the LocalStorage file system.
-        BrowserFS.configure({
-            fs: "LocalStorage"
-        }, function(e) {
-            if (e) {
-                // An error happened!
-                throw e;
-            }
-            // Otherwise, BrowserFS is ready-to-use!
-        });
-    </script>
 
     <script src="https://unpkg.com/ipfs-api/dist/index.min.js "></script>
     <script src="./modules/ipfs-api/dist/index.js "></script>

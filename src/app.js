@@ -24,7 +24,6 @@ App = {
         await App.loadAccount()
         await App.loadContract()
         await App.ConnectedToServer()
-
     },
 
     // https://medium.com/metamask/https-medium-com-metamask-breaking-change-injecting-web3-7722797916a8
@@ -78,7 +77,7 @@ App = {
         var commitsArray = []
         $.ajax({
             type: 'GET',
-            url: 'http://127.0.0.1:5000/getDifference?len=1',
+            url: 'http://127.0.0.1:5000/getDifference?len=30',
 
             success: function(response) {
                 var commitsArray = JSON.parse(response)
@@ -91,17 +90,6 @@ App = {
                         App.hash.push(element[key]["hash"])
                         App.message.push(element[key]["message"])
                         App.date.push(element[key]["date"])
-                            /*for(changeKey in element[key]["change"]) {
-                                if(changeKey === "Added Lines") {
-                                    App.change.addedLines = element[key]["change"][changeKey]
-                                } else if(changeKey === "Removed Lines") {
-                                    App.change.removedLines = element[key]["change"][changeKey]
-                                } else if(changeKey === "files added") {
-                                    App.change.addedFiles = element[key]["change"][changeKey]
-                                } else if(changeKey === "files deleted") {
-                                    App.change.removedFiles = element[key]["change"][changeKey]
-                                }
-                            }*/
                         currentChange = {}
                         currentChange.addedLines = element[key]["change"]["Added Lines"]
                         currentChange.removedLines = element[key]["change"]["Removed Lines"]
@@ -116,7 +104,6 @@ App = {
                 console.log("Dates : ", App.date)
                 console.log("Messages : ", App.message)
                 console.log("Hashes: ", App.hash)
-                    //App.makeRepo()
 
             },
             error: function(response) {
@@ -125,8 +112,6 @@ App = {
         });
     },
     makeRepo: async() => {
-        // let repoName = prompt("enter your repo name")
-        // let repoDescription = prompt("enter repo desription")
         let repoName = $('#repoNameText').val()
         let repoDescription = $('#repoDescriptionText').val()
         const repo = await App.createRepo.createNewRepo(repoName, repoDescription)
@@ -159,8 +144,10 @@ App = {
         const masterBranch = await $.getJSON('branch.json')
         App.contracts.masterBranch = web3.eth.contract(masterBranch.abi).at(App.repoBranchMasterAdress)
         console.log(App.repoBranchMasterAdress)
-        App.pushCommits()
-        App.pushGitFile()
+        window.location.href = "repoCreationDetails.html";
+
+        //App.pushCommits()
+        //App.pushGitFile()
     },
     pushCommits: async() => {
         App.checkLengthPromise()
@@ -214,7 +201,6 @@ App = {
                     } else {
                         resolve(response)
                         alert("done")
-                        window.location.href = "repoCreationDetails.html";
                         console.log(response)
                     }
                 })
@@ -227,8 +213,6 @@ App = {
                 return console.error('ipfs add error', err, res)
             } else {
                 console.log("weeeeeeeeeeeeeeeeeeeeeeeeee")
-                    //App.makeCommitPromise(App.author, App.hash, App.date, App.message, res[0].hash)
-                    // App.ipfsHash = res[0].hash
             }
         })
     },
@@ -243,19 +227,38 @@ App = {
 
         })
     },
-    setValue: async() => {
-        var value = $('#uploadInput').val()
-        ipfs.add(Buffer.from(value), function(err, res) {
-            if (err || !res) {
-                return console.error('ipfs add error', err, res)
-            }
-            res.forEach(function(file) {
-                if (file && file.hash) {
-                    console.log('successfully stored', file.hash)
-                    console.log(file.hash)
-                        //window.location.href = "repoPage.html";
+    initialCommit: async() => {
+        let input = document.getElementById("uploadInput")
+        let fReader = new FileReader()
+        fReader.readAsText(input.files)
+        fReader.onloadend = function(event) {
+            ipfs.add(Buffer.from(event.target.result), function(err, res) {
+                if (err || !res) {
+                    return console.error('ipfs add error', err, res)
                 }
+                res.forEach(function(file) {
+                    if (file && file.hash) {
+                        console.log('successfully stored', file.hash)
+                        console.log(file.hash)
+                        console.log(file)
+                        console.log(res)
+
+                        //window.location.href = "repoPage.html";
+                    }
+                })
             })
+        }
+
+    },
+
+    display: (hash) => {
+        ipfs.cat(hash, function(err, res) {
+            if (err || !res) {
+                return console.error('ipfs cat error', err, res)
+            }
+
+            document.getElementById('hash').innerText = hash
+            document.getElementById('content').innerText = res.toString()
         })
     },
     uploadIPFS: (file) => {
@@ -269,9 +272,23 @@ App = {
             }
         })
         return hash
+    },
+
+    viewRepo: async() => {
+        let repos = await App.createRepo.returnRepoNames()
+        console.log(repos)
+        let repoName = $('#searchBox').val()
+        let returnRepoName
+        App.createRepo.returnRepoAddress(repoName).then(function(result) {
+            returnRepoName = result
+            console.log(returnRepoName)
+            if (returnRepoName !== '0x0000000000000000000000000000000000000000') {
+                console.log(repoName)
+            } else {
+                alert("Repo not found!")
+            }
+        })
     }
-
-
 }
 
 $(window).on('load', function() {

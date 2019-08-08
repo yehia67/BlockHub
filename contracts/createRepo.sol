@@ -17,4 +17,8 @@ contract createRepo{
     function returnRepoNames() view public returns ( repo[] memory) {
         return repos;
     }
+    
+    function returnRepoAddress(string memory _repoName) public view returns (address){
+        return repoMap[_repoName];
+    }
 }
