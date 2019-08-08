@@ -157,9 +157,18 @@ label {
 
 div {}
 
+.errorHeaderDiv {
+    margin-top: 10%;
+    text-align: center;
+}
+
+.errorHeader {
+    text-align: center;
+}
+
 .searchInputDiv {
     background-color: lightCyan;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 #timelineDiv {
@@ -193,7 +202,6 @@ body {
     margin: 0px;
     margin-left: 25%;
     margin-right: 25%;
-    margin-top: 1%;
     border: none;
 }
 
@@ -228,6 +236,10 @@ body {
 }
 
 form {}
+
+.repoInputLabel {
+    margin-top: -30%;
+}
 
 .createRepoInputForm {
     margin-left: 15px;

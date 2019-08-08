@@ -14,13 +14,15 @@
     <nav class="navbar navbar-light navbar-expand-md">
         <div class="container-fluid"><a class="navbar-brand" href="#">Create New Repo</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
-                <ul class="nav navbar-nav"></ul>
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="index.html" style="color:rgba(255,255,255,0.9);">Dashboard</a></li>
+                </ul>
             </div>
         </div>
     </nav>
     <div id="createRepoDiv">
         <div class="repoInput" style="font-size:16px;"><label style="width:140px;">Repository Name:</label><input type="text" id="repoNameText"></div>
-        <div class="repoInput"><label style="width:140px;">Description (optional):<br></label><input type="text" id="repoDescriptionText" style="height:107px;"></div>
+        <div class="repoInput"><label class="repoInputLabel" style="width:140px;">Description (optional):<br></label><textarea id="repoDescriptionText" style="height:108px;width:200px;"></textarea></div>
     </div>
     <a class="btn btn-primary createRepoBtn" role="button" href=# onclick="App.makeRepo()" style=" width:205px;margin-left:48%;margin-top:15px; ">Create Repo</a>
 
