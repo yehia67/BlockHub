@@ -236,32 +236,21 @@ App = {
             let fReader = new FileReader()
             fReader.readAsText(item)
             fReader.onloadend = function(event) {
-                    ipfs.add(Buffer.from(event.target.result), function(err, res) {
-                        if (err || !res) {
-                            return console.error('ipfs add error', err, res)
-                        }
-                        res.forEach(function(file) {
-                            if (file && file.hash) {
-                                console.log('successfully stored', file.hash)
-                                console.log(file.hash)
-                                console.log(file)
-                                console.log(res)
-                                hashs.push(file.hash)
-                            }
-                        })
-                    })
-                }
-                /* if (index === input.files.length - 1) {
-                    ipfs.add([Buffer.from(JSON.stringify(hashs))], function(err, res) {
-                        if (err || !res) {
-                            return console.error('ipfs add error', err, res)
-                        } else {
-                            console.log(hashs)
-                            console.log(res[0])
+                ipfs.add(Buffer.from(event.target.result), function(err, res) {
+                    if (err || !res) {
+                        return console.error('ipfs add error', err, res)
+                    }
+                    res.forEach(function(file) {
+                        if (file && file.hash) {
+                            console.log('successfully stored', file.hash)
+                            console.log(file.hash)
+                            console.log(file)
+                            console.log(res)
+                            hashs.push(file.hash)
                         }
                     })
-                } */
-
+                })
+            }
         });
     },
 
@@ -302,9 +291,28 @@ App = {
                 alert("Repo not found!")
             }
         })
-    }
+    },
+
+    redirectToRepo: async(repoName) => {
+        window.location.href = 'repoPage.html' + '?' + 'repoName' + '=' + repoName
+    },
+
+    changeRepoName: async() => {
+        let urlParams = new URLSearchParams(location.search)
+        $('#repoNameNavBar').text(urlParams.get('repoName'))
+    },
+
+    testFn: async() => {}
 }
 
+//Loading App
 $(window).on('load', function() {
     App.load()
+});
+
+//Changing Repo Name in Navbar
+$(function() {
+    if (location.pathname == "/repoPage.html") {
+        App.changeRepoName()
+    }
 });

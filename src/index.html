@@ -41,12 +41,11 @@
     <div class="searchInputDiv"><input type="search" placeholder="Search for a Repo.." id="searchBox"><a class="btn btn-primary float-right searchBtn" role="button" onclick="App.viewRepo()" style="color:white;width:125px;margin-right:13%;margin-top:-48px;height:40px;">Search</a></div>
     <div class="float-left" id="timelineDiv"><textarea id="TimelineArea" style="height:48px;width:362px;">Timeline</textarea>
         <div id="issuesArea">
-            <div class="issueDiv"><label class="issueLabel">Mahmoud Khalil pushed to BlockHub</label><textarea class="issueText">2 commits to dev</textarea></div>
-            <div class="issueDiv"><label class="issueLabel">Yehia Tarek pushed to BlockHub</label><textarea class="issueText">1 commit to master</textarea></div>
-            <div class="issueDiv"><label class="issueLabel">Mostafa Hazem created a repository BlockHub</label><textarea class="issueText">2 commits to dev</textarea></div>
-            <div class="issueDiv"><label class="issueLabel">Mostafa Hazem created an issue in BlockHub</label><textarea class="issueText">strings don't get saved</textarea>
-                <div class="issueDiv"><label class="issueLabel">Yehia Tarek commented on an issue in BlockHub</label><textarea class="issueText">fixed strings bug</textarea></div>
-            </div>
+            <div class="issueDiv"><label class="issueLabel">Mahmoud Khalil pushed to BlockHub</br>2 commits to dev</label></div>
+            <div class="issueDiv"><label class="issueLabel">Yehia Tarek pushed to BlockHub</br>1 commit to master</label></div>
+            <div class="issueDiv"><label class="issueLabel">Mostafa Hazem created a repository BlockHub</br>2 commits to dev</label></div>
+            <div class="issueDiv"><label class="issueLabel">Mostafa Hazem created an issue in BlockHub</br>strings don't get saved</label></div>
+            <div class="issueDiv"><label class="issueLabel">Yehia Tarek commented on an issue in BlockHub</br>fixed strings bug</label></div>
         </div>
     </div>
     <div class="float-right" id="reposDiv"><textarea id="reposArea" style="height:48px;width:50%;">Repositories</textarea><a class="btn btn-primary float-right" role="button" href="createRepo.html" style="height:40px;width:148px;padding:8px;margin:1px;">New Repository +</a>
@@ -76,7 +75,27 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="vendor/truffle-contract/dist/truffle-contract.js"></script>
-
+    <!--Install Buffer-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/BrowserFS/2.0.0/browserfs.min.js" integrity="sha256-9vfol9kbQ9KEqShl+2ejcpsESl8uQAI2K81vm1EVkRo=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        // Installs globals onto window:
+        // * Buffer
+        // * require (monkey-patches if already defined)
+        // * process
+        // You can pass in an arbitrary object if you do not wish to pollute
+        // the global namespace.
+        BrowserFS.install(window);
+        // Configures BrowserFS to use the LocalStorage file system.
+        BrowserFS.configure({
+            fs: "LocalStorage"
+        }, function(e) {
+            if (e) {
+                // An error happened!
+                throw e;
+            }
+            // Otherwise, BrowserFS is ready-to-use!
+        });
+    </script>
     <script src="https://unpkg.com/ipfs-api/dist/index.min.js"></script>
     <script src="./modules/ipfs-api/dist/index.js"></script>
     <script src="app.js"></script>
