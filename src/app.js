@@ -1,5 +1,5 @@
 const ipfs = IpfsApi("localhost", "5001")
-    //const ipfs = IpfsApi("ipfs.infura.io", "5001", {protocol: 'https'});
+    //const ipfs = IpfsHttpClient("ipfs.infura.io", "5001", {protocol: 'https'});
 ipfs.id(function(err, res) {
     if (err) throw err
     console.log("Connected to IPFS node!", res.id, res.agentVersion, res.protocolVersion);
@@ -229,26 +229,39 @@ App = {
     },
     initialCommit: async() => {
         let input = document.getElementById("uploadInput")
-        let fReader = new FileReader()
-        fReader.readAsText(input.files)
-        fReader.onloadend = function(event) {
-            ipfs.add(Buffer.from(event.target.result), function(err, res) {
-                if (err || !res) {
-                    return console.error('ipfs add error', err, res)
+        hashs = []
+        console.log(input.files)
+        Array.prototype.forEach.call(input.files, item => {
+            let fReader = new FileReader()
+            fReader.readAsText(item)
+            fReader.onloadend = function(event) {
+                    ipfs.add(Buffer.from(event.target.result), function(err, res) {
+                        if (err || !res) {
+                            return console.error('ipfs add error', err, res)
+                        }
+                        res.forEach(function(file) {
+                            if (file && file.hash) {
+                                console.log('successfully stored', file.hash)
+                                console.log(file.hash)
+                                console.log(file)
+                                console.log(res)
+                                hashs.push(file.hash)
+                            }
+                        })
+                    })
                 }
-                res.forEach(function(file) {
-                    if (file && file.hash) {
-                        console.log('successfully stored', file.hash)
-                        console.log(file.hash)
-                        console.log(file)
-                        console.log(res)
+                /* if (index === input.files.length - 1) {
+                    ipfs.add([Buffer.from(JSON.stringify(hashs))], function(err, res) {
+                        if (err || !res) {
+                            return console.error('ipfs add error', err, res)
+                        } else {
+                            console.log(hashs)
+                            console.log(res[0])
+                        }
+                    })
+                } */
 
-                        //window.location.href = "repoPage.html";
-                    }
-                })
-            })
-        }
-
+        });
     },
 
     display: (hash) => {
