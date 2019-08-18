@@ -104,6 +104,7 @@ App = {
                 console.log("Dates : ", App.date)
                 console.log("Messages : ", App.message)
                 console.log("Hashes: ", App.hash)
+                    // App.makeRepo()
 
             },
             error: function(response) {
