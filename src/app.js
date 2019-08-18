@@ -145,7 +145,7 @@ App = {
         const masterBranch = await $.getJSON('branch.json')
         App.contracts.masterBranch = web3.eth.contract(masterBranch.abi).at(App.repoBranchMasterAdress)
         console.log(App.repoBranchMasterAdress)
-        window.location.href = "repoCreationDetails.html";
+        window.location.href = "repoCreationDetails.html" + '?' + 'address' + '=' + App.repoBranchMasterAdress
 
         //App.pushCommits()
         //App.pushGitFile()
@@ -230,7 +230,14 @@ App = {
     },
     initialCommit: async() => {
         let input = document.getElementById("uploadInput")
-        hashs = []
+        let msg = $("#initialCommitMsg").val()
+        const masterBranch = await $.getJSON('branch.json')
+        let urlParams = new URLSearchParams(location.search)
+        let barnchAddress = urlParams.get('address')
+        console.log(barnchAddress)
+        App.contracts.masterBranch = web3.eth.contract(masterBranch.abi).at(barnchAddress)
+        console.log(msg)
+        hashs = ""
         console.log(input.files)
         Array.prototype.forEach.call(input.files, item => {
             let fReader = new FileReader()
@@ -246,12 +253,14 @@ App = {
                             console.log(file.hash)
                             console.log(file)
                             console.log(res)
-                            hashs.push(file.hash)
+                            hashs += file.hash + ","
                         }
                     })
                 })
             }
         });
+        let date = new Date().toLocaleDateString("en", { year: "numeric", day: "2-digit", month: "2-digit" });
+        App.makeCommitPromise("owner", "root init commit", date, msg, hashs)
     },
 
     display: (hash) => {
