@@ -125,7 +125,6 @@ App = {
         const repo = await $.getJSON('repo.json')
         App.contracts.repo = web3.eth.contract(repo.abi).at(App.repoAddress)
         App.masterBranchPromise()
-
     },
     masterBranchPromise: async() => {
         return new Promise(function(resolve, reject) {
@@ -284,11 +283,10 @@ App = {
         let returnRepoName
         App.createRepo.returnRepoAddress(repoName).then(function(result) {
             returnRepoName = result
-            console.log(returnRepoName)
             if (returnRepoName !== '0x0000000000000000000000000000000000000000') {
-                console.log(repoName)
+                App.redirectToRepo(repoName)
             } else {
-                alert("Repo not found!")
+                window.location.href = '404.html'
             }
         })
     },
@@ -301,7 +299,25 @@ App = {
         let urlParams = new URLSearchParams(location.search)
         $('#repoNameNavBar').text(urlParams.get('repoName'))
     },
-
+    createIssue: async() => {
+        let issueName = $('#issueName').val()
+        let issueDescription = $('#issueDescription').val()
+            //loading repo
+        const repo = await $.getJSON('repo.json')
+        App.contracts.repo = web3.eth.contract(repo.abi).at(App.repoAddress)
+        return new Promise(function(resolve, reject) {
+            App.contracts.repo.makeIssue(issueName, issueDescription,
+                function(error, response) {
+                    if (error) {
+                        reject(error)
+                    } else {
+                        resolve(response)
+                        alert("my issue created")
+                        console.log(response)
+                    }
+                })
+        });
+    },
     testFn: async() => {}
 }
 

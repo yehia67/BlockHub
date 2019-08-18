@@ -30,10 +30,8 @@ contract repo{
     event collaboratorAdded(address collaborator, address repoAddress, string repoName);
     event collaboratorRemoved(address collaborator, address repoAddress, string repoName);
     event branchCreated(string repoName,address branchAddress ,string branchName);
-    event issueCreated(address issueCreator);
-    function getMasterBranch() public view returns (address) {
-        return branchesMap['master'];
-    }
+    event issueCreated(address issueCreator, string issueName);
+    
     modifier onlyOwner(){
         require(collaboratorsMap[msg.sender] == true);
         _;
@@ -42,6 +40,10 @@ contract repo{
     modifier onlyPermitted(){
         //require(msg.sender == repoOwner);
         _;
+    }
+
+    function getMasterBranch() public view returns (address) {
+        return branchesMap['master'];
     }
 
     function addColaborator (address _collaborator) public onlyOwner{
@@ -63,8 +65,8 @@ contract repo{
     }
 
 
-    function makeIssue() public{
-        issues.push(new issue(repoOwner));
-        emit issueCreated(msg.sender);
+    function makeIssue(string memory _issueName, string memory _issueDescription) public{
+        issues.push(new issue(_issueName, _issueDescription));
+        emit issueCreated(msg.sender, _issueName);
     }
 }
