@@ -210,6 +210,10 @@ body {
     font-family: sans-serif;
 }
 
+.repoInputDescriptionLabel {
+    margin-top: -5%;
+}
+
 .btn:not(:disabled):not(.disabled) {
     /*position:center;*/
 }
@@ -324,12 +328,16 @@ form {}
     margin-right: 50px;
 }
 
-.btn.btn-primary.float-right.createIssueBtn {
-    margin-left: 50%;
-}
-
 #creatIssueDiv {
     margin-top: 30px;
+}
+
+#issuesArea {
+    padding-left: 5px;
+}
+
+.issueDiv {
+    border-bottom: solid steelblue 1px;
 }
 
 p {}
