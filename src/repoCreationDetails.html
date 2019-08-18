@@ -12,7 +12,7 @@
 
 <body>
     <nav class="navbar navbar-light navbar-expand-md" style="background-color:steelBlue;">
-        <div class="container-fluid"><a class="navbar-brand" href="#">Dashboard</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="container-fluid"><a class="navbar-brand" style="color:rgba(255,255,255,0.9);">Repo Creation Details</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item" role="presentation"><a class="nav-link active" href="index.html" style="color:rgba(255,255,255,0.9);">Dashboard</a></li>
@@ -22,18 +22,19 @@
     </nav>
     <form class="createRepoInputForm" style="height:363px;">
         <div class="form-group">
-            <div class="makeFirstCommitDiv"><label class="uploadLbl">Upload/Make your first commit:&nbsp;</label><input type="file" id="uploadInput" multiple directory webkitdirectory mozdirectory></div>
+            <div class="makeFirstCommitDiv"><label class="uploadLbl">Upload/Make your first commit:&nbsp;</label><input type="file" id="uploadInput" multiple directory webkitdirectory mozdirectory required></div>
         </div>
         <div class="form-group">
-            <div class="chooseModules"><label class="uploadLbl">Choose directories not to be included (ex. node modules):&nbsp;</label><input type="text" id="notIncludeModulesText"></div>
+            <div class="chooseModules"><label class="uploadLbl">Choose directories not to be included (ex. node modules):&nbsp;</label><input type="text" id="notIncludeModulesText" required></div>
         </div>
         <div class="form-group">
-            <div class="initMsg form-inline"><label class="uploadLbl initCommitLbl">Initial Commit Message (Optional):</label><input class="form-control initCommit" type="text" style="height:108px;width:292px;"></div>
+            <div class="initMsg form-inline"><label class="uploadLbl initCommitLbl">Initial Commit Message (Required):</label><input class="form-control initCommit" type="text" style="height:108px;width:292px;" required></div>
         </div>
         <div class="form-group">
             <label class="uploadLbl gitIncludeLabel">Don't Forget to include your .git directory</label>
-            <div class=" uploadCommitFormBtn "><a class="btn btn-primary float-right uploadCommitBtn " role="button" href=# onclick="App.initialCommit()" style="width:199px; ">Upload / Commit</a></div>
-        </div>
+            <div class=" uploadCommitFormBtn ">
+                <button class="btn btn-primary float-right uploadCommitBtn" role="button" href=# onclick="App.initialCommit()" style="width:199px; ">Upload / Commit</a>
+            </div>
     </form>
     <div id="hash"></div>
     <div id="content"></div>

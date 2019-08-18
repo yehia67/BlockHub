@@ -12,7 +12,7 @@
 
 <body>
     <nav class="navbar navbar-light navbar-expand-md">
-        <div class="container-fluid"><a class="navbar-brand" href="#">Create New Repo</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="container-fluid"><a class="navbar-brand" style="color:rgba(255,255,255,0.9);">Create New Repo</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item" role="presentation"><a class="nav-link active" href="index.html" style="color:rgba(255,255,255,0.9);">Dashboard</a></li>
@@ -21,11 +21,12 @@
         </div>
     </nav>
     <div id="createRepoDiv">
-        <div class="repoInput" style="font-size:16px;"><label style="width:140px;">Repository Name:</label><input type="text" id="repoNameText"></div>
-        <div class="repoInput"><label class="repoInputLabel" style="width:140px;">Description (optional):<br></label><textarea id="repoDescriptionText" style="height:108px;width:200px;"></textarea></div>
+        <div class="repoInput" style="font-size:16px;"><label style="width:140px;">Repository Name:</label><input type="text" id="repoNameText" required></div>
+        <div class="repoInput"><label style="width:140px;">Description:<br /></label><input type="text" id="repoDescriptionText" style="height:107px;" /></div>
     </div>
-    <a class="btn btn-primary createRepoBtn" role="button" href=# onclick="App.makeRepo()" style=" width:205px;margin-left:48%;margin-top:15px; ">Create Repo</a>
-
+    <div class="createRepoDivBtn">
+        <button class="btn btn-primary createRepoBtn" type="submit" onclick="App.makeRepo()" style="width:195px;margin-left:49%;margin-top:15px;">Create Repo</button>
+    </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js "></script>
@@ -57,7 +58,6 @@
 
     <script src="https://unpkg.com/ipfs-api/dist/index.min.js "></script>
     <script src="./modules/ipfs-api/dist/index.js "></script>
-    <script src="parsingVariables.js"></script>
     <script src="app.js "></script>
 </body>
 

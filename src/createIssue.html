@@ -21,15 +21,20 @@
         </div>
     </nav>
     <div id="creatIssueDiv">
-        <div class="repoInput" style="font-size:16px;"><label style="width:140px;">Issue Title:</label><input type="text"></div>
-        <div class="repoInput"><label style="width:140px;">Description:<br></label><input type="text" style="height:107px;"></div>
-    </div><a class="btn btn-primary createIssueBtn" role="button" href="issues.html" style="width:194px;margin-left:48%;margin-top:15px;">Create Issue</a>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+        <div class="repoInput" style="font-size:16px;"><label style="width:140px;">Issue Name:</label><input type="text" id="issueName"></div>
+        <div class="repoInput"><label style="width:140px;">Description:<br></label><input type="text" id="issueDescription" style="height:107px;"></div>
+    </div><button class="btn btn-primary createIssueBtn " type="submit " onclick="App.createIssue() " style="width:194px;margin-left:48%;margin-top:15px; ">Create Issue</button>
 
-    <script src="https://unpkg.com/ipfs-api/dist/index.min.js"></script>
-    <script src="./modules/ipfs-api/dist/index.js"></script>
-    <script src="app.js"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js "></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="vendor/truffle-contract/dist/truffle-contract.js"></script>
+
+    <script src="https://unpkg.com/ipfs-api/dist/index.min.js "></script>
+    <script src="./modules/ipfs-api/dist/index.js "></script>
+    <script src="app.js "></script>
 </body>
 
 </html>
