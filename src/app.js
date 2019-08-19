@@ -266,7 +266,7 @@ App = {
         let date = new Date().toLocaleDateString("en", { year: "numeric", day: "2-digit", month: "2-digit" })
         App.makeCommitPromise("owner", "root", date, msg, hashs).then(function() { App.GoToRepoPage() })
     },
-    GoToRepoPage: () => {
+    goToRepoPage: () => {
         let urlParams = new URLSearchParams(location.search)
         window.location.href = "repoPage.html" + '?address=' + urlParams.get('address') + "&repoName=" + urlParams.get('repoName')
 
@@ -344,12 +344,32 @@ App = {
         let urlParams = new URLSearchParams(location.search)
         $('#repoNameNavBar').text(urlParams.get('repoName'))
     },
+
+    createNewIssue: async() => {
+        window.location.href = 'createIssue.html' + '?' + 'repoName' + '=' + $('#repoNameNavBar').text()
+    },
+
     createIssue: async() => {
-        let issueName = $('#issueName').val()
-        let issueDescription = $('#issueDescription').val()
-            //loading repo
+        //loading repo
         const repo = await $.getJSON('repo.json')
-        App.contracts.repo = web3.eth.contract(repo.abi).at(App.repoAddress)
+        console.log($('#repoNameNavBar').text())
+        App.createRepo.returnRepoAddress($('#repoNameNavBar').text()).then(function(result) {
+            newRepoAddress = result
+            if (newRepoAddress !== '0x0000000000000000000000000000000000000000') {
+                console.log(newRepoAddress)
+                App.contracts.repo = web3.eth.contract(repo.abi).at(newRepoAddress)
+                $('#repoNameNavBar').text($('#repoNameNavBar').text())
+
+                let issueName = $('#issueName').val()
+                let issueDescription = $('#issueDescription').val()
+                App.makeIssue(issueName, issueDescription)
+            } else {
+                window.location.href = '404.html'
+            }
+        })
+    },
+
+    makeIssue: async(issueName, issueDescription) => {
         return new Promise(function(resolve, reject) {
             App.contracts.repo.makeIssue(issueName, issueDescription,
                 function(error, response) {
@@ -357,12 +377,16 @@ App = {
                         reject(error)
                     } else {
                         resolve(response)
-                        alert("my issue created")
                         console.log(response)
                     }
                 })
         });
     },
+
+    goToIssue: async() => {
+        window.location.href = 'issues.html' + '?' + 'repoName' + '=' + $('#repoNameNavBar').text()
+    },
+
     testFn: async() => {}
 }
 
@@ -373,8 +397,10 @@ $(window).on('load', function() {
 
 //Changing Repo Name in Navbar
 $(function() {
-    if (location.pathname == "/repoPage.html") {
+    if (location.pathname == "/repoPage.html" || location.pathname == "/issues.html" || location.pathname == "/createIssue.html") {
         App.changeRepoName()
+    }
+    if (location.pathname == "/repoPage.html") {
         App.showRepoFiles()
     }
 });
