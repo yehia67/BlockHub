@@ -224,6 +224,12 @@ App = {
 
         })
     },
+    branchInit: async() => {
+        const masterBranch = await $.getJSON('branch.json')
+        let urlParams = new URLSearchParams(location.search)
+        let barnchAddress = urlParams.get('address')
+        App.contracts.masterBranch = web3.eth.contract(masterBranch.abi).at(barnchAddress)
+    },
     initialCommit: async() => {
         let input = document.getElementById("uploadInput")
         let msg = $("#initialCommitMsg").val()
@@ -231,9 +237,7 @@ App = {
         const masterBranch = await $.getJSON('branch.json')
         let urlParams = new URLSearchParams(location.search)
         let barnchAddress = urlParams.get('address')
-        console.log(barnchAddress)
         App.contracts.masterBranch = web3.eth.contract(masterBranch.abi).at(barnchAddress)
-        console.log(msg)
         hashs = ""
         console.log(input.files)
         let filesIterator = 0
@@ -266,7 +270,33 @@ App = {
     GoToRepoPage: () => {
         let urlParams = new URLSearchParams(location.search)
         window.location.href = "repoPage.html" + '?address=' + urlParams.get('address') + "&repoName=" + urlParams.get('repoName')
+
+
+
+    },
+    showRepoFiles: async() => {
+        let urlParams = new URLSearchParams(location.search)
         $('#repoNameNavBar').text(urlParams.get('repoName'))
+        const masterBranch = await $.getJSON('branch.json')
+        let barnchAddress = urlParams.get('address')
+        App.contracts.masterBranch = web3.eth.contract(masterBranch.abi).at(barnchAddress)
+        const ipfsHash = App.getRootCommitPromise()
+        alert("done")
+        console.log("MY HASHHHH" + ipfsHash)
+    },
+    getRootCommitPromise: () => {
+        return new Promise(function(resolve, reject) {
+            console.log("HNAAAAAAAAAAAAAAAAAAAAAAAA")
+            App.contracts.masterBranch.getRootCommit(
+                function(error, response) {
+                    if (error) {
+                        reject(error)
+                    } else {
+                        resolve(response)
+                        console.log("hash " + response)
+                    }
+                })
+        });
     },
     display: (hash) => {
         ipfs.cat(hash, function(err, res) {
@@ -345,5 +375,6 @@ $(window).on('load', function() {
 $(function() {
     if (location.pathname == "/repoPage.html") {
         App.changeRepoName()
+        App.showRepoFiles()
     }
 });
