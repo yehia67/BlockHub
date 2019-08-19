@@ -25,6 +25,9 @@ contract branch{
      function getCommitsArrayLength() public view returns (uint) {
         return commitArray.length;
     }
+    function getRootCommit() view public returns (string  memory) {
+        return changes["root init commit"]; 
+    }
    function pushCommit(string memory _authorName,string memory _commitHash,
   string memory  _date, string memory _message,string memory _ipfsChange) public{
       

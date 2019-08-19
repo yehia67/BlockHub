@@ -21,4 +21,8 @@ contract createRepo{
     function returnRepoAddress(string memory _repoName) public view returns (address){
         return repoMap[_repoName];
     }
+    function getRootCommit(string memory repoName) public view  returns (string memory) {
+          repo Repo = repo(repoMap[repoName]);
+          return Repo.getMasterRootCommit();
+    }
 }

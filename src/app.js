@@ -144,10 +144,7 @@ App = {
         const masterBranch = await $.getJSON('branch.json')
         App.contracts.masterBranch = web3.eth.contract(masterBranch.abi).at(App.repoBranchMasterAdress)
         console.log(App.repoBranchMasterAdress)
-        window.location.href = "repoCreationDetails.html" + '?' + 'address' + '=' + App.repoBranchMasterAdress
-
-        //App.pushCommits()
-        //App.pushGitFile()
+        window.location.href = "repoCreationDetails.html" + '?address=' + App.repoBranchMasterAdress + "&repoName=" + $('#repoNameText').val()
     },
     pushCommits: async() => {
         App.checkLengthPromise()
@@ -230,6 +227,7 @@ App = {
     initialCommit: async() => {
         let input = document.getElementById("uploadInput")
         let msg = $("#initialCommitMsg").val()
+        console.log(input.files)
         const masterBranch = await $.getJSON('branch.json')
         let urlParams = new URLSearchParams(location.search)
         let barnchAddress = urlParams.get('address')
@@ -238,6 +236,7 @@ App = {
         console.log(msg)
         hashs = ""
         console.log(input.files)
+        let filesIterator = 0
         Array.prototype.forEach.call(input.files, item => {
             let fReader = new FileReader()
             fReader.readAsText(item)
@@ -248,32 +247,28 @@ App = {
                     }
                     res.forEach(function(file) {
                         if (file && file.hash) {
-                            console.log('successfully stored', file.hash)
-                            console.log(file.hash)
-                            console.log(file)
-                            console.log(res)
-                            hashs += file.hash + ","
+
+                            hashs += file.hash + "/" + input.files[filesIterator].name + "/" + input.files[filesIterator].webkitRelativePath + ","
+                            filesIterator++
+                            console.log(hashs)
                         }
                     })
                 })
             }
         });
-        let date = new Date().toLocaleDateString("en", { year: "numeric", day: "2-digit", month: "2-digit" });
-        App.makeCommitPromise("owner", "root init commit", date, msg, hashs)
-        hash = hashs.split(',')
-        console.log("================================================= " + hash[0])
-        App.display(hash[0])
+        App.CommitAndRedirectToRepo(msg, hashs)
     },
-
+    CommitAndRedirectToRepo: (msg, hashs) => {
+        let date = new Date().toLocaleDateString("en", { year: "numeric", day: "2-digit", month: "2-digit" })
+        App.makeCommitPromise("owner", "root init commit", date, msg, hashs)
+        App.GoToRepoPage()
+    },
+    GoToRepoPage: () => {
+        let urlParams = new URLSearchParams(location.search)
+        window.location.href = "repoPage.html" + '?address=' + urlParams.get('address') + "&repoName=" + urlParams.get('repoName')
+        $('#repoNameNavBar').text(urlParams.get('repoName'))
+    },
     display: (hash) => {
-
-        /*  ipfs.get(hash, function(err, file) {
-             console.log("------------------------------------------------------")
-             console.log(file)
-
-         }) */
-
-
         ipfs.cat(hash, function(err, res) {
             if (err || !res) {
                 return console.error('ipfs cat error', err, res)

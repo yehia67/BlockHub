@@ -56,7 +56,10 @@ contract repo{
         collaboratorsMap[_collaborator] = false;
         emit collaboratorRemoved(_collaborator, address(this), repoName);
     }
-  
+    function getMasterRootCommit() view public returns (string memory) {
+        branch Branch = branch(branchesMap["master"]);
+        return Branch.getRootCommit(); 
+    }
     function makeBranch(string memory _branchName) public onlyPermitted{
         branch Branch = new branch(_branchName, branches[0].getCommitsArray());
         branchesMap[_branchName] = address(Branch);
