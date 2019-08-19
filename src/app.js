@@ -264,8 +264,7 @@ App = {
     },
     CommitAndRedirectToRepo: (msg, hashs) => {
         let date = new Date().toLocaleDateString("en", { year: "numeric", day: "2-digit", month: "2-digit" })
-        App.makeCommitPromise("owner", "root init commit", date, msg, hashs)
-        App.GoToRepoPage()
+        App.makeCommitPromise("owner", "root", date, msg, hashs).then(function() { App.GoToRepoPage() })
     },
     GoToRepoPage: () => {
         let urlParams = new URLSearchParams(location.search)
@@ -280,9 +279,10 @@ App = {
         const masterBranch = await $.getJSON('branch.json')
         let barnchAddress = urlParams.get('address')
         App.contracts.masterBranch = web3.eth.contract(masterBranch.abi).at(barnchAddress)
-        const ipfsHash = App.getRootCommitPromise()
-        alert("done")
-        console.log("MY HASHHHH" + ipfsHash)
+        App.getRootCommitPromise().then(function(result) {
+            alert(result)
+        })
+
     },
     getRootCommitPromise: () => {
         return new Promise(function(resolve, reject) {
