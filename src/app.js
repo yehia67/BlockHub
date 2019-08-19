@@ -260,9 +260,20 @@ App = {
         });
         let date = new Date().toLocaleDateString("en", { year: "numeric", day: "2-digit", month: "2-digit" });
         App.makeCommitPromise("owner", "root init commit", date, msg, hashs)
+        hash = hashs.split(',')
+        console.log("================================================= " + hash[0])
+        App.display(hash[0])
     },
 
     display: (hash) => {
+
+        /*  ipfs.get(hash, function(err, file) {
+             console.log("------------------------------------------------------")
+             console.log(file)
+
+         }) */
+
+
         ipfs.cat(hash, function(err, res) {
             if (err || !res) {
                 return console.error('ipfs cat error', err, res)
