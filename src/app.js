@@ -73,7 +73,7 @@ App = {
         // Hydrate the smart contract with values from the blockchain
         App.createRepo = await App.contracts.createRepo.deployed()
 
-        if (location.pathname == "/pages/index.html" || location.pathname == "/") {
+        if (location.pathname == "/index.html" || location.pathname == "/") {
             App.addReposToHomePage()
         }
     },
