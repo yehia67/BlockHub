@@ -260,16 +260,20 @@ App = {
                 })
             }
         });
-        App.CommitAndRedirectToRepo(msg, hashs)
+        let date = new Date().toLocaleDateString("en", { year: "numeric", day: "2-digit", month: "2-digit" })
+        App.makeCommitPromise("owner", "root", date, msg, hashs)
+        App.goToRepoPage()
+
     },
     CommitAndRedirectToRepo: (msg, hashs) => {
         let date = new Date().toLocaleDateString("en", { year: "numeric", day: "2-digit", month: "2-digit" })
-        App.makeCommitPromise("owner", "root", date, msg, hashs).then(function() { App.GoToRepoPage() })
+        App.makeCommitPromise("owner", "root", date, msg, hashs)
+        App.GoToRepoPage()
+
     },
     goToRepoPage: () => {
         let urlParams = new URLSearchParams(location.search)
         window.location.href = "repoPage.html" + '?address=' + urlParams.get('address') + "&repoName=" + urlParams.get('repoName')
-
 
 
     },
