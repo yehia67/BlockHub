@@ -32,7 +32,7 @@ contract branch{
   string memory  _date, string memory _message,string memory _ipfsChange) public{
       
       commit Commit = new commit(_authorName,_commitHash,_date,_message);
-      changes[_commitHash] = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+      changes[_commitHash] =_ipfsChange;
       commitMap[_commitHash] = address(Commit);
       emit commitCreated(msg.sender,_authorName,_message,_commitHash);
   }

@@ -259,13 +259,20 @@ App = {
                     })
                 })
             }
-        });
-        let date = new Date().toLocaleDateString("en", { year: "numeric", day: "2-digit", month: "2-digit" })
-        App.makeCommitPromise("owner", "root", date, msg, hashs)
-        App.goToRepoPage()
+        })
+        setTimeout(function() {
+            let date = new Date().toLocaleDateString("en", { year: "numeric", day: "2-digit", month: "2-digit" })
+            App.makeCommitPromise("owner", "root", date, msg, hashs)
+            App.goToRepoPage()
+        }, 5000)
+
+
+
+
     },
     CommitAndRedirectToRepo: (msg, hashs) => {
         let date = new Date().toLocaleDateString("en", { year: "numeric", day: "2-digit", month: "2-digit" })
+        alert("mn gowaa " + hashs)
         App.makeCommitPromise("owner", "root", date, msg, hashs)
         App.GoToRepoPage()
 
@@ -404,7 +411,7 @@ $(function() {
         App.changeRepoName()
     }
     if (location.pathname == "/repoPage.html") {
-        setTimeout(App.showRepoFiles, 10000)
+        setTimeout(App.showRepoFiles, 5000)
 
     }
 });
