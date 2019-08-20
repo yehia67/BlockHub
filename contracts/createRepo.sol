@@ -27,6 +27,11 @@ contract createRepo{
         return _tempRepo.getRepoName();
     }
 
+    function getRepoMasterBranch(address _repoAddress) public view returns (address){
+        repo _tempRepo = repo(_repoAddress);
+        return _tempRepo.getMasterBranch();
+    }
+
     function getRootCommit(string memory repoName) public view  returns (string memory) {
           repo Repo = repo(repoMap[repoName]);
           return Repo.getMasterRootCommit();

@@ -269,11 +269,8 @@ App = {
             App.makeCommitPromise("owner", "root", date, msg, hashs)
             App.goToRepoPage()
         }, 5000)
-
-
-
-
     },
+
     CommitAndRedirectToRepo: (msg, hashs) => {
         let date = new Date().toLocaleDateString("en", { year: "numeric", day: "2-digit", month: "2-digit" })
         alert("mn gowaa " + hashs)
@@ -281,11 +278,10 @@ App = {
         App.GoToRepoPage()
 
     },
+
     goToRepoPage: async() => {
         let urlParams = new URLSearchParams(location.search)
         window.location.href = "repoPage.html" + '?address=' + urlParams.get('address') + "&repoName=" + urlParams.get('repoName')
-
-
     },
     showRepoFiles: async() => {
         let urlParams = new URLSearchParams(location.search)
@@ -347,13 +343,13 @@ App = {
     },
 
     viewRepo: async() => {
-        let repos = await App.createRepo.returnRepoNames()
+        let repos = await App.createRepo.returnRepos()
         console.log(repos)
         let repoName = $('#searchBox').val()
-        let returnRepoName
+        let returnRepoAddress
         App.createRepo.returnRepoAddress(repoName).then(function(result) {
-            returnRepoName = result
-            if (returnRepoName !== '0x0000000000000000000000000000000000000000') {
+            returnRepoAddress = result
+            if (returnRepoAddress !== '0x0000000000000000000000000000000000000000') {
                 App.redirectToRepo(repoName)
             } else {
                 window.location.href = '404.html'
@@ -362,7 +358,12 @@ App = {
     },
 
     redirectToRepo: async(repoName) => {
-        window.location.href = 'repoPage.html' + '?' + 'repoName' + '=' + repoName
+        App.createRepo.returnRepoAddress(repoName).then(function(result) {
+            let returnRepoAddress = result
+            App.createRepo.getRepoMasterBranch(returnRepoAddress).then(function(result) {
+                window.location.href = "repoPage.html" + '?address=' + result + "&repoName=" + repoName
+            })
+        })
     },
 
     changeRepoName: async() => {
@@ -414,20 +415,30 @@ App = {
 
     addReposToHomePage: async() => {
         App.createRepo.returnRepos().then(function(result) {
-            repos = result
+            let repos = result
             if (repos.length !== 0) {
                 for (let i in repos) {
                     App.createRepo.returnRepoName(repos[i]).then(function(result) {
+                        let repoName = result
                         let repoNode = document.createElement("a")
-                        repoNode.setAttribute("id", "repoNameLink");
-                        let repoURL = 'repoPage.html' + '?' + 'repoName' + '=' + result
-                        repoNode.setAttribute("href", repoURL)
-                        let textNode = document.createTextNode(result)
-                        repoNode.appendChild(textNode)
-                        document.getElementById('reposDiv').appendChild(repoNode)
-                        let breakNode = document.createElement("br")
-                        repoNode.appendChild(breakNode)
-                        document.getElementById('reposDiv').appendChild(breakNode)
+                        repoNode.setAttribute("id", "repoNameLink")
+                        let repoURL
+                        App.createRepo.returnRepoAddress(repoName).then(function(result) {
+                            let returnRepoAddress = result
+                            App.createRepo.getRepoMasterBranch(returnRepoAddress).then(function(result) {
+                                console.log('result', result)
+                                console.log('repoaddress', returnRepoAddress)
+                                repoURL = "repoPage.html" + '?address=' + result + "&repoName=" + repoName
+                                repoNode.setAttribute("href", repoURL)
+                                let textNode = document.createTextNode(repoName)
+                                repoNode.appendChild(textNode)
+                                document.getElementById('reposDiv').appendChild(repoNode)
+                                let breakNode = document.createElement("br")
+                                repoNode.appendChild(breakNode)
+                                document.getElementById('reposDiv').appendChild(breakNode)
+                            })
+                        })
+
                     })
                 }
             } else {
