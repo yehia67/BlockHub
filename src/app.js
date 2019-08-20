@@ -414,7 +414,8 @@ App = {
     },
 
     goToIssue: async() => {
-        window.location.href = 'issues.html' + '?' + 'repoName' + '=' + $('#repoNameNavBar').text()
+        let urlParams = new URLSearchParams(location.search)
+        window.location.href = "issues.html" + '?address=' + urlParams.get('address') + "&repoName=" + urlParams.get('repoName')
     },
 
     addReposToHomePage: async() => {
