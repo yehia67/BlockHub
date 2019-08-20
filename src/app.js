@@ -66,14 +66,14 @@ App = {
 
     loadContract: async() => {
         // Create a JavaScript version of the smart contract
-        const createRepo = await $.getJSON('createRepo.json')
+        const createRepo = await $.getJSON('../createRepo.json')
         App.contracts.createRepo = TruffleContract(createRepo)
         App.contracts.createRepo.setProvider(App.web3Provider)
 
         // Hydrate the smart contract with values from the blockchain
         App.createRepo = await App.contracts.createRepo.deployed()
 
-        if (location.pathname == "/index.html" || location.pathname == "/") {
+        if (location.pathname == "/pages/index.html" || location.pathname == "/") {
             App.addReposToHomePage()
         }
     },
@@ -108,7 +108,6 @@ App = {
                 console.log("Dates : ", App.date)
                 console.log("Messages : ", App.message)
                 console.log("Hashes: ", App.hash)
-                    // App.makeRepo()
 
             },
             error: function(response) {
@@ -126,7 +125,7 @@ App = {
         App.loadRepo()
     },
     loadRepo: async() => {
-        const repo = await $.getJSON('repo.json')
+        const repo = await $.getJSON('../repo.json')
         App.contracts.repo = web3.eth.contract(repo.abi).at(App.repoAddress)
         App.masterBranchPromise()
     },
@@ -145,10 +144,10 @@ App = {
         });
     },
     loadMasterBranch: async() => {
-        const masterBranch = await $.getJSON('branch.json')
+        const masterBranch = await $.getJSON('../branch.json')
         App.contracts.masterBranch = web3.eth.contract(masterBranch.abi).at(App.repoBranchMasterAdress)
         console.log(App.repoBranchMasterAdress)
-        window.location.href = "repoCreationDetails.html" + '?address=' + App.repoBranchMasterAdress + "&repoName=" + $('#repoNameText').val()
+        window.location.href = "/pages/repoCreationDetails.html" + '?address=' + App.repoBranchMasterAdress + "&repoName=" + $('#repoNameText').val()
     },
     pushCommits: async() => {
         App.checkLengthPromise()
@@ -229,19 +228,19 @@ App = {
         })
     },
     branchInit: async() => {
-        const masterBranch = await $.getJSON('branch.json')
+        const masterBranch = await $.getJSON('../branch.json')
         let urlParams = new URLSearchParams(location.search)
-        let barnchAddress = urlParams.get('address')
-        App.contracts.masterBranch = web3.eth.contract(masterBranch.abi).at(barnchAddress)
+        let branchAddress = urlParams.get('address')
+        App.contracts.masterBranch = web3.eth.contract(masterBranch.abi).at(branchAddress)
     },
     initialCommit: async() => {
         let input = document.getElementById("uploadInput")
         let msg = $("#initialCommitMsg").val()
         console.log(input.files)
-        const masterBranch = await $.getJSON('branch.json')
+        const masterBranch = await $.getJSON('../branch.json')
         let urlParams = new URLSearchParams(location.search)
-        let barnchAddress = urlParams.get('address')
-        App.contracts.masterBranch = web3.eth.contract(masterBranch.abi).at(barnchAddress)
+        let branchAddress = urlParams.get('address')
+        App.contracts.masterBranch = web3.eth.contract(masterBranch.abi).at(branchAddress)
         hashs = ""
         console.log(input.files)
         let filesIterator = 0
@@ -281,15 +280,15 @@ App = {
 
     goToRepoPage: async() => {
         let urlParams = new URLSearchParams(location.search)
-        window.location.href = "repoPage.html" + '?address=' + urlParams.get('address') + "&repoName=" + urlParams.get('repoName')
+        window.location.href = "/pages/repoPage.html" + '?address=' + urlParams.get('address') + "&repoName=" + urlParams.get('repoName')
     },
     showRepoFiles: async() => {
         let urlParams = new URLSearchParams(location.search)
         let ipfsHash
         $('#repoNameNavBar').text(urlParams.get('repoName'))
-        const masterBranch = await $.getJSON('branch.json')
-        let barnchAddress = urlParams.get('address')
-        App.contracts.masterBranch = web3.eth.contract(masterBranch.abi).at(barnchAddress)
+        const masterBranch = await $.getJSON('../branch.json')
+        let branchAddress = urlParams.get('address')
+        App.contracts.masterBranch = web3.eth.contract(masterBranch.abi).at(branchAddress)
         App.getRootCommitPromise().then(function(result) {
             App.LoadRepoFiles(result)
         })
@@ -362,7 +361,7 @@ App = {
             if (returnRepoAddress !== '0x0000000000000000000000000000000000000000') {
                 App.redirectToRepo(repoName)
             } else {
-                window.location.href = '404.html'
+                window.location.href = '/pages/404.html'
             }
         })
     },
@@ -371,7 +370,7 @@ App = {
         App.createRepo.returnRepoAddress(repoName).then(function(result) {
             let returnRepoAddress = result
             App.createRepo.getRepoMasterBranch(returnRepoAddress).then(function(result) {
-                window.location.href = "repoPage.html" + '?address=' + result + "&repoName=" + repoName
+                window.location.href = "/pages/repoPage.html" + '?address=' + result + "&repoName=" + repoName
             })
         })
     },
@@ -382,12 +381,12 @@ App = {
     },
 
     createNewIssue: async() => {
-        window.location.href = 'createIssue.html' + '?' + 'repoName' + '=' + $('#repoNameNavBar').text()
+        window.location.href = '/pages/createIssue.html' + '?' + 'repoName' + '=' + $('#repoNameNavBar').text()
     },
 
     createIssue: async() => {
         //loading repo
-        const repo = await $.getJSON('repo.json')
+        const repo = await $.getJSON('../repo.json')
         console.log($('#repoNameNavBar').text())
         App.createRepo.returnRepoAddress($('#repoNameNavBar').text()).then(function(result) {
             newRepoAddress = result
@@ -400,7 +399,7 @@ App = {
                 let issueDescription = $('#issueDescription').val()
                 App.makeIssue(issueName, issueDescription)
             } else {
-                window.location.href = '404.html'
+                window.location.href = '/pages/404.html'
             }
         })
     },
@@ -421,7 +420,7 @@ App = {
 
     goToIssue: async() => {
         let urlParams = new URLSearchParams(location.search)
-        window.location.href = "issues.html" + '?address=' + urlParams.get('address') + "&repoName=" + urlParams.get('repoName')
+        window.location.href = "/pages/issues.html" + '?address=' + urlParams.get('address') + "&repoName=" + urlParams.get('repoName')
     },
 
     addReposToHomePage: async() => {
@@ -439,7 +438,7 @@ App = {
                             App.createRepo.getRepoMasterBranch(returnRepoAddress).then(function(result) {
                                 console.log('result', result)
                                 console.log('repoaddress', returnRepoAddress)
-                                repoURL = "repoPage.html" + '?address=' + result + "&repoName=" + repoName
+                                repoURL = "/pages/repoPage.html" + '?address=' + result + "&repoName=" + repoName
                                 repoNode.setAttribute("href", repoURL)
                                 let textNode = document.createTextNode(repoName)
                                 repoNode.appendChild(textNode)
@@ -478,10 +477,10 @@ $(window).on('load', function() {
 
 //Changing Repo Name in Navbar
 $(function() {
-    if (location.pathname == "/repoPage.html" || location.pathname == "/issues.html" || location.pathname == "/createIssue.html") {
+    if (location.pathname == "/pages/repoPage.html" || location.pathname == "/pages/issues.html" || location.pathname == "/pages/createIssue.html") {
         App.changeRepoName()
     }
-    if (location.pathname == "/repoPage.html") {
+    if (location.pathname == "/pages/repoPage.html") {
         setTimeout(App.showRepoFiles, 5000)
 
     }
