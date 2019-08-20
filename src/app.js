@@ -256,7 +256,7 @@ App = {
                     res.forEach(function(file) {
                         if (file && file.hash) {
 
-                            hashs += file.hash + "/" + input.files[filesIterator].name + "/" + input.files[filesIterator].webkitRelativePath + ","
+                            hashs += file.hash + "*" + input.files[filesIterator].name + "*" + input.files[filesIterator].webkitRelativePath + ","
                             filesIterator++
                             console.log(hashs)
                         }
@@ -303,7 +303,7 @@ App = {
         let ipfsFiles = ipfsHashs.split(',')
         console.log(ipfsFiles)
         for (let index = 0; index < ipfsFiles.length - 1; index++) {
-            let file = ipfsFiles[index].split("/")
+            let file = ipfsFiles[index].split("*")
             console.log("file hash: " + file[0])
             console.log("file name: " + file[1])
             console.log("file path: " + file[2])
