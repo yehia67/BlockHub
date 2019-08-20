@@ -298,13 +298,19 @@ App = {
     LoadRepoFiles: async(ipfsHashs) => {
         let ipfsFiles = ipfsHashs.split(',')
         console.log(ipfsFiles)
-        for (let index = 0; index < ipfsFiles.length - 1; index++) {
-            let file = ipfsFiles[index].split("*")
-            $("#repoFiles").append("<tr style='color:steelBlue;font-family:ABeeZee, sans-serif;font-size:18px;'><td onclick='App.uploadFile(" + file[0] + ")' style='cursor:pointer !important;' >" + file[1] + "</<td><td>" + file[2] + "</td>   </tr>")
-            console.log("file hash: " + file[0])
-            console.log("file name: " + file[1])
-            console.log("file path: " + file[2])
+        if (ipfsHashs.length !== 0) {
+            for (let index = 0; index < ipfsFiles.length - 1; index++) {
+                let file = ipfsFiles[index].split("*")
+                $("#repoFiles").append("<tr style='color:steelBlue;font-family:ABeeZee, sans-serif;font-size:18px;'><td onclick='App.uploadFile(" + file[0] + ")' style='cursor:pointer !important;' >" + file[1] + "</<td><td>" + file[2] + "</td>   </tr>")
+                console.log("file hash: " + file[0])
+                console.log("file name: " + file[1])
+                console.log("file path: " + file[2])
+            }
+            App.showCommits(true)
+        } else {
+            App.showCommits(false)
         }
+
     },
     uploadFile: (hash) => {
         alert(hash)
@@ -450,6 +456,16 @@ App = {
                 console.log('no repos found')
             }
         })
+    },
+    showCommits: async(boolValue) => {
+        if (boolValue) { //Show Initial Commits
+            console.log(document.getElementById('commitsDiv'))
+            document.getElementById('commitsDiv').style.display = 'block'
+            document.getElementById('noCommitBtn').style.display = 'none'
+        } else { //No Initial Commits
+            document.getElementById('commitsDiv').style.display = 'none'
+            document.getElementById('noCommitBtn').style.display = 'block'
+        }
     },
 
     testFn: async() => {}
