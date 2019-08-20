@@ -17,7 +17,6 @@ App = {
     date: [],
     changeJson: [],
     ipfsHashArr: [],
-    initialCommitHash: '',
     ipfsHash: '',
 
     load: async() => {
@@ -295,10 +294,20 @@ App = {
         const masterBranch = await $.getJSON('branch.json')
         let barnchAddress = urlParams.get('address')
         App.contracts.masterBranch = web3.eth.contract(masterBranch.abi).at(barnchAddress)
-        App.getRootCommitPromise().then(function() {
-            alert(App.initialCommitHash)
+        App.getRootCommitPromise().then(function(result) {
+            App.LoadRepoFiles(result)
         })
 
+    },
+    LoadRepoFiles: async(ipfsHashs) => {
+        let ipfsFiles = ipfsHashs.split(',')
+        console.log(ipfsFiles)
+        for (let index = 0; index < ipfsFiles.length - 1; index++) {
+            let file = ipfsFiles[index].split("/")
+            console.log("file hash: " + file[0])
+            console.log("file name: " + file[1])
+            console.log("file path: " + file[2])
+        }
     },
     getRootCommitPromise: () => {
         return new Promise(function(resolve, reject) {
@@ -309,7 +318,6 @@ App = {
                         reject(error)
                     } else {
                         resolve(response)
-                        App.initialCommitHash = response
                         console.log("hash " + response)
                     }
                 })
