@@ -73,6 +73,10 @@ App = {
 
         // Hydrate the smart contract with values from the blockchain
         App.createRepo = await App.contracts.createRepo.deployed()
+
+        if (location.pathname == "/index.html" || location.pathname == "/") {
+            App.addReposToHomePage()
+        }
     },
     ConnectedToServer: async() => {
         var commitsArray = []
@@ -398,6 +402,30 @@ App = {
 
     goToIssue: async() => {
         window.location.href = 'issues.html' + '?' + 'repoName' + '=' + $('#repoNameNavBar').text()
+    },
+
+    addReposToHomePage: async() => {
+        App.createRepo.returnRepos().then(function(result) {
+            repos = result
+            if (repos.length !== 0) {
+                for (let i in repos) {
+                    App.createRepo.returnRepoName(repos[i]).then(function(result) {
+                        let repoNode = document.createElement("a")
+                        repoNode.setAttribute("id", "repoNameLink");
+                        let repoURL = 'repoPage.html' + '?' + 'repoName' + '=' + result
+                        repoNode.setAttribute("href", repoURL)
+                        let textNode = document.createTextNode(result)
+                        repoNode.appendChild(textNode)
+                        document.getElementById('reposDiv').appendChild(repoNode)
+                        let breakNode = document.createElement("br")
+                        repoNode.appendChild(breakNode)
+                        document.getElementById('reposDiv').appendChild(breakNode)
+                    })
+                }
+            } else {
+                console.log('no repos found')
+            }
+        })
     },
 
     testFn: async() => {}

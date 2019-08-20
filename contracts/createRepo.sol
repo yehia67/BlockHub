@@ -14,13 +14,19 @@ contract createRepo{
         emit repoCreated(_repoName,address(Repo) ,_repoDescription, msg.sender, now);
         return(address(Repo));
     }
-    function returnRepoNames() view public returns ( repo[] memory) {
+    function returnRepos() view public returns ( repo[] memory) {
         return repos;
     }
-    
+
     function returnRepoAddress(string memory _repoName) public view returns (address){
         return repoMap[_repoName];
     }
+
+    function returnRepoName(address _repoAddress) public view returns (string memory){
+        repo _tempRepo = repo(_repoAddress);
+        return _tempRepo.getRepoName();
+    }
+
     function getRootCommit(string memory repoName) public view  returns (string memory) {
           repo Repo = repo(repoMap[repoName]);
           return Repo.getMasterRootCommit();

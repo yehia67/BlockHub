@@ -41,6 +41,9 @@ contract repo{
         //require(msg.sender == repoOwner);
         _;
     }
+    function getRepoName() public view returns (string memory){
+        return repoName;
+    }
 
     function getMasterBranch() public view returns (address) {
         return branchesMap['master'];
