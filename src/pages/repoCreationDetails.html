@@ -20,7 +20,7 @@
                 </div>
             </div>
         </nav>
-        <div class="createRepoInputForm" style="height:363px;">
+        <div class="createRepoInputForm" style="height:363px;" id="createRepoForm">
             <div class="form-group">
                 <div class="makeFirstCommitDiv"><label class="uploadLbl">Upload/Make your first commit:&nbsp;</label><input type="file" id="uploadInput" multiple directory webkitdirectory mozdirectory required></div>
             </div>
@@ -34,7 +34,10 @@
                 <label class="uploadLbl gitIncludeLabel">Don't Forget to include your .git directory</label>
                 <div class=" uploadCommitFormBtn ">
                     <button class="btn btn-primary float-right uploadCommitBtn" role="button" onclick="App.initialCommit()" style="width:199px; ">Upload / Commit</a>
+                </div>
             </div>
+        </div>
+        <div id="loader" style="display:none"></div>
     </div>
     <div id="hash"></div>
     <div id="content"></div>
