@@ -234,6 +234,8 @@ App = {
         App.contracts.masterBranch = web3.eth.contract(masterBranch.abi).at(branchAddress)
     },
     initialCommit: async() => {
+        document.getElementById('createRepoForm').style.display = 'none'
+        document.getElementById('loader').style.display = 'block'
         let input = document.getElementById("uploadInput")
         let msg = $("#initialCommitMsg").val()
         console.log(input.files)
