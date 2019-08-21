@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<div>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BlockHub</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ABeeZee">
+        <link rel="stylesheet" href="../assets/css/styles.css">
+    </head>
+
+    <body>
+        <nav class="navbar navbar-light navbar-expand-md" style="background-color:steelBlue;">
+            <div class="container-fluid"><a class="navbar-brand" style="color:rgba(255,255,255,0.9);">Repo Creation Details</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navcol-1">
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item" role="presentation"><a class="nav-link active" href="../index.html" style="color:rgba(255,255,255,0.9);">Dashboard</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="createRepoInputForm" style="height:363px;" id="createRepoForm">
+            <div class="form-group">
+                <div class="makeFirstCommitDiv"><label class="uploadLbl">Upload/Make your first commit:&nbsp;</label><input type="file" id="uploadInput" multiple directory webkitdirectory mozdirectory required></div>
+            </div>
+            <div class="form-group">
+                <div class="chooseModules"><label class="uploadLbl">Choose directories not to be included (ex. node modules):&nbsp;</label><input type="text" id="notIncludeModulesText"></div>
+            </div>
+            <div class="form-group">
+                <div class="initMsg form-inline"><label class="uploadLbl initCommitLbl">Initial Commit Message (Required):</label><input class="form-control initCommit" id="initialCommitMsg" type="text" style="height:108px;width:292px;"></div>
+            </div>
+            <div class="form-group">
+                <label class="uploadLbl gitIncludeLabel">Don't Forget to include your .git directory</label>
+                <div class=" uploadCommitFormBtn ">
+                    <button class="btn btn-primary float-right uploadCommitBtn" role="button" onclick="App.initialCommit()" style="width:199px; ">Upload / Commit</a>
+                </div>
+            </div>
+        </div>
+        <div id="loader" style="display:none"></div>
+    </div>
+    <div id="hash"></div>
+    <div id="content"></div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js "></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../vendor/truffle-contract/dist/truffle-contract.js"></script>
+    <!--Install Buffer-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/BrowserFS/2.0.0/browserfs.min.js" integrity="sha256-9vfol9kbQ9KEqShl+2ejcpsESl8uQAI2K81vm1EVkRo=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        // Installs globals onto window:
+        // * Buffer
+        // * require (monkey-patches if already defined)
+        // * process
+        // You can pass in an arbitrary object if you do not wish to pollute
+        // the global namespace.
+        BrowserFS.install(window);
+        // Configures BrowserFS to use the LocalStorage file system.
+        BrowserFS.configure({
+            fs: "LocalStorage"
+        }, function(e) {
+            if (e) {
+                // An error happened!
+                throw e;
+            }
+            // Otherwise, BrowserFS is ready-to-use!
+        });
+    </script>
+
+    <script src="https://unpkg.com/ipfs-api/dist/index.min.js "></script>
+    <script src="../modules/ipfs-api/dist/index.js "></script>
+    <script src="../app.js"></script>
+</body>
+
+</div>

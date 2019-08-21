@@ -5,6 +5,8 @@ import "./commit.sol";
 contract branch{
     string branchName;
     mapping(string => address) commitMap; //CommitHash => contract
+    mapping ( string => string) changes;// CommitHash => IPFS hash
+
     commit[] commitArray;
 
     constructor(string memory _branchName, commit[] memory _commitArray) public{
@@ -20,28 +22,27 @@ contract branch{
     function getCommitsArray() public view returns (commit[] memory) {
         return commitArray;
     }
-    event commitCreated(address commitCreator, string msg, string _commitHash);
+     function getCommitsArrayLength() public view returns (uint) {
+        return commitArray.length;
+    }
+    function getRootCommit() view public returns (string  memory) {
+        return changes["root"]; 
+    }
+   function pushCommit(string memory _authorName,string memory _commitHash,
+  string memory  _date, string memory _message,string memory _ipfsChange) public{
+      
+      commit Commit = new commit(_authorName,_commitHash,_date,_message);
+      changes[_commitHash] =_ipfsChange;
+      commitMap[_commitHash] = address(Commit);
+      emit commitCreated(msg.sender,_authorName,_message,_commitHash);
+  }
+    event commitCreated(address commitCreator, string name,string msg, string _commitHash);
 
     modifier onlyPermitted(){
         //require(msg.sender == owner);
         _;
     }
-    function parseCommit(address _authorAddress,string memory _authorName,string memory _commitHash, string memory _date,
-    string memory _msg, string memory _change ) public onlyPermitted{
-        commit Commit = new commit(_authorAddress,_authorName, _commitHash, _date, _msg, _change);
-        commitMap[_commitHash] = address(Commit);
-        commitArray.push(commit(commitMap[_commitHash]));
-        emit commitCreated(_authorAddress, _msg, _commitHash);
-    }
-
-    function pushCommit(string memory _authorName,string memory _commitHash, string memory _date,
-    string memory _msg, string memory _change ) public onlyPermitted{
-        commit Commit = new commit(msg.sender,_authorName, _commitHash, _date, _msg, _change);
-        commitMap[_commitHash] = address(Commit);
-        commitArray.push(commit(commitMap[_commitHash]));
-        emit commitCreated(msg.sender, _msg, _commitHash);
-    }
-
+  
 
     function getLastCommitHash() public view returns(string memory) {
         return commitArray[commitArray.length-1].getHash();

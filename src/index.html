@@ -6,10 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Hello Box</title>
+    <title>BlockHub</title>
 
     <!-- Bootstrap -->
-    <link href="vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ABeeZee">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <!-- <link href="vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"> -->
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -24,25 +27,76 @@
 <body>
 
     <!--Start YOUR Front End code from here-->
-    <div class="app">
+    <nav class="navbar navbar-light navbar-expand-md" style="background-color:steelBlue;">
+        <div class="container-fluid"><a class="navbar-brand" style="color:rgb(255,255,255);">Dashboard</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1"></div>
+        </div>
+    </nav>
+    <div id="blockHub" style="/*background-color:lightCyan;*/">
+        <div class="jumbotron introJumbotron">
+            <h1>BlockHub</h1>
+            <p>BlockHub is a decentralized version control system</p>
+        </div>
+    </div>
+    <div class="searchInputDiv">
+        <input type="search" placeholder="Search for a Repo.." id="searchBox" class="searchRepoBox" style="height:41px" />
+        <button class="btn btn-primary searchBtn" type="submit" onclick="App.viewRepo()" style="width:125px;margin-top:-5%;margin-left:80%;;height:41px;color:rgb(255,255,255);">Search</button>
+    </div>
+    <div class="float-left" id="timelineDiv"><textarea id="TimelineArea" style="height:48px;width:362px;">Timeline</textarea>
+        <div id="issuesArea">
+            <div class="issueDiv"><label class="issueLabel">Mahmoud Khalil pushed to BlockHub</br>2 commits to dev</label></div>
+            <div class="issueDiv"><label class="issueLabel">Yehia Tarek pushed to BlockHub</br>1 commit to master</label></div>
+            <div class="issueDiv"><label class="issueLabel">Mostafa Hazem created a repository BlockHub</br>2 commits to dev</label></div>
+            <div class="issueDiv"><label class="issueLabel">Mostafa Hazem created an issue in BlockHub</br>strings don't get saved</label></div>
+            <div class="issueDiv"><label class="issueLabel">Yehia Tarek commented on an issue in BlockHub</br>fixed strings bug</label></div>
+        </div>
+    </div>
+    <div class="float-right" id="reposDiv"><textarea id="reposArea" style="height:48px;width:50%;">Repositories</textarea><a class="btn btn-primary float-right" role="button" href="pages/createRepo.html" style="height:40px;width:148px;padding:8px;margin:1px;">New Repository +</a>
+        </br>
+
+    </div>
+    <!-- <div class="app">
         <form class="p-5">
             <div class="m-5 form-group">
                 <h1 class="text-center">Hello Box</h1>
-                <input type="text" class="form-control" placeholder="Set Any String To Be Saved On Etherum Blockchian" id="setValue">
+                <input type="file" class="form-control" placeholder="Set Any String To Be Saved On Etherum Blockchian" id="setValue">
                 <button type="button" onclick="App.getvalue()" class="btn btn-primary pull-left mt-3">Get Value</button>
                 <button type="button" onclick="App.setValue()" class="btn btn-primary float-right mt-3">Set Value</button>
             </div>
             <h1 class="text-center" id="getValue"></h1>
         </form>
-    </div>
+    </div> -->
 
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="vendor/truffle-contract/dist/truffle-contract.js"></script>
+    <!--Install Buffer-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/BrowserFS/2.0.0/browserfs.min.js" integrity="sha256-9vfol9kbQ9KEqShl+2ejcpsESl8uQAI2K81vm1EVkRo=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        // Installs globals onto window:
+        // * Buffer
+        // * require (monkey-patches if already defined)
+        // * process
+        // You can pass in an arbitrary object if you do not wish to pollute
+        // the global namespace.
+        BrowserFS.install(window);
+        // Configures BrowserFS to use the LocalStorage file system.
+        BrowserFS.configure({
+            fs: "LocalStorage"
+        }, function(e) {
+            if (e) {
+                // An error happened!
+                throw e;
+            }
+            // Otherwise, BrowserFS is ready-to-use!
+        });
+    </script>
+    <script src="https://unpkg.com/ipfs-api/dist/index.min.js"></script>
     <script src="./modules/ipfs-api/dist/index.js"></script>
     <script src="app.js"></script>
 </body>

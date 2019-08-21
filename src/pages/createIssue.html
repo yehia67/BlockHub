@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlockHub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ABeeZee">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-light navbar-expand-md">
+        <div class="container-fluid">
+            <a class="navbar-brand" id="repoNameNavBar" style="color:rgba(255,255,255,0.9);"></a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="../index.html" style="color:rgba(255,255,255,0.9);">Dashboard</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div id="creatIssueDiv">
+        <div class="repoInput" style="font-size:16px;"><label style="width:140px;">Issue Name:</label><input type="text" id="issueName"></div>
+        <div class="repoInput"><label style="width:140px;">Description:<br></label><input type="text" id="issueDescription" style="height:107px;"></div>
+    </div><button class="btn btn-primary createIssueBtn " type="submit " onclick="App.createIssue()" style="width:194px;margin-left:48%;margin-top:15px; ">Create Issue</button>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js "></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../vendor/truffle-contract/dist/truffle-contract.js"></script>
+
+    <script src="https://unpkg.com/ipfs-api/dist/index.min.js "></script>
+    <script src="../modules/ipfs-api/dist/index.js "></script>
+    <script src="../app.js"></script>
+</body>
+
+</html>

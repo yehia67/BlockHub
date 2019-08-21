@@ -1,0 +1,486 @@
+#blockHub {
+    text-align: center;
+}
+
+body {
+    font-family: sans-serif;
+    background-color: lightcyan;
+}
+
+#timelineDiv {
+    width: 48%;
+    padding-right: 1%;
+}
+
+.float-right {
+    width: 50%;
+}
+
+#TimelineArea {
+    padding-left: 25px;
+    background-color: lightgrey;
+}
+
+#reposArea {
+    background-color: lightgrey;
+}
+
+#TimelineArea {
+    font-size: 1.5em;
+}
+
+#reposArea {
+    font-size: 1.5em;
+    padding-left: 25px;
+}
+
+#timelineDiv {
+    border-right: solid steelBlue;
+}
+
+.navbar.navbar-light.navbar-expand-md {
+    background-color: steelBlue;
+}
+
+.navbar-light .navbar-brand {
+    color: white;
+}
+
+#createRepoDiv {
+    margin-left: 25px;
+    margin-top: 50px;
+}
+
+label {
+    padding-left: 5px;
+}
+
+label {
+    /*width:40%;*/
+}
+
+.issueLabel {
+    width: 100%;
+}
+
+.issueText {
+    width: 100%;
+    padding-left: 5px;
+    /*border:round;*/
+    border-radius: 10px;
+}
+
+#reposArea {
+    border: none;
+}
+
+#TimelineArea {
+    border: none;
+}
+
+.btn:not(:disabled):not(.disabled) {
+    /*margin-top:10px;*/
+}
+
+.reposLink {
+    width: 100%;
+    padding: 5px;
+}
+
+.navbar.navbar-light.navbar-expand-md.RepoNav {
+    /*background-color:lightgrey;*/
+}
+
+.dropdown,
+.dropup {
+    /*width:10px;*/
+}
+
+.btn.btn-primary.float-left.pullRequestBtn {
+    margin-left: 25px;
+}
+
+.btn.btn-primary.dropdown-toggle.float-right {
+    width: 20%;
+}
+
+.RepoNavBar {}
+
+.codeDiv {
+    margin-top: 20px;
+}
+
+.latestCommittext {
+    background-color: inherit;
+}
+
+.latestCommittext {
+    width: 50%;
+}
+
+.latestCommitTime {
+    background-color: inherit;
+    width: 50%;
+    text-align: right;
+}
+
+.latestCommitTime {
+    border: none;
+}
+
+.latestCommittext {
+    border: none;
+}
+
+.foldersAndFiles {
+    width: 100%;
+    height: 500px;
+}
+
+#blockHub {
+    height: 128px;
+}
+
+.jumbotron.introJumbotron {
+    padding: 1.5rem;
+}
+
+.navbar.navbar-light.navbar-expand-md {}
+
+#blockHub {
+    background-color: lightCyan;
+}
+
+.jumbotron.introJumbotron {
+    background-color: lightCyan;
+}
+
+div {}
+
+.errorHeaderDiv {
+    margin-top: 10%;
+    text-align: center;
+}
+
+.errorHeader {
+    text-align: center;
+}
+
+.searchInputDiv {
+    background-color: lightCyan;
+    margin-bottom: 20px;
+}
+
+#timelineDiv {
+    background-color: lightCyan;
+}
+
+#TimelineArea {
+    background-color: inherit;
+}
+
+body {
+    background-color: lightCyan;
+}
+
+#reposArea {
+    background-color: inherit;
+}
+
+.btn:not(:disabled):not(.disabled) {
+    margin-right: initi;
+    background-color: steelBlue;
+}
+
+.btn:not(:disabled):not(.disabled) {
+    text-align: center;
+}
+
+#searchBox {
+    width: 50%;
+    height: 50px;
+    margin: 0px;
+    margin-left: 25%;
+    margin-right: 25%;
+    border: none;
+}
+
+.repoInput {
+    text-align: center;
+    font-family: sans-serif;
+}
+
+.repoInputDescriptionLabel {
+    margin-top: -5%;
+}
+
+.btn:not(:disabled):not(.disabled) {
+    /*position:center;*/
+}
+
+.btn:not(:disabled):not(.disabled) {
+    margin-left: 45%;
+    margin-right: 40%;
+}
+
+.btn:not(:disabled):not(.disabled) {
+    background-color: steelblue;
+}
+
+.makeFirstCommitDiv {
+    margin-left: 1%;
+}
+
+.Choose.Modules {
+    /*margin-left:15px;*/
+}
+
+.chooseModules {
+    margin-left: -1%
+}
+
+form {}
+
+.repoInputLabel {
+    margin-top: -30%;
+}
+
+.createRepoInputForm {
+    margin-left: 15px;
+    margin-top: 70px;
+}
+
+.uploadCommitLbl {
+    width: 40%;
+}
+
+.uploadModulesLst {
+    width: 40%;
+}
+
+.uploadLbl {
+    width: 40%;
+}
+
+.createRepoInputForm {
+    text-align: center;
+}
+
+.form-control.initCommit {}
+
+.initMsg {
+    text-align: center;
+}
+
+.gitIncludeLabel {
+    margin-left: -19%;
+}
+
+.form-inline .form-control {
+    /*margin-left:120px;*/
+}
+
+.uploadLbl.initCommitLbl {
+    margin-left: 19%;
+}
+
+.btn:not(:disabled):not(.disabled) {
+    background-color: steelBlue;
+}
+
+#notIncludeModulesText {
+    margin-left: -5%;
+}
+
+#uploadInput {
+    margin-left: 2%;
+}
+
+.RepoNavBar {
+    background-color: steelBlue;
+}
+
+.navbar.navbar-light.navbar-expand-md.RepoNav {
+    background-color: steelBlue;
+}
+
+.navbar.navbar-light.navbar-expand-md.RepoNav {}
+
+.btn-group,
+.btn-group-vertical {
+    margin-top: 10px;
+}
+
+.btn-group,
+.btn-group-vertical {}
+
+.btnDiv {
+    /*width:initial;*/
+}
+
+.btnDiv {
+    /*width:20%;*/
+}
+
+.btn:not(:disabled):not(.disabled) {}
+
+.cloneBtn {
+    margin-right: 50px;
+}
+
+#creatIssueDiv {
+    margin-top: 30px;
+}
+
+#issuesArea {
+    padding-left: 5px;
+}
+
+.issueDiv {
+    border-bottom: solid steelblue 1px;
+}
+
+p {}
+
+.issueTitleDiv {
+    margin-left: 15px;
+    margin-top: 15px;
+}
+
+.issueTitle {
+    font-size: 36px;
+    font-family: ABeeZee, sans-serif;
+}
+
+.issueCreator {
+    margin-top: -10px;
+}
+
+.issueCreatorLabel {
+    margin-left: 10px;
+}
+
+.card.issueCard {
+    border-radius: 50px;
+}
+
+.card-body.issueCardBody {
+    border-radius: 25px;
+}
+
+.card {
+    background-color: inherit;
+    border: none;
+}
+
+.card-body.issueCommentCardBody {
+    border-radius: 25px;
+}
+
+.btn.btn-primary.float-right.IssuePullRequestBtn {
+    background-color: lightCyan;
+}
+
+.issueCommentTextArea {
+    width: 95%;
+    /*margin-left:20px;*/
+    /*margin-top:20px;*/
+}
+
+.myCodeTable {
+    width: 150%;
+}
+
+.newCommentDiv {
+    margin-top: 25px;
+}
+
+.float-left.uploadCodeLabel {
+    margin-left: 2px;
+}
+
+.uploadCodeInput {}
+
+.float-left.uploadCodeLabel {
+    width: 30%;
+}
+
+.btn:not(:disabled):not(.disabled) {}
+
+.float-right.btnDiv.cloneBtnDiv {
+    /*margin-right:80px;*/
+}
+
+.float-left.btnDiv.branchBtnDiv {
+    margin-left: -35px;
+}
+
+.btn.btn-primary.float-right.postCommentBtn {
+    width: 100px;
+}
+
+.btn:not(:disabled):not(.disabled) {}
+
+.cloneBtn {}
+
+.float-right.btnDiv.cloneBtnDiv {
+    margin-right: -12%;
+}
+
+.navbar-expand-md .navbar-nav {
+    margin-left: -3%;
+}
+
+.uploadCommitFormBtn {
+    margin-right: -27%;
+    margin-top: -2%;
+}
+
+.card-title {
+    width: 50%;
+}
+
+#loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 1;
+    width: 150px;
+    height: 150px;
+    margin: -75px 0 0 -75px;
+    border: 16px solid white;
+    border-radius: 50%;
+    border-top: 16px solid steelblue;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.animate-bottom {
+    position: relative;
+    -webkit-animation-name: animatebottom;
+    -webkit-animation-duration: 1s;
+    animation-name: animatebottom;
+    animation-duration: 1s
+}
+
+@keyframes animatebottom {
+    from {
+        bottom: -100px;
+        opacity: 0
+    }
+    to {
+        bottom: 0;
+        opacity: 1
+    }
+}

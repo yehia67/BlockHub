@@ -6,8 +6,9 @@ module.exports = {
     networks: {
         development: {
             host: 'localhost',
-            port: 8545,
+            port: 9545,
             network_id: '*', // eslint-disable-line camelcase
+
         },
         ganache: {
             host: 'localhost',
@@ -29,7 +30,7 @@ module.exports = {
     solc: {
         optimizer: {
             enabled: true,
-            runs: 200
+            runs: 100000
         }
     }
 }

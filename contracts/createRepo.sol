@@ -4,11 +4,36 @@ import "./repo.sol";
 
 contract createRepo{
     repo[] repos;
-    //map
-    event repoCreated(string _repoName, string _repoDescription, address _repoOwner, uint _creationDate);
+    mapping (string => address) repoMap;
+    event repoCreated(string _repoName,address repoAddress, string _repoDescription, address _repoOwner, uint _creationDate);
 
-    function createNewRepo(string memory _repoName, string memory _repoDescription, address _repoOwner) public{
-        repos.push(new repo(_repoName, _repoDescription));
-        emit repoCreated(_repoName, _repoDescription, _repoOwner, now);
+    function createNewRepo(string memory _repoName, string memory _repoDescription) public returns(address){
+        repo Repo = new repo(_repoName, _repoDescription);
+        repoMap[_repoName] = address(Repo);
+        repos.push(Repo);
+        emit repoCreated(_repoName,address(Repo) ,_repoDescription, msg.sender, now);
+        return(address(Repo));
+    }
+    function returnRepos() view public returns ( repo[] memory) {
+        return repos;
+    }
+
+    function returnRepoAddress(string memory _repoName) public view returns (address){
+        return repoMap[_repoName];
+    }
+
+    function returnRepoName(address _repoAddress) public view returns (string memory){
+        repo _tempRepo = repo(_repoAddress);
+        return _tempRepo.getRepoName();
+    }
+
+    function getRepoMasterBranch(address _repoAddress) public view returns (address){
+        repo _tempRepo = repo(_repoAddress);
+        return _tempRepo.getMasterBranch();
+    }
+
+    function getRootCommit(string memory repoName) public view  returns (string memory) {
+          repo Repo = repo(repoMap[repoName]);
+          return Repo.getMasterRootCommit();
     }
 }

@@ -6,7 +6,7 @@ import "./issue.sol";
 contract repo{
     string repoName;
     string repoDescription;
-    address repoOwner;
+    address payable repoOwner;
     uint creationDate;
     address[] collaborators;
     branch[] branches;
@@ -24,14 +24,14 @@ contract repo{
         branch masterBranch = new branch("master", _commitArray);
         branchesMap["master"] = address(masterBranch);
         branches.push(masterBranch);
-        emit branchCreated(repoName, "master");
+        emit branchCreated(repoName,address(masterBranch), "master");
     }
 
     event collaboratorAdded(address collaborator, address repoAddress, string repoName);
     event collaboratorRemoved(address collaborator, address repoAddress, string repoName);
-    event branchCreated(string repoName, string branchName);
-    event issueCreated(string issueLabel, string issueMessage);
-
+    event branchCreated(string repoName,address branchAddress ,string branchName);
+    event issueCreated(address issueCreator, string issueName);
+    
     modifier onlyOwner(){
         require(collaboratorsMap[msg.sender] == true);
         _;
@@ -41,59 +41,38 @@ contract repo{
         //require(msg.sender == repoOwner);
         _;
     }
+    function getRepoName() public view returns (string memory){
+        return repoName;
+    }
 
-    function addColaborator (address _collaborator) onlyOwner public{
+    function getMasterBranch() public view returns (address) {
+        return branchesMap['master'];
+    }
+
+    function addColaborator (address _collaborator) public onlyOwner{
         collaborators.push(_collaborator);
         collaboratorsMap[_collaborator] = true;
         emit collaboratorAdded(_collaborator, address(this), repoName);
     }
 
-    function removeCollaborator(address _collaborator) onlyOwner public{
+    function removeCollaborator(address _collaborator) public onlyOwner{
         collaboratorsMap[_collaborator] = false;
         emit collaboratorRemoved(_collaborator, address(this), repoName);
     }
-
-    function makeBranch(string memory _branchName) onlyPermitted public{
+    function getMasterRootCommit() view public returns (string memory) {
+        branch Branch = branch(branchesMap["master"]);
+        return Branch.getRootCommit(); 
+    }
+    function makeBranch(string memory _branchName) public onlyPermitted{
         branch Branch = new branch(_branchName, branches[0].getCommitsArray());
         branchesMap[_branchName] = address(Branch);
         branches.push(branch(branchesMap[_branchName]));
-        emit branchCreated(repoName, _branchName);
-    }
-    function doMerge(commit[] memory originalBranhceCommits,commit[] memory mergedBranhceCommits,branch  mergedBranch) private returns(uint8) {
-            uint  diff = originalBranhceCommits.length -  mergedBranhceCommits.length;
-             if(originalBranhceCommits[originalBranhceCommits.length-1-diff] != mergedBranhceCommits[mergedBranhceCommits.length-1] )
-             {
-                return 99;
-             }
-             else{
-                uint  counter = mergedBranhceCommits.length;
-                for(uint i = 0; i < diff;i++ ){
-                    mergedBranch.parseCommit(originalBranhceCommits[counter].getAuthorAddress(),originalBranhceCommits[counter].getAuthoreName(),
-                    originalBranhceCommits[counter].getDate(), originalBranhceCommits[counter].getHash(),originalBranhceCommits[counter].getMessage(),originalBranhceCommits[counter].getChange());
-                    counter++;
-                }
-                
-                return 1;
-             }
-    }
-    function merge(string memory _firstBranchName,string memory _secondBranchName) public returns(uint8) {
-        branch firstBranche = branch(branchesMap[_firstBranchName]);
-        branch secondBranche = branch(branchesMap[_secondBranchName]);
-        commit[] memory firstBranchCommits = firstBranche.getCommitsArray();
-        commit[] memory secondBranchCommits = secondBranche.getCommitsArray();
-        if(keccak256(abi.encodePacked((firstBranchCommits[firstBranchCommits.length -1].getHash())))  == keccak256(abi.encodePacked((secondBranchCommits[secondBranchCommits.length -1].getHash())))){
-            return 0;
-        }
-        else if(secondBranchCommits.length  > firstBranchCommits.length){
-             return doMerge(secondBranchCommits,firstBranchCommits,firstBranche);
-        }
-        else{
-            return doMerge(firstBranchCommits,secondBranchCommits,secondBranche);
-        }
+        emit branchCreated(repoName,address(Branch),_branchName);
     }
 
-    function makeIssue(string memory _issueLabel, string memory _issueMessage) public{
-        issues.push(new issue(_issueLabel, _issueMessage));
-        emit issueCreated(_issueLabel, _issueMessage);
+
+    function makeIssue(string memory _issueName, string memory _issueDescription) public{
+        issues.push(new issue(_issueName, _issueDescription));
+        emit issueCreated(msg.sender, _issueName);
     }
 }
