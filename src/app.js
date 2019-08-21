@@ -300,14 +300,15 @@ App = {
         console.log(ipfsFiles)
         for (let index = 0; index < ipfsFiles.length - 1; index++) {
             let file = ipfsFiles[index].split("*")
-            $("#repoFiles").append("<tr style='color:steelBlue;font-family:ABeeZee, sans-serif;font-size:18px;'><td onclick='App.uploadFile(" + file[0] + ")' style='cursor:pointer !important;' >" + file[1] + "</<td><td>" + file[2] + "</td>   </tr>")
+            $("#repoFiles").append("<tr style='color:steelBlue;font-family:ABeeZee, sans-serif;font-size:18px;'><td onclick=" + "App.uploadFile(" + "'" + file[0] + "'" + ")" + " style='cursor:pointer !important;' >" + file[1] + "</<td><td>" + file[2] + "</td>   </tr>")
             console.log("file hash: " + file[0])
             console.log("file name: " + file[1])
             console.log("file path: " + file[2])
         }
     },
     uploadFile: (hash) => {
-        alert(hash)
+        $("tr").hide()
+        App.display("filContent", hash)
     },
     getRootCommitPromise: () => {
         return new Promise(function(resolve, reject) {
@@ -323,14 +324,12 @@ App = {
                 })
         });
     },
-    display: (hash) => {
+    display: (diplayID, hash) => {
         ipfs.cat(hash, function(err, res) {
             if (err || !res) {
                 return console.error('ipfs cat error', err, res)
             }
-
-            document.getElementById('hash').innerText = hash
-            document.getElementById('content').innerText = res.toString()
+            document.getElementById(diplayID).innerText = res.toString()
         })
     },
     uploadIPFS: (file) => {
