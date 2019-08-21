@@ -300,7 +300,7 @@ App = {
         if (ipfsHashs.length !== 0) {
             for (let index = 0; index < ipfsFiles.length - 1; index++) {
                 let file = ipfsFiles[index].split("*")
-                $("#repoFiles").append("<tr style='color:steelBlue;font-family:ABeeZee, sans-serif;font-size:18px;'><td onclick='App.uploadFile(" + file[0] + ")' style='cursor:pointer !important;' >" + file[1] + "</<td><td>" + file[2] + "</td>   </tr>")
+                $("#repoFiles").append("<tr style='color:steelBlue;font-family:ABeeZee, sans-serif;font-size:18px;'><td" + " onclick= ' App.uploadFile(" + '"' + file[0] + '"' + ")'" + "style='cursor:pointer !important;' >" + file[1] + "</<td><td>" + file[2] + "</td>   </tr>")
                 console.log("file hash: " + file[0])
                 console.log("file name: " + file[1])
                 console.log("file path: " + file[2])
@@ -312,7 +312,7 @@ App = {
 
     },
     uploadFile: (hash) => {
-        $("tr").hide()
+        $("table").hide()
         App.display("filContent", hash)
     },
     getRootCommitPromise: () => {
@@ -334,7 +334,8 @@ App = {
             if (err || !res) {
                 return console.error('ipfs cat error', err, res)
             }
-            document.getElementById(diplayID).innerText = res.toString()
+            console.log(res.toString())
+            $("#" + diplayID).html("<p>" + res.toString() + "</p>")
         })
     },
     uploadIPFS: (file) => {
