@@ -302,7 +302,7 @@ App = {
         if (ipfsHashs.length !== 0) {
             for (let index = 0; index < ipfsFiles.length - 1; index++) {
                 let file = ipfsFiles[index].split("*")
-                $("#repoFiles").append("<tr style='color:steelBlue;font-family:ABeeZee, sans-serif;font-size:18px;'><td" + " onclick= ' App.uploadFile(" + '"' + file[0] + '"' + ")'" + "style='cursor:pointer !important;' >" + file[1] + "</<td><td>" + file[2] + "</td>   </tr>")
+                $("#repoFiles").append("<tr style='color:steelBlue;width:80%;font-family:ABeeZee, sans-serif;font-size:18px;'><td" + " onclick= ' App.uploadFile(" + '"' + file[0] + '"' + ")'" + "style='width:40%;cursor:pointer !important;' >" + file[1] + "</<td><td>" + file[2] + "</td>   </tr>")
                 console.log("file hash: " + file[0])
                 console.log("file name: " + file[1])
                 console.log("file path: " + file[2])
@@ -474,6 +474,11 @@ App = {
             document.getElementById('commitsDiv').style.display = 'none'
             document.getElementById('noCommitBtn').style.display = 'block'
         }
+    },
+
+    goToInitialCommitPage: async() => {
+        let urlParams = new URLSearchParams(location.search)
+        window.location.href = "/pages/repoCreationDetails.html" + '?address=' + urlParams.get('address') + "&repoName=" + urlParams.get('repoName')
     },
 
     testFn: async() => {}
