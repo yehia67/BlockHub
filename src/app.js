@@ -24,6 +24,7 @@ App = {
         await App.loadAccount()
         await App.loadContract()
         await App.ConnectedToServer()
+        App.testSocket()
     },
 
     // https://medium.com/metamask/https-medium-com-metamask-breaking-change-injecting-web3-7722797916a8
@@ -143,24 +144,42 @@ App = {
             })
         });
     },
+
     loadMasterBranch: async() => {
         const masterBranch = await $.getJSON('../branch.json')
         App.contracts.masterBranch = web3.eth.contract(masterBranch.abi).at(App.repoBranchMasterAdress)
         console.log(App.repoBranchMasterAdress)
         window.location.href = "/pages/repoCreationDetails.html" + '?address=' + App.repoBranchMasterAdress + "&repoName=" + $('#repoNameText').val()
     },
-    pushCommits: async() => {
-        App.checkLengthPromise()
-        for (let j = 0; j < App.hash.length; j++) {
-            ipfs.add([Buffer.from(App.changeJson[j])], function(err, res) {
-                if (err || !res) {
-                    return console.error('ipfs add error', err, res)
-                } else {
-                    console.log(App.author[j])
-                    App.makeCommitPromise(App.author[j], App.hash[j], App.date[j], App.message[j], res[0].hash)
-                }
-            })
+    testSocket: () => {
+        /*  var socket = io.connect('Access-Control-Allow-Origin:http://127.0.0.1:5000/');
+         // this is a callback that triggers when the "my response" event is emitted by the server.
+         socket.on('my response', function(msg) {
+             alert("my response event")
+         });
+         //example of triggering an event on click of a form submit button
+         $('form#emit').submit(function(event) {
+             socket.emit('my event', { data: $('#emit_data').val() });
+             alert("my event emissions")
+         }); */
+        var eventSource = new EventSource("http://127.0.0.1:5000/stream")
+        eventSource.onmessage = function(e) {
+            alert(e.data)
         }
+    },
+    pushCommits: async() => {
+        let urlParams = new URLSearchParams(location.search)
+        let branchAddress = urlParams.get('address')
+        const masterBranch = await $.getJSON('../branch.json')
+        App.contracts.masterBranch = web3.eth.contract(masterBranch.abi).at(branchAddress)
+        let x = App.change[3].addedFiles
+        console.log("--------------------------------------------------------------------------------------------------")
+        console.log(x)
+            //newFilesHash = returnIpfsHashForNewFiles()
+
+    },
+    returnIpfsHashForNewFiles: (fileDirectory) => {
+
     },
     checkLengthPromise: async() => {
         return new Promise(function(resolve, reject) {
@@ -227,12 +246,7 @@ App = {
 
         })
     },
-    branchInit: async() => {
-        const masterBranch = await $.getJSON('../branch.json')
-        let urlParams = new URLSearchParams(location.search)
-        let branchAddress = urlParams.get('address')
-        App.contracts.masterBranch = web3.eth.contract(masterBranch.abi).at(branchAddress)
-    },
+
     initialCommit: async() => {
         document.getElementById('createRepoForm').style.display = 'none'
         document.getElementById('loader').style.display = 'block'
@@ -272,13 +286,7 @@ App = {
         }, 5000)
     },
 
-    CommitAndRedirectToRepo: (msg, hashs) => {
-        let date = new Date().toLocaleDateString("en", { year: "numeric", day: "2-digit", month: "2-digit" })
-        alert("mn gowaa " + hashs)
-        App.makeCommitPromise("owner", "root", date, msg, hashs)
-        App.GoToRepoPage()
 
-    },
 
     goToRepoPage: async() => {
         let urlParams = new URLSearchParams(location.search)
@@ -294,6 +302,7 @@ App = {
         App.getRootCommitPromise().then(function(result) {
             App.LoadRepoFiles(result)
         })
+        App.pushCommits()
 
     },
     LoadRepoFiles: async(ipfsHashs) => {
@@ -303,9 +312,6 @@ App = {
             for (let index = 0; index < ipfsFiles.length - 1; index++) {
                 let file = ipfsFiles[index].split("*")
                 $("#repoFiles").append("<tr style='color:steelBlue;font-family:ABeeZee, sans-serif;font-size:18px;'><td" + " onclick= ' App.uploadFile(" + '"' + file[0] + '"' + ")'" + "style='cursor:pointer !important;' >" + file[1] + "</<td><td>" + file[2] + "</td>   </tr>")
-                console.log("file hash: " + file[0])
-                console.log("file name: " + file[1])
-                console.log("file path: " + file[2])
             }
             App.showCommits(true)
         } else {
