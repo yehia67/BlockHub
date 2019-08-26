@@ -152,20 +152,53 @@ App = {
         window.location.href = "/pages/repoCreationDetails.html" + '?address=' + App.repoBranchMasterAdress + "&repoName=" + $('#repoNameText').val()
     },
     testSocket: () => {
-        /*  var socket = io.connect('Access-Control-Allow-Origin:http://127.0.0.1:5000/');
-         // this is a callback that triggers when the "my response" event is emitted by the server.
-         socket.on('my response', function(msg) {
-             alert("my response event")
-         });
-         //example of triggering an event on click of a form submit button
-         $('form#emit').submit(function(event) {
-             socket.emit('my event', { data: $('#emit_data').val() });
-             alert("my event emissions")
-         }); */
         var eventSource = new EventSource("http://127.0.0.1:5000/stream")
         eventSource.onmessage = function(e) {
             alert(e.data)
         }
+    },
+    SendAddedFilesToPython: () => {
+        const addedFiles = []
+        for (let i = 0; i < App.change.addedFiles.length; i++) {
+            let fileNameAndLocation = App.change.addedFiles[i].split('/')
+            let name = fileNameAndLocation.pop()
+            let location = App.change.addedFiles[i].replace(name, '')
+            addedFiles.push(name + "**" + location + "**" + App.change.addedFiles[i])
+        }
+        $.ajax({
+            type: 'GET',
+            url: 'http://127.0.0.1:5000/getFilesData?files=' + addedFiles,
+
+            success: function(response) {
+                App.IpfsHashForNewFiles(response)
+            },
+            error: function(response) {
+                return console.error(response);
+            }
+        });
+
+    },
+    IpfsHashForNewFiles: (newFiles) => {
+        newFilesWithHashes = ""
+        Array.prototype.forEach.call(newFiles, item => {
+
+            fileInfo = itemFiles.split("**")
+
+            ipfs.add(Buffer.from(fileInfo[2]), function(err, res) {
+                if (err || !res) {
+                    return console.error('ipfs add error', err, res)
+                }
+                res.forEach(function(file) {
+                    if (file && file.hash) {
+
+                        newFilesWithHashes += file.hash + "*" + fileInfo[0] + "*" + fileInfo[1] + ","
+
+                    }
+                })
+            })
+
+        })
+        App.addedFiles = newFilesWithHashes
     },
     pushCommits: async() => {
         let urlParams = new URLSearchParams(location.search)
@@ -178,9 +211,7 @@ App = {
             //newFilesHash = returnIpfsHashForNewFiles()
 
     },
-    returnIpfsHashForNewFiles: (fileDirectory) => {
 
-    },
     checkLengthPromise: async() => {
         return new Promise(function(resolve, reject) {
             App.contracts.masterBranch.getCommitsArrayLength(

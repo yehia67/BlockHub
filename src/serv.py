@@ -5,6 +5,7 @@ from flask import request
 import time
 from push import *
 from db import *
+from filesData import *
 app = Flask(__name__)
 
 
@@ -33,7 +34,11 @@ def stream():
             # wait for source data to be available, then push it
             yield 'data: {}\n\n'.format(get_message())
    return Response(eventStream(), mimetype="text/event-stream")
-    
+@app.route('/getFilesData')
+def getFilesData():
+     return FilesData(request.args.get('files'))    
+
+
 @app.route('/hash')
 def commitHash():
    commitsHash = ""
