@@ -78,6 +78,10 @@ App = {
         }
     },
     ConnectedToServer: async(response) => {
+        const masterBranch = await $.getJSON('../branch.json')
+        let urlParams = new URLSearchParams(location.search)
+        let branchAddress = urlParams.get('address')
+        App.contracts.masterBranch = web3.eth.contract(masterBranch.abi).at(branchAddress)
         var commitsArray = JSON.parse(response)
         for (var i = 0; i < commitsArray.length; i++) {
             var element = commitsArray[i]
@@ -98,10 +102,12 @@ App = {
                 App.changeJson.push(JSON.stringify(currentChange))
             }
         }
-        console.log("Authors : ", App.author)
-        console.log("Dates : ", App.date)
-        console.log("Messages : ", App.message)
-        console.log("Hashes: ", App.hash)
+        let index = 0
+        Array.prototype.forEach.call(commitsArray, item => {
+            App.makeCommitPromise(App.author[index], App.hash[index], App.message[index], App.date[index], "changes")
+            index++;
+        })
+
 
     },
     makeRepo: async() => {
