@@ -4,18 +4,24 @@ from flask_cors import CORS
 from flask import request
 import time
 from push import *
+import os
+# from push import *
 from db import *
 from filesData import *
 app = Flask(__name__)
 
 
 CORS(app)
-
-
-
-@app.route('/')
-def hello_world():
-   return commitsJsonObject
+flag = "f"
+@app.route('/push')
+def execute_push():
+    flag ="v"
+    location = request.args.get("location")
+    print("location : ", location)
+    if location == None:
+        return ""
+    os.chdir(location)
+    return os.popen("python3 push.py").read()
 
 @app.route('/getDifference')
 def getDifference():
@@ -23,9 +29,11 @@ def getDifference():
 
 def get_message():
     '''this could be any function that blocks until data is ready'''
-    time.sleep(1.0)
-    s = time.ctime(time.time())
-    return s
+    if flag == "v":
+        return "done"
+    else:
+       return "wait"
+      
 
 @app.route('/stream')
 def stream():

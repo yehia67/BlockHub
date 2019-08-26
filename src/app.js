@@ -154,7 +154,7 @@ App = {
     testSocket: () => {
         var eventSource = new EventSource("http://127.0.0.1:5000/stream")
         eventSource.onmessage = function(e) {
-            alert(e.data)
+            if (e.data === "done") { alert(e.data) }
         }
     },
     SendAddedFilesToPython: () => {
@@ -511,6 +511,11 @@ App = {
             document.getElementById('commitsDiv').style.display = 'none'
             document.getElementById('noCommitBtn').style.display = 'block'
         }
+    },
+
+    goToInitialCommitPage: async() => {
+        let urlParams = new URLSearchParams(location.search)
+        window.location.href = "/pages/repoCreationDetails.html" + '?address=' + urlParams.get('address') + "&repoName=" + urlParams.get('repoName')
     },
 
     testFn: async() => {}
