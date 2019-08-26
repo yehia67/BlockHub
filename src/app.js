@@ -155,6 +155,7 @@ App = {
         var eventSource = new EventSource("http://127.0.0.1:5000/stream")
         eventSource.onmessage = function(e) {
             if (e.data === "done") { alert(e.data) }
+            console.log(e.data)
         }
     },
     SendAddedFilesToPython: () => {

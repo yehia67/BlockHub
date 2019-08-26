@@ -3,7 +3,6 @@ from flask import Response
 from flask_cors import CORS
 from flask import request
 import time
-from push import *
 import os
 # from push import *
 from db import *
@@ -12,10 +11,19 @@ app = Flask(__name__)
 
 
 CORS(app)
-flag = "f"
+
+
+def get_message():
+    '''this could be any function that blocks until data is ready'''
+    if flag == "v":
+        return "done"
+    else:
+       return "wait"
+
 @app.route('/push')
 def execute_push():
-    flag ="v"
+    global flag 
+    flag = "v"
     location = request.args.get("location")
     print("location : ", location)
     if location == None:
@@ -27,12 +35,7 @@ def execute_push():
 def getDifference():
    return returnDifference(int(request.args.get('len')))
 
-def get_message():
-    '''this could be any function that blocks until data is ready'''
-    if flag == "v":
-        return "done"
-    else:
-       return "wait"
+
       
 
 @app.route('/stream')
@@ -101,3 +104,6 @@ def getRemovedLines():
 
 if __name__ == '__main__':
    app.run(debug = True)
+   global flag
+   flag = "f" 
+
