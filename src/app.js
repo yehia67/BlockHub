@@ -23,8 +23,7 @@ App = {
         await App.loadWeb3()
         await App.loadAccount()
         await App.loadContract()
-        await App.ConnectedToServer()
-        App.testSocket()
+        await App.testSocket()
     },
 
     // https://medium.com/metamask/https-medium-com-metamask-breaking-change-injecting-web3-7722797916a8
@@ -78,43 +77,32 @@ App = {
             App.addReposToHomePage()
         }
     },
-    ConnectedToServer: async() => {
-        var commitsArray = []
-        $.ajax({
-            type: 'GET',
-            url: 'http://127.0.0.1:5000/getDifference?len=30',
+    ConnectedToServer: async(response) => {
+        var commitsArray = JSON.parse(response)
+        for (var i = 0; i < commitsArray.length; i++) {
+            var element = commitsArray[i]
+            console.log(element)
+            for (key in element) {
+                console.log("key : " + key + "-> " + element[key]["author"])
+                App.author.push(element[key]["author"])
+                App.hash.push(element[key]["hash"])
+                App.message.push(element[key]["message"])
+                App.date.push(element[key]["date"])
+                currentChange = {}
+                currentChange.addedLines = element[key]["change"]["Added Lines"]
+                currentChange.removedLines = element[key]["change"]["Removed Lines"]
+                currentChange.addedFiles = element[key]["change"]["files added"]
+                currentChange.removedFiles = element[key]["change"]["files deleted"]
+                App.change.push(currentChange)
 
-            success: function(response) {
-                var commitsArray = JSON.parse(response)
-                for (var i = 0; i < commitsArray.length; i++) {
-                    var element = commitsArray[i]
-                    console.log(element)
-                    for (key in element) {
-                        console.log("key : " + key + "-> " + element[key]["author"])
-                        App.author.push(element[key]["author"])
-                        App.hash.push(element[key]["hash"])
-                        App.message.push(element[key]["message"])
-                        App.date.push(element[key]["date"])
-                        currentChange = {}
-                        currentChange.addedLines = element[key]["change"]["Added Lines"]
-                        currentChange.removedLines = element[key]["change"]["Removed Lines"]
-                        currentChange.addedFiles = element[key]["change"]["files added"]
-                        currentChange.removedFiles = element[key]["change"]["files deleted"]
-                        App.change.push(currentChange)
-
-                        App.changeJson.push(JSON.stringify(currentChange))
-                    }
-                }
-                console.log("Authors : ", App.author)
-                console.log("Dates : ", App.date)
-                console.log("Messages : ", App.message)
-                console.log("Hashes: ", App.hash)
-
-            },
-            error: function(response) {
-                return console.error(response);
+                App.changeJson.push(JSON.stringify(currentChange))
             }
-        });
+        }
+        console.log("Authors : ", App.author)
+        console.log("Dates : ", App.date)
+        console.log("Messages : ", App.message)
+        console.log("Hashes: ", App.hash)
+
     },
     makeRepo: async() => {
         let repoName = $('#repoNameText').val()
@@ -154,8 +142,13 @@ App = {
     testSocket: () => {
         var eventSource = new EventSource("http://127.0.0.1:5000/stream")
         eventSource.onmessage = function(e) {
-            if (e.data === "done") { alert(e.data) }
-            console.log(e.data)
+            if (e.data !== "wait") {
+                console.log(e.data)
+                console.log("------------------------------------------------------------------------")
+                App.ConnectedToServer(e.data)
+
+            }
+
         }
     },
     SendAddedFilesToPython: () => {
@@ -332,9 +325,9 @@ App = {
         let branchAddress = urlParams.get('address')
         App.contracts.masterBranch = web3.eth.contract(masterBranch.abi).at(branchAddress)
         App.getRootCommitPromise().then(function(result) {
-            App.LoadRepoFiles(result)
-        })
-        App.pushCommits()
+                App.LoadRepoFiles(result)
+            })
+            //App.pushCommits()
 
     },
     LoadRepoFiles: async(ipfsHashs) => {
