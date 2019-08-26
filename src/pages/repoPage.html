@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 
-<body>
+<body style="overflow-x:hidden;">
     <nav class="navbar navbar-light navbar-expand-md">
         <div class="container-fluid">
             <a class="navbar-brand" id="repoNameNavBar" style="color:white"></a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
@@ -45,25 +45,25 @@
         <div class="float-right btnDiv cloneBtnDiv" style="/*margin:7px;*/"><a class="btn btn-primary cloneBtn" role="button" href="#">Clone / Download</a></div>
     </div>
     <div class="noInitialCommitDiv">
-        <div class="codeDiv" id="commitsDiv" style="display:none;height:74px;width:100%;/*margin:46px;*/ ">
+        <div class="codeDiv" id="commitsDiv" style="display:none;height:50%;">
             <div class="table-responsive myCodeTable">
-                <div class="table-responsive myCodeTable">
+                <div class="table-responsive myCodeTable" style="overflow-x:hidden;width:80%">
                     <div id="filContent"></div>
-                    <table class="table">
+                    <table class="table" style="width:80% ">
                         <thead>
 
                         </thead>
-                        <tbody style="color:steelBlue;font-size:18px;font-family:ABeeZee, sans-serif;" id="repoFiles">
+                        <tbody style="color:steelBlue;font-size:18px;font-family:ABeeZee, sans-serif; " id="repoFiles">
 
                         </tbody>
                     </table>
                 </div>
             </div>
-            <div class="noInitialCommitBtn" style="display:none;" id="noCommitBtn">
-                </br>
-                <p style="font-size:24px;font-family:ABeeZee, sans-serif;text-align:center">No Initial Commits Found</p>
-                <a class="btn btn-primary noInitialCommitBtn" role="button" href="repoCreationDetails.html" style="width:172px;height:36px;margin-left:43%;font-family:sans-serif;">Add Initial Commit</a>
-            </div>
+        </div>
+        <div class="noInitialCommitBtn" style="display:none; " id="noCommitBtn">
+            </br>
+            <p style="font-size:24px;font-family:ABeeZee, sans-serif;text-align:center ">No Initial Commits Found</p>
+            <a class="btn btn-primary noInitialCommitBtn " role="button " href="javascript:App.goToInitialCommitPage() " style="width:172px;height:36px;margin-left:43%;font-family:sans-serif; ">Add Initial Commit</a>
         </div>
     </div>
     <div id="loader"></div>

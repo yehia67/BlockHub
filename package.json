@@ -45,6 +45,7 @@
     "dependencies": {
         "childprocess": "^2.0.2",
         "fs": "0.0.1-security",
-        "ipfs-api": "^26.1.2"
+        "ipfs-api": "^26.1.2",
+        "socket.io-client": "^2.2.0"
     }
 }

@@ -23,7 +23,7 @@ App = {
         await App.loadWeb3()
         await App.loadAccount()
         await App.loadContract()
-        await App.ConnectedToServer()
+        await App.testSocket()
     },
 
     // https://medium.com/metamask/https-medium-com-metamask-breaking-change-injecting-web3-7722797916a8
@@ -77,43 +77,38 @@ App = {
             App.addReposToHomePage()
         }
     },
-    ConnectedToServer: async() => {
-        var commitsArray = []
-        $.ajax({
-            type: 'GET',
-            url: 'http://127.0.0.1:5000/getDifference?len=30',
+    ConnectedToServer: async(response) => {
+        const masterBranch = await $.getJSON('../branch.json')
+        let urlParams = new URLSearchParams(location.search)
+        let branchAddress = urlParams.get('address')
+        App.contracts.masterBranch = web3.eth.contract(masterBranch.abi).at(branchAddress)
+        var commitsArray = JSON.parse(response)
+        for (var i = 0; i < commitsArray.length; i++) {
+            var element = commitsArray[i]
+            console.log(element)
+            for (key in element) {
+                console.log("key : " + key + "-> " + element[key]["author"])
+                App.author.push(element[key]["author"])
+                App.hash.push(element[key]["hash"])
+                App.message.push(element[key]["message"])
+                App.date.push(element[key]["date"])
+                currentChange = {}
+                currentChange.addedLines = element[key]["change"]["Added Lines"]
+                currentChange.removedLines = element[key]["change"]["Removed Lines"]
+                currentChange.addedFiles = element[key]["change"]["files added"]
+                currentChange.removedFiles = element[key]["change"]["files deleted"]
+                App.change.push(currentChange)
 
-            success: function(response) {
-                var commitsArray = JSON.parse(response)
-                for (var i = 0; i < commitsArray.length; i++) {
-                    var element = commitsArray[i]
-                    console.log(element)
-                    for (key in element) {
-                        console.log("key : " + key + "-> " + element[key]["author"])
-                        App.author.push(element[key]["author"])
-                        App.hash.push(element[key]["hash"])
-                        App.message.push(element[key]["message"])
-                        App.date.push(element[key]["date"])
-                        currentChange = {}
-                        currentChange.addedLines = element[key]["change"]["Added Lines"]
-                        currentChange.removedLines = element[key]["change"]["Removed Lines"]
-                        currentChange.addedFiles = element[key]["change"]["files added"]
-                        currentChange.removedFiles = element[key]["change"]["files deleted"]
-                        App.change.push(currentChange)
-
-                        App.changeJson.push(JSON.stringify(currentChange))
-                    }
-                }
-                console.log("Authors : ", App.author)
-                console.log("Dates : ", App.date)
-                console.log("Messages : ", App.message)
-                console.log("Hashes: ", App.hash)
-
-            },
-            error: function(response) {
-                return console.error(response);
+                App.changeJson.push(JSON.stringify(currentChange))
             }
-        });
+        }
+        let index = 0
+        Array.prototype.forEach.call(commitsArray, item => {
+            App.makeCommitPromise(App.author[index], App.hash[index], App.message[index], App.date[index], "changes")
+            index++;
+        })
+
+
     },
     makeRepo: async() => {
         let repoName = $('#repoNameText').val()
@@ -143,25 +138,80 @@ App = {
             })
         });
     },
+
     loadMasterBranch: async() => {
         const masterBranch = await $.getJSON('../branch.json')
         App.contracts.masterBranch = web3.eth.contract(masterBranch.abi).at(App.repoBranchMasterAdress)
         console.log(App.repoBranchMasterAdress)
         window.location.href = "/pages/repoCreationDetails.html" + '?address=' + App.repoBranchMasterAdress + "&repoName=" + $('#repoNameText').val()
     },
-    pushCommits: async() => {
-        App.checkLengthPromise()
-        for (let j = 0; j < App.hash.length; j++) {
-            ipfs.add([Buffer.from(App.changeJson[j])], function(err, res) {
-                if (err || !res) {
-                    return console.error('ipfs add error', err, res)
-                } else {
-                    console.log(App.author[j])
-                    App.makeCommitPromise(App.author[j], App.hash[j], App.date[j], App.message[j], res[0].hash)
-                }
-            })
+    testSocket: () => {
+        var eventSource = new EventSource("http://127.0.0.1:5000/stream")
+        eventSource.onmessage = function(e) {
+            if (e.data !== "wait") {
+                console.log(e.data)
+                console.log("------------------------------------------------------------------------")
+                App.ConnectedToServer(e.data)
+
+            }
+
         }
     },
+    SendAddedFilesToPython: () => {
+        const addedFiles = []
+        for (let i = 0; i < App.change.addedFiles.length; i++) {
+            let fileNameAndLocation = App.change.addedFiles[i].split('/')
+            let name = fileNameAndLocation.pop()
+            let location = App.change.addedFiles[i].replace(name, '')
+            addedFiles.push(name + "**" + location + "**" + App.change.addedFiles[i])
+        }
+        $.ajax({
+            type: 'GET',
+            url: 'http://127.0.0.1:5000/getFilesData?files=' + addedFiles,
+
+            success: function(response) {
+                App.IpfsHashForNewFiles(response)
+            },
+            error: function(response) {
+                return console.error(response);
+            }
+        });
+
+    },
+    IpfsHashForNewFiles: (newFiles) => {
+        newFilesWithHashes = ""
+        Array.prototype.forEach.call(newFiles, item => {
+
+            fileInfo = itemFiles.split("**")
+
+            ipfs.add(Buffer.from(fileInfo[2]), function(err, res) {
+                if (err || !res) {
+                    return console.error('ipfs add error', err, res)
+                }
+                res.forEach(function(file) {
+                    if (file && file.hash) {
+
+                        newFilesWithHashes += file.hash + "*" + fileInfo[0] + "*" + fileInfo[1] + ","
+
+                    }
+                })
+            })
+
+        })
+        App.addedFiles = newFilesWithHashes
+    },
+    pushCommits: async() => {
+        let urlParams = new URLSearchParams(location.search)
+        let branchAddress = urlParams.get('address')
+        const masterBranch = await $.getJSON('../branch.json')
+        App.contracts.masterBranch = web3.eth.contract(masterBranch.abi).at(branchAddress)
+        let x = App.change[3].addedFiles
+        console.log("--------------------------------------------------------------------------------------------------")
+        console.log(x)
+            //newFilesHash = returnIpfsHashForNewFiles()
+
+    },
+
     checkLengthPromise: async() => {
         return new Promise(function(resolve, reject) {
             App.contracts.masterBranch.getCommitsArrayLength(
@@ -227,12 +277,7 @@ App = {
 
         })
     },
-    branchInit: async() => {
-        const masterBranch = await $.getJSON('../branch.json')
-        let urlParams = new URLSearchParams(location.search)
-        let branchAddress = urlParams.get('address')
-        App.contracts.masterBranch = web3.eth.contract(masterBranch.abi).at(branchAddress)
-    },
+
     initialCommit: async() => {
         document.getElementById('createRepoForm').style.display = 'none'
         document.getElementById('loader').style.display = 'block'
@@ -272,13 +317,7 @@ App = {
         }, 5000)
     },
 
-    CommitAndRedirectToRepo: (msg, hashs) => {
-        let date = new Date().toLocaleDateString("en", { year: "numeric", day: "2-digit", month: "2-digit" })
-        alert("mn gowaa " + hashs)
-        App.makeCommitPromise("owner", "root", date, msg, hashs)
-        App.GoToRepoPage()
 
-    },
 
     goToRepoPage: async() => {
         let urlParams = new URLSearchParams(location.search)
@@ -292,8 +331,9 @@ App = {
         let branchAddress = urlParams.get('address')
         App.contracts.masterBranch = web3.eth.contract(masterBranch.abi).at(branchAddress)
         App.getRootCommitPromise().then(function(result) {
-            App.LoadRepoFiles(result)
-        })
+                App.LoadRepoFiles(result)
+            })
+            //App.pushCommits()
 
     },
     LoadRepoFiles: async(ipfsHashs) => {
@@ -303,9 +343,6 @@ App = {
             for (let index = 0; index < ipfsFiles.length - 1; index++) {
                 let file = ipfsFiles[index].split("*")
                 $("#repoFiles").append("<tr style='color:steelBlue;font-family:ABeeZee, sans-serif;font-size:18px;'><td" + " onclick= ' App.uploadFile(" + '"' + file[0] + '"' + ")'" + "style='cursor:pointer !important;' >" + file[1] + "</<td><td>" + file[2] + "</td>   </tr>")
-                console.log("file hash: " + file[0])
-                console.log("file name: " + file[1])
-                console.log("file path: " + file[2])
             }
             App.showCommits(true)
         } else {
@@ -474,6 +511,11 @@ App = {
             document.getElementById('commitsDiv').style.display = 'none'
             document.getElementById('noCommitBtn').style.display = 'block'
         }
+    },
+
+    goToInitialCommitPage: async() => {
+        let urlParams = new URLSearchParams(location.search)
+        window.location.href = "/pages/repoCreationDetails.html" + '?address=' + urlParams.get('address') + "&repoName=" + urlParams.get('repoName')
     },
 
     testFn: async() => {}
