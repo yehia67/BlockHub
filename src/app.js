@@ -77,7 +77,7 @@ App = {
             App.addReposToHomePage()
         }
     },
-    ConnectedToServer: async(response) => {
+    ConnectedToServer: async(response, dir) => {
         const masterBranch = await $.getJSON('../branch.json')
         let urlParams = new URLSearchParams(location.search)
         let branchAddress = urlParams.get('address')
@@ -95,16 +95,18 @@ App = {
                 currentChange = {}
                 currentChange.addedLines = element[key]["change"]["Added Lines"]
                 currentChange.removedLines = element[key]["change"]["Removed Lines"]
-                currentChange.addedFiles = element[key]["change"]["files added"]
+                currentChange.addedFiles = App.SendAddedFilesToPython(element[key]["change"]["files added"], dir)
                 currentChange.removedFiles = element[key]["change"]["files deleted"]
                 App.change.push(currentChange)
-
                 App.changeJson.push(JSON.stringify(currentChange))
             }
         }
         let index = 0
+
+        console.log(App.change[0].addedFiles)
+        console.log(App.changeJson[0])
         Array.prototype.forEach.call(commitsArray, item => {
-            App.makeCommitPromise(App.author[index], App.hash[index], App.message[index], App.date[index], "changes")
+            App.makeCommitPromise(App.author[index], App.hash[index], App.message[index], App.date[index], App.changeJson[index])
             index++;
         })
 
@@ -151,26 +153,34 @@ App = {
             if (e.data !== "wait") {
                 console.log(e.data)
                 console.log("------------------------------------------------------------------------")
-                App.ConnectedToServer(e.data)
+                let commitInfo = e.data.split("&&&&")
+                App.ConnectedToServer(commitInfo[1], commitInfo[0])
 
             }
 
         }
     },
-    SendAddedFilesToPython: () => {
+    SendAddedFilesToPython: (newAddedFiles, dir) => {
         const addedFiles = []
-        for (let i = 0; i < App.change.addedFiles.length; i++) {
-            let fileNameAndLocation = App.change.addedFiles[i].split('/')
-            let name = fileNameAndLocation.pop()
-            let location = App.change.addedFiles[i].replace(name, '')
-            addedFiles.push(name + "**" + location + "**" + App.change.addedFiles[i])
+
+        for (let i = 0; i < newAddedFiles.length; i++) {
+            let files = newAddedFiles[i].split(',')
+            for (let j = 0; j < files.length; j++) {
+                let fileNameAndLocation = files[j].split('/')
+                let name = fileNameAndLocation.pop()
+                let location = files[j].replace(name, '')
+                    //Possible bug if we have directory inside directory
+                addedFiles.push(name + "**" + dir + "/" + name + "**" + location + "&&")
+            }
+            console.log(addedFiles)
         }
         $.ajax({
             type: 'GET',
             url: 'http://127.0.0.1:5000/getFilesData?files=' + addedFiles,
 
             success: function(response) {
-                App.IpfsHashForNewFiles(response)
+                alert(response)
+                return App.IpfsHashForNewFiles(response)
             },
             error: function(response) {
                 return console.error(response);
@@ -179,12 +189,14 @@ App = {
 
     },
     IpfsHashForNewFiles: (newFiles) => {
+        let makeNewFilesArray = newFiles.split(+"&&")
         newFilesWithHashes = ""
-        Array.prototype.forEach.call(newFiles, item => {
+        console.log(newFiles)
+        Array.prototype.forEach.call(makeNewFilesArray, item => {
 
-            fileInfo = itemFiles.split("**")
+            fileInfo = item.split("**")
 
-            ipfs.add(Buffer.from(fileInfo[2]), function(err, res) {
+            ipfs.add(Buffer.from(fileInfo[1]), function(err, res) {
                 if (err || !res) {
                     return console.error('ipfs add error', err, res)
                 }
@@ -192,13 +204,14 @@ App = {
                     if (file && file.hash) {
 
                         newFilesWithHashes += file.hash + "*" + fileInfo[0] + "*" + fileInfo[1] + ","
+                        console.log(file.hash + " " + fileInfo[0])
 
                     }
                 })
             })
 
         })
-        App.addedFiles = newFilesWithHashes
+        return newFilesWithHashes
     },
     pushCommits: async() => {
         let urlParams = new URLSearchParams(location.search)

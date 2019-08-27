@@ -33,7 +33,9 @@ def execute_push():
     if location == None:
         return ""
     os.chdir(location)
-    commits = os.popen("python3 push.py").read()
+    commits = request.args.get("location") + "&&&&"
+    commits += os.popen("python3 push.py").read() 
+    
     return "done"
 
    
