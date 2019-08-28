@@ -103,8 +103,9 @@ App = {
         }
         let index = 0
 
-        console.log(App.change[0].addedFiles)
         console.log(App.changeJson[0])
+        console.log(App.changeJson[1])
+        console.log(App.changeJson[2])
         Array.prototype.forEach.call(commitsArray, item => {
             App.makeCommitPromise(App.author[index], App.hash[index], App.message[index], App.date[index], App.changeJson[index])
             index++;
@@ -162,24 +163,21 @@ App = {
     },
     SendAddedFilesToPython: (newAddedFiles, dir) => {
         const addedFiles = []
-
         for (let i = 0; i < newAddedFiles.length; i++) {
-            let files = newAddedFiles[i].split(',')
-            for (let j = 0; j < files.length; j++) {
-                let fileNameAndLocation = files[j].split('/')
-                let name = fileNameAndLocation.pop()
-                let location = files[j].replace(name, '')
-                    //Possible bug if we have directory inside directory
-                addedFiles.push(name + "**" + dir + "/" + name + "**" + location + "&&")
-            }
-            console.log(addedFiles)
+            let fileNameAndLocation = newAddedFiles[i].split('/')
+            let name = fileNameAndLocation.pop()
+            let location = newAddedFiles[i].replace(name, '')
+                //Possible bug if we have directory inside directory
+            if (name == "") { continue }
+
+            addedFiles.push(name + "**" + dir + "/" + name + "**" + location)
         }
         $.ajax({
             type: 'GET',
             url: 'http://127.0.0.1:5000/getFilesData?files=' + addedFiles,
 
             success: function(response) {
-                alert(response)
+
                 return App.IpfsHashForNewFiles(response)
             },
             error: function(response) {
@@ -188,31 +186,45 @@ App = {
         });
 
     },
-    IpfsHashForNewFiles: (newFiles) => {
-        let makeNewFilesArray = newFiles.split(+"&&")
+
+    IpfsHashForNewFiles: async(newFiles) => {
+
+        let makeNewFilesArray = newFiles.split("&&")
+
+        let index = 0;
+        makeNewFilesArray = makeNewFilesArray.filter(item => item !== "")
+        console.log(makeNewFilesArray)
+
+
+        const ipfsHash = await App.uploadIPFS(makeNewFilesArray)
+        return ipfsHash
+    },
+    uploadIPFS: (makeNewFilesArray) => {
         newFilesWithHashes = ""
-        console.log(newFiles)
-        Array.prototype.forEach.call(makeNewFilesArray, item => {
-
+        for (const item of makeNewFilesArray) {
             fileInfo = item.split("**")
+            console.log(fileInfo[1])
+            console.log(typeof fileInfo[0])
+            let uploadedFile = {
+                heading: fileInfo[0],
+                content: fileInfo[2]
+            };
 
-            ipfs.add(Buffer.from(fileInfo[1]), function(err, res) {
+            ipfs.add([Buffer.from(JSON.stringify(uploadedFile))], (err, res) => {
                 if (err || !res) {
                     return console.error('ipfs add error', err, res)
                 }
-                res.forEach(function(file) {
-                    if (file && file.hash) {
+                if (res && res[0].hash) {
 
-                        newFilesWithHashes += file.hash + "*" + fileInfo[0] + "*" + fileInfo[1] + ","
-                        console.log(file.hash + " " + fileInfo[0])
-
-                    }
-                })
-            })
-
-        })
+                    newFilesWithHashes += res[0].hash + "*" + fileInfo[1] + ","
+                    console.log(fileInfo[1])
+                    console.log(fileInfo[0])
+                }
+            });
+        }
         return newFilesWithHashes
     },
+
     pushCommits: async() => {
         let urlParams = new URLSearchParams(location.search)
         let branchAddress = urlParams.get('address')
@@ -221,7 +233,6 @@ App = {
         let x = App.change[3].addedFiles
         console.log("--------------------------------------------------------------------------------------------------")
         console.log(x)
-            //newFilesHash = returnIpfsHashForNewFiles()
 
     },
 
@@ -389,18 +400,6 @@ App = {
             console.log(res.toString())
             $("#" + diplayID).html("<p>" + res.toString() + "</p>")
         })
-    },
-    uploadIPFS: (file) => {
-        let hash
-        ipfs.add([Buffer.from(JSON.stringify(file))], function(err, res) {
-            if (err || !res) {
-                return console.error('ipfs add error', err, res)
-            } else {
-                hash = res[0].hash
-                console.log(res[0].hash)
-            }
-        })
-        return hash
     },
 
     viewRepo: async() => {

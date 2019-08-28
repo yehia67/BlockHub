@@ -1,6 +1,6 @@
 def FilesData(files):
     newFiles =""
-    filesArray = files.split("&&")
+    filesArray = files.split(",")
     for i in range(0,len(filesArray)):
         fileInfo = filesArray[i].split("**")
         if len(fileInfo) == 3:
