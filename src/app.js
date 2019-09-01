@@ -23,7 +23,7 @@ App = {
         await App.loadWeb3()
         await App.loadAccount()
         await App.loadContract()
-        await App.testSocket()
+            //await App.testSocket()
     },
 
     // https://medium.com/metamask/https-medium-com-metamask-breaking-change-injecting-web3-7722797916a8
@@ -149,17 +149,17 @@ App = {
         window.location.href = "/pages/repoCreationDetails.html" + '?address=' + App.repoBranchMasterAdress + "&repoName=" + $('#repoNameText').val()
     },
     testSocket: () => {
-        var eventSource = new EventSource("http://127.0.0.1:5000/stream")
-        eventSource.onmessage = function(e) {
-            if (e.data !== "wait") {
-                console.log(e.data)
-                console.log("------------------------------------------------------------------------")
-                let commitInfo = e.data.split("&&&&")
-                App.ConnectedToServer(commitInfo[1], commitInfo[0])
+        /*       var eventSource = new EventSource("http://127.0.0.1:5000/stream")
+              eventSource.onmessage = function(e) {
+                  if (e.data !== "wait") {
+                      console.log(e.data)
+                      console.log("------------------------------------------------------------------------")
+                      let commitInfo = e.data.split("&&&&")
+                      App.ConnectedToServer(commitInfo[1], commitInfo[0])
 
-            }
+                  }
 
-        }
+              } */
     },
     SendAddedFilesToPython: (newAddedFiles, dir) => {
         const addedFiles = []
