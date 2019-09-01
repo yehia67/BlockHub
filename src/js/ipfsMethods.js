@@ -24,6 +24,27 @@ uploadIPFS = (makeNewFilesArray) => {
     return newFilesWithHashes
 }
 
+LoadRepoFiles = async(ipfsHashs) => {
+    let ipfsFiles = ipfsHashs.split(',')
+    console.log(ipfsFiles)
+    if (ipfsHashs.length !== 0) {
+        for (let index = 0; index < ipfsFiles.length - 1; index++) {
+            let file = ipfsFiles[index].split("*")
+            $("#repoFiles").append("<tr style='color:steelBlue;font-family:ABeeZee, sans-serif;font-size:18px;'><td" + " onclick= ' App.uploadFile(" + '"' + file[0] + '"' + ")'" + "style='cursor:pointer !important;' >" + file[1] + "</<td><td>" + file[2] + "</td>   </tr>")
+        }
+        showCommits(true)
+    } else {
+        showCommits(false)
+    }
+
+}
+
+uploadFile = (hash) => {
+    $("table").hide()
+    display("filContent", hash)
+}
+
+
 display = (diplayID, hash) => {
     ipfs.cat(hash, function(err, res) {
         if (err || !res) {

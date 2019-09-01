@@ -40,7 +40,7 @@
     </div>
     <div class="searchInputDiv">
         <input type="search" placeholder="Search for a Repo.." id="searchBox" class="searchRepoBox" style="height:41px" />
-        <button class="btn btn-primary searchBtn" type="submit" onclick="App.viewRepo()" style="width:125px;margin-top:-5%;margin-left:80%;;height:41px;color:rgb(255,255,255);">Search</button>
+        <button class="btn btn-primary searchBtn" type="submit" onclick="viewRepo()" style="width:125px;margin-top:-5%;margin-left:80%;;height:41px;color:rgb(255,255,255);">Search</button>
     </div>
     <div class="float-left" id="timelineDiv"><textarea id="TimelineArea" style="height:48px;width:362px;">Timeline</textarea>
         <div id="issuesArea">
@@ -55,17 +55,7 @@
         </br>
 
     </div>
-    <!-- <div class="app">
-        <form class="p-5">
-            <div class="m-5 form-group">
-                <h1 class="text-center">Hello Box</h1>
-                <input type="file" class="form-control" placeholder="Set Any String To Be Saved On Etherum Blockchian" id="setValue">
-                <button type="button" onclick="App.getvalue()" class="btn btn-primary pull-left mt-3">Get Value</button>
-                <button type="button" onclick="App.setValue()" class="btn btn-primary float-right mt-3">Set Value</button>
-            </div>
-            <h1 class="text-center" id="getValue"></h1>
-        </form>
-    </div> -->
+
 
 
 
@@ -99,6 +89,8 @@
     <script src="https://unpkg.com/ipfs-api/dist/index.min.js"></script>
     <script src="./modules/ipfs-api/dist/index.js"></script>
     <script src="./socket.io-client-master/dist/socket.io.js"></script>
+    <script src="/js/loader.js"></script>
+    <script src="./js/navigation.js"></script>
     <script src="app.js"></script>
 </body>
 

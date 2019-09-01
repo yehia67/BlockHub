@@ -28,7 +28,7 @@
                 <div class="collapse navbar-collapse" id="navcol-2">
                     <ul class="nav navbar-nav">
                         <li class="nav-item" role="presentation" style="background-color:rgba(255,255,255,0.24);"><a class="nav-link active" id="repoSourceCode" href="javascript:App.goToRepoPage()" style="color:rgba(255,255,255,0.9);">Source Code</a></li>
-                        <li class="nav-item" role="presentation"><a class="nav-link" id="repoIssues" href="javascript:App.goToIssue()" style="color:#ffffff;">Issues</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" id="repoIssues" href="javascript:goToIssue()" style="color:#ffffff;">Issues</a></li>
                         <li class="nav-item" role="presentation"><a class="nav-link" id="repoContributions" href="javascript:App.testFn()" style="color:#ffffff;">Contributions</a></li>
                     </ul>
                 </div>
@@ -63,7 +63,7 @@
         <div class="noInitialCommitBtn" style="display:none; " id="noCommitBtn">
             </br>
             <p style="font-size:24px;font-family:ABeeZee, sans-serif;text-align:center ">No Initial Commits Found</p>
-            <a class="btn btn-primary noInitialCommitBtn " role="button " href="javascript:App.goToInitialCommitPage() " style="width:172px;height:36px;margin-left:43%;font-family:sans-serif; ">Add Initial Commit</a>
+            <a class="btn btn-primary noInitialCommitBtn " role="button " href="goToInitialCommitPage() " style="width:172px;height:36px;margin-left:43%;font-family:sans-serif; ">Add Initial Commit</a>
         </div>
     </div>
     <div id="loader"></div>
@@ -96,6 +96,10 @@
     </script>
     <script src="https://unpkg.com/ipfs-api/dist/index.min.js "></script>
     <script src="../modules/ipfs-api/dist/index.js "></script>
+    <script src="../js/ipfsMethods.js"></script>
+    <script src="../js/loader.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/ajaxCalls.js"></script>
     <script src="../app.js "></script>
     <script src="../js/internalServerEvent.js"></script>
 </body>

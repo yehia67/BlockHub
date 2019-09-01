@@ -23,7 +23,6 @@ App = {
         await App.loadWeb3()
         await App.loadAccount()
         await App.loadContract()
-            //await App.testSocket()
     },
 
     // https://medium.com/metamask/https-medium-com-metamask-breaking-change-injecting-web3-7722797916a8
@@ -95,7 +94,7 @@ App = {
                 currentChange = {}
                 currentChange.addedLines = element[key]["change"]["Added Lines"]
                 currentChange.removedLines = element[key]["change"]["Removed Lines"]
-                currentChange.addedFiles = App.SendAddedFilesToPython(element[key]["change"]["files added"], dir)
+                currentChange.addedFiles = SendAddedFilesToPython(element[key]["change"]["files added"], dir)
                 currentChange.removedFiles = element[key]["change"]["files deleted"]
                 App.change.push(currentChange)
                 App.changeJson.push(JSON.stringify(currentChange))
@@ -148,44 +147,6 @@ App = {
         console.log(App.repoBranchMasterAdress)
         window.location.href = "/pages/repoCreationDetails.html" + '?address=' + App.repoBranchMasterAdress + "&repoName=" + $('#repoNameText').val()
     },
-    testSocket: () => {
-        /*       var eventSource = new EventSource("http://127.0.0.1:5000/stream")
-              eventSource.onmessage = function(e) {
-                  if (e.data !== "wait") {
-                      console.log(e.data)
-                      console.log("------------------------------------------------------------------------")
-                      let commitInfo = e.data.split("&&&&")
-                      App.ConnectedToServer(commitInfo[1], commitInfo[0])
-
-                  }
-
-              } */
-    },
-    SendAddedFilesToPython: (newAddedFiles, dir) => {
-        const addedFiles = []
-        for (let i = 0; i < newAddedFiles.length; i++) {
-            let fileNameAndLocation = newAddedFiles[i].split('/')
-            let name = fileNameAndLocation.pop()
-            let location = newAddedFiles[i].replace(name, '')
-                //Possible bug if we have directory inside directory
-            if (name == "") { continue }
-
-            addedFiles.push(name + "**" + dir + "/" + name + "**" + location)
-        }
-        $.ajax({
-            type: 'GET',
-            url: 'http://127.0.0.1:5000/getFilesData?files=' + addedFiles,
-
-            success: function(response) {
-
-                return App.IpfsHashForNewFiles(response)
-            },
-            error: function(response) {
-                return console.error(response);
-            }
-        });
-
-    },
 
     IpfsHashForNewFiles: async(newFiles) => {
 
@@ -196,34 +157,10 @@ App = {
         console.log(makeNewFilesArray)
 
 
-        const ipfsHash = await App.uploadIPFS(makeNewFilesArray)
+        const ipfsHash = await uploadIPFS(makeNewFilesArray)
         return ipfsHash
     },
-    uploadIPFS: (makeNewFilesArray) => {
-        newFilesWithHashes = ""
-        for (const item of makeNewFilesArray) {
-            fileInfo = item.split("**")
-            console.log(fileInfo[1])
-            console.log(typeof fileInfo[0])
-            let uploadedFile = {
-                heading: fileInfo[0],
-                content: fileInfo[2]
-            };
 
-            ipfs.add([Buffer.from(JSON.stringify(uploadedFile))], (err, res) => {
-                if (err || !res) {
-                    return console.error('ipfs add error', err, res)
-                }
-                if (res && res[0].hash) {
-
-                    newFilesWithHashes += res[0].hash + "*" + fileInfo[1] + ","
-                    console.log(fileInfo[1])
-                    console.log(fileInfo[0])
-                }
-            });
-        }
-        return newFilesWithHashes
-    },
 
     pushCommits: async() => {
         let urlParams = new URLSearchParams(location.search)
@@ -337,16 +274,13 @@ App = {
         setTimeout(function() {
             let date = new Date().toLocaleDateString("en", { year: "numeric", day: "2-digit", month: "2-digit" })
             App.makeCommitPromise("owner", "root", date, msg, hashs)
-            App.goToRepoPage()
+            goToRepoPage()
         }, 5000)
     },
 
 
 
-    goToRepoPage: async() => {
-        let urlParams = new URLSearchParams(location.search)
-        window.location.href = "/pages/repoPage.html" + '?address=' + urlParams.get('address') + "&repoName=" + urlParams.get('repoName')
-    },
+
     showRepoFiles: async() => {
         let urlParams = new URLSearchParams(location.search)
         let ipfsHash
@@ -355,29 +289,11 @@ App = {
         let branchAddress = urlParams.get('address')
         App.contracts.masterBranch = web3.eth.contract(masterBranch.abi).at(branchAddress)
         App.getRootCommitPromise().then(function(result) {
-                App.LoadRepoFiles(result)
-            })
-            //App.pushCommits()
+            LoadRepoFiles(result)
+        })
 
     },
-    LoadRepoFiles: async(ipfsHashs) => {
-        let ipfsFiles = ipfsHashs.split(',')
-        console.log(ipfsFiles)
-        if (ipfsHashs.length !== 0) {
-            for (let index = 0; index < ipfsFiles.length - 1; index++) {
-                let file = ipfsFiles[index].split("*")
-                $("#repoFiles").append("<tr style='color:steelBlue;font-family:ABeeZee, sans-serif;font-size:18px;'><td" + " onclick= ' App.uploadFile(" + '"' + file[0] + '"' + ")'" + "style='cursor:pointer !important;' >" + file[1] + "</<td><td>" + file[2] + "</td>   </tr>")
-            }
-            App.showCommits(true)
-        } else {
-            App.showCommits(false)
-        }
 
-    },
-    uploadFile: (hash) => {
-        $("table").hide()
-        App.display("filContent", hash)
-    },
     getRootCommitPromise: () => {
         return new Promise(function(resolve, reject) {
             console.log("HNAAAAAAAAAAAAAAAAAAAAAAAA")
@@ -392,30 +308,9 @@ App = {
                 })
         });
     },
-    display: (diplayID, hash) => {
-        ipfs.cat(hash, function(err, res) {
-            if (err || !res) {
-                return console.error('ipfs cat error', err, res)
-            }
-            console.log(res.toString())
-            $("#" + diplayID).html("<p>" + res.toString() + "</p>")
-        })
-    },
 
-    viewRepo: async() => {
-        let repos = await App.createRepo.returnRepos()
-        console.log(repos)
-        let repoName = $('#searchBox').val()
-        let returnRepoAddress
-        App.createRepo.returnRepoAddress(repoName).then(function(result) {
-            returnRepoAddress = result
-            if (returnRepoAddress !== '0x0000000000000000000000000000000000000000') {
-                App.redirectToRepo(repoName)
-            } else {
-                window.location.href = '/pages/404.html'
-            }
-        })
-    },
+
+
 
     redirectToRepo: async(repoName) => {
         App.createRepo.returnRepoAddress(repoName).then(function(result) {
@@ -426,14 +321,9 @@ App = {
         })
     },
 
-    changeRepoName: async() => {
-        let urlParams = new URLSearchParams(location.search)
-        $('#repoNameNavBar').text(urlParams.get('repoName'))
-    },
 
-    createNewIssue: async() => {
-        window.location.href = '/pages/createIssue.html' + '?' + 'repoName' + '=' + $('#repoNameNavBar').text()
-    },
+
+
 
     createIssue: async() => {
         //loading repo
@@ -469,10 +359,7 @@ App = {
         });
     },
 
-    goToIssue: async() => {
-        let urlParams = new URLSearchParams(location.search)
-        window.location.href = "/pages/issues.html" + '?address=' + urlParams.get('address') + "&repoName=" + urlParams.get('repoName')
-    },
+
 
     addReposToHomePage: async() => {
         App.createRepo.returnRepos().then(function(result) {
@@ -507,28 +394,8 @@ App = {
             }
         })
     },
-    showCommits: async(boolValue) => {
-        //Hide Loader
-        document.getElementById('loader').style.display = 'none'
 
-        //Show Initial Commits
-        if (boolValue) {
-            console.log(document.getElementById('commitsDiv'))
-            document.getElementById('commitsDiv').style.display = 'block'
-            document.getElementById('noCommitBtn').style.display = 'none'
-        }
 
-        //No Initial Commits
-        else {
-            document.getElementById('commitsDiv').style.display = 'none'
-            document.getElementById('noCommitBtn').style.display = 'block'
-        }
-    },
-
-    goToInitialCommitPage: async() => {
-        let urlParams = new URLSearchParams(location.search)
-        window.location.href = "/pages/repoCreationDetails.html" + '?address=' + urlParams.get('address') + "&repoName=" + urlParams.get('repoName')
-    },
 
     testFn: async() => {}
 }
@@ -541,7 +408,7 @@ $(window).on('load', function() {
 //Changing Repo Name in Navbar
 $(function() {
     if (location.pathname == "/pages/repoPage.html" || location.pathname == "/pages/issues.html" || location.pathname == "/pages/createIssue.html") {
-        App.changeRepoName()
+        changeRepoName()
     }
     if (location.pathname == "/pages/repoPage.html") {
         setTimeout(App.showRepoFiles, 5000)
