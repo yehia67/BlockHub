@@ -229,15 +229,7 @@ App = {
     },
 
 
-    getvalue: async() => {
-        ipfs.cat(App.ipfsHash, function(err, res) {
-            if (err || !res) {
-                return console.error('ipfs cat error', err, res)
-            }
-            $('#getValue').html(res.toString())
 
-        })
-    },
 
     initialCommit: async() => {
         document.getElementById('createRepoForm').style.display = 'none'
@@ -253,29 +245,27 @@ App = {
         console.log(input.files)
         let filesIterator = 0
         Array.prototype.forEach.call(input.files, item => {
-            let fReader = new FileReader()
-            fReader.readAsText(item)
-            fReader.onloadend = function(event) {
-                ipfs.add(Buffer.from(event.target.result), function(err, res) {
-                    if (err || !res) {
-                        return console.error('ipfs add error', err, res)
-                    }
-                    res.forEach(function(file) {
-                        if (file && file.hash) {
-
-                            hashs += file.hash + "*" + input.files[filesIterator].name + "*" + input.files[filesIterator].webkitRelativePath + ","
-                            filesIterator++
-                            console.log(hashs)
+                let fReader = new FileReader()
+                fReader.readAsText(item)
+                fReader.onloadend = function(event) {
+                    ipfs.add(Buffer.from(event.target.result), function(err, res) {
+                        if (err || !res) {
+                            return console.error('ipfs add error', err, res)
+                        }
+                        if (res[0] && res[0].hash) {
+                            hashs += res[0].hash + "*" + item.name + "*" + item.name + ","
                         }
                     })
-                })
-            }
-        })
-        setTimeout(function() {
-            let date = new Date().toLocaleDateString("en", { year: "numeric", day: "2-digit", month: "2-digit" })
-            App.makeCommitPromise("owner", "root", date, msg, hashs)
-            goToRepoPage()
-        }, 5000)
+
+                }
+            }),
+            setTimeout(function() {
+                console.log(hashs)
+                alert(hashs)
+                let date = new Date().toLocaleDateString("en", { year: "numeric", day: "2-digit", month: "2-digit" })
+                App.makeCommitPromise("owner", "root", date, msg, hashs)
+                goToRepoPage()
+            }, 5000)
     },
 
 

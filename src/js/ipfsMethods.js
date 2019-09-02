@@ -30,7 +30,7 @@ LoadRepoFiles = async(ipfsHashs) => {
     if (ipfsHashs.length !== 0) {
         for (let index = 0; index < ipfsFiles.length - 1; index++) {
             let file = ipfsFiles[index].split("*")
-            $("#repoFiles").append("<tr style='color:steelBlue;font-family:ABeeZee, sans-serif;font-size:18px;'><td" + " onclick= ' App.uploadFile(" + '"' + file[0] + '"' + ")'" + "style='cursor:pointer !important;' >" + file[1] + "</<td><td>" + file[2] + "</td>   </tr>")
+            $("#repoFiles").append("<tr style='color:steelBlue;font-family:ABeeZee, sans-serif;font-size:18px;'><td" + " onclick= 'uploadFile(" + '"' + file[0] + '"' + ")'" + "style='cursor:pointer !important;' >" + file[1] + "</<td><td>" + file[2] + "</td>   </tr>")
         }
         showCommits(true)
     } else {
@@ -44,13 +44,20 @@ uploadFile = (hash) => {
     display("filContent", hash)
 }
 
+getvalue = async() => {
+    ipfs.cat(App.ipfsHash, function(err, res) {
+        if (err || !res) {
+            return console.error('ipfs cat error', err, res)
+        }
+        $('#getValue').html(res.toString())
 
+    })
+};
 display = (diplayID, hash) => {
     ipfs.cat(hash, function(err, res) {
         if (err || !res) {
             return console.error('ipfs cat error', err, res)
         }
-        console.log(res.toString())
         $("#" + diplayID).html("<p>" + res.toString() + "</p>")
     })
 }
