@@ -1,5 +1,5 @@
 # BlockHub
- BlockHub is a decentralized version control system similar to (GitHub,GitLab,...). 
+ BlockHub is a decentralized version control system similar to (GitHub,GitLab,...).  We use different technologies like web3js to manage blockchain and flask to manage changes.
  
 ## Our Goal: 
  
